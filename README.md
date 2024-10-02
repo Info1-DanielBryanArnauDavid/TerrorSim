@@ -8,9 +8,8 @@ A basic flight simulator with real-time collision detection.
 
 ## Usage
 
-- **WASD / Arrow Keys**: Control the aircraft.
-- **Space**: Increase speed.
-- **Ctrl**: Decrease speed.
+- **Simple**: WaypointCart.cs y FlightPlanCart.cs
+- **Complex**: Waypoint.cs y FlightPlan.cs
 
 ## To-Do
 
