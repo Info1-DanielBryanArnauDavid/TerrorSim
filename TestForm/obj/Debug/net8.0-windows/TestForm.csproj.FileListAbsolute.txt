@@ -1,0 +1,17 @@
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\bin\Debug\net8.0-windows\TestForm.exe
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\bin\Debug\net8.0-windows\TestForm.deps.json
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\bin\Debug\net8.0-windows\TestForm.runtimeconfig.json
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\bin\Debug\net8.0-windows\TestForm.dll
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\bin\Debug\net8.0-windows\TestForm.pdb
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.Form1.resources
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.csproj.GenerateResource.cache
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.AssemblyInfoInputs.cache
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.AssemblyInfo.cs
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.csproj.CoreCompileInputs.cache
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.sourcelink.json
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.dll
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\refint\TestForm.dll
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.pdb
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\TestForm.genruntimeconfig.cache
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\TestForm\obj\Debug\net8.0-windows\ref\TestForm.dll

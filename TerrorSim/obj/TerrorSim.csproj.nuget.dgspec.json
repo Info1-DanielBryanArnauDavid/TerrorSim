@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bolty\\source\\repos\\TerrorSim\\TerrorSim\\TerrorSim.csproj": {}
+    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\TerrorSim.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bolty\\source\\repos\\TerrorSim\\TerrorSim\\TerrorSim.csproj": {
+    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\TerrorSim.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bolty\\source\\repos\\TerrorSim\\TerrorSim\\TerrorSim.csproj",
+        "projectUniqueName": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\TerrorSim.csproj",
         "projectName": "TerrorSim",
-        "projectPath": "C:\\Users\\bolty\\source\\repos\\TerrorSim\\TerrorSim\\TerrorSim.csproj",
+        "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\TerrorSim.csproj",
         "packagesPath": "C:\\Users\\bolty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bolty\\source\\repos\\TerrorSim\\TerrorSim\\obj\\",
+        "outputPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bolty\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bolty\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\bolty\\source\\repos\\info1-danielbryanarnaudavid\\terrorsim\\winformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22726F39-1806-44EA-909E-EE570E805499}|TerrorSim\\TerrorSim.csproj|c:\\users\\bolty\\source\\repos\\info1-danielbryanarnaudavid\\terrorsim\\terrorsim\\flightplancart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22726F39-1806-44EA-909E-EE570E805499}|TerrorSim\\TerrorSim.csproj|solutionrelative:terrorsim\\flightplancart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22726F39-1806-44EA-909E-EE570E805499}|TerrorSim\\TerrorSim.csproj|c:\\users\\bolty\\source\\repos\\info1-danielbryanarnaudavid\\terrorsim\\terrorsim\\flightplan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22726F39-1806-44EA-909E-EE570E805499}|TerrorSim\\TerrorSim.csproj|solutionrelative:terrorsim\\flightplan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\bolty\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\Form1.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Form1.cs",
+              "ToolTip": "C:\\Users\\bolty\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "WinFormsApp1\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T09:20:21.013Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FlightPlanCart.cs",
+              "DocumentMoniker": "C:\\Users\\bolty\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\FlightPlanCart.cs",
+              "RelativeDocumentMoniker": "TerrorSim\\FlightPlanCart.cs",
+              "ToolTip": "C:\\Users\\bolty\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\FlightPlanCart.cs",
+              "RelativeToolTip": "TerrorSim\\FlightPlanCart.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T08:34:07.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FlightPlan.cs",
+              "DocumentMoniker": "C:\\Users\\bolty\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\FlightPlan.cs",
+              "RelativeDocumentMoniker": "TerrorSim\\FlightPlan.cs",
+              "ToolTip": "C:\\Users\\bolty\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\TerrorSim\\FlightPlan.cs",
+              "RelativeToolTip": "TerrorSim\\FlightPlan.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T08:34:06.749Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
