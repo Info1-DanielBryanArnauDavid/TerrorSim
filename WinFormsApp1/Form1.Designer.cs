@@ -35,6 +35,7 @@
             treeView1 = new TreeView();
             panel1 = new Panel();
             comboBox2 = new ComboBox();
+            maskedTextBox1 = new MaskedTextBox();
             SuspendLayout();
             // 
             // checkBox1
@@ -94,11 +95,19 @@
             comboBox2.Size = new Size(121, 23);
             comboBox2.TabIndex = 0;
             // 
+            // maskedTextBox1
+            // 
+            maskedTextBox1.Location = new Point(304, 119);
+            maskedTextBox1.Name = "maskedTextBox1";
+            maskedTextBox1.Size = new Size(100, 23);
+            maskedTextBox1.TabIndex = 6;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 463);
+            Controls.Add(maskedTextBox1);
             Controls.Add(comboBox2);
             Controls.Add(panel1);
             Controls.Add(treeView1);
@@ -121,5 +130,6 @@
         private TreeView treeView1;
         private Panel panel1;
         private ComboBox comboBox2;
+        private MaskedTextBox maskedTextBox1;
     }
 }
