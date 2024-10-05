@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             checkBox1 = new CheckBox();
             listBox1 = new ListBox();
             progressBar1 = new ProgressBar();
             comboBox1 = new ComboBox();
             treeView1 = new TreeView();
-            toolTip1 = new ToolTip(components);
             panel1 = new Panel();
+            comboBox2 = new ComboBox();
             SuspendLayout();
             // 
             // checkBox1
@@ -82,16 +81,25 @@
             // 
             // panel1
             // 
-            panel1.Location = new Point(46, 323);
+            panel1.Location = new Point(69, 338);
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 100);
             panel1.TabIndex = 5;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(509, 292);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(121, 23);
+            comboBox2.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 463);
+            Controls.Add(comboBox2);
             Controls.Add(panel1);
             Controls.Add(treeView1);
             Controls.Add(comboBox1);
@@ -111,7 +119,7 @@
         private ProgressBar progressBar1;
         private ComboBox comboBox1;
         private TreeView treeView1;
-        private ToolTip toolTip1;
         private Panel panel1;
+        private ComboBox comboBox2;
     }
 }
