@@ -33,6 +33,7 @@
             progressBar1 = new ProgressBar();
             comboBox1 = new ComboBox();
             treeView1 = new TreeView();
+            checkBox2 = new CheckBox();
             SuspendLayout();
             // 
             // checkBox1
@@ -77,11 +78,22 @@
             treeView1.Size = new Size(121, 97);
             treeView1.TabIndex = 4;
             // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(87, 321);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(83, 19);
+            checkBox2.TabIndex = 5;
+            checkBox2.Text = "checkBox2";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(checkBox2);
             Controls.Add(treeView1);
             Controls.Add(comboBox1);
             Controls.Add(progressBar1);
@@ -89,6 +101,7 @@
             Controls.Add(checkBox1);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -100,5 +113,6 @@
         private ProgressBar progressBar1;
         private ComboBox comboBox1;
         private TreeView treeView1;
+        private CheckBox checkBox2;
     }
 }
