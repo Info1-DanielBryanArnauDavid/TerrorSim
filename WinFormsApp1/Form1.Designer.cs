@@ -29,23 +29,35 @@
         private void InitializeComponent()
         {
             checkBox1 = new CheckBox();
+            listBox1 = new ListBox();
             SuspendLayout();
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(46, 337);
+            checkBox1.Location = new Point(170, 254);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(83, 19);
+            checkBox1.Size = new Size(61, 19);
             checkBox1.TabIndex = 0;
-            checkBox1.Text = "checkBox1";
+            checkBox1.Text = "semen";
             checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(458, 69);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(120, 94);
+            listBox1.TabIndex = 1;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(listBox1);
             Controls.Add(checkBox1);
             Name = "Form1";
             Text = "Form1";
@@ -56,5 +68,6 @@
         #endregion
 
         private CheckBox checkBox1;
+        private ListBox listBox1;
     }
 }
