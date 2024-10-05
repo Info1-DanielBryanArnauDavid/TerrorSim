@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TerrorSim")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83f74a50ee8fe104032770032c2c3a6c6dd11204")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e40c5d3253efab8147075e24c5672983a82bcab")]
 [assembly: System.Reflection.AssemblyProductAttribute("TerrorSim")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TerrorSim")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

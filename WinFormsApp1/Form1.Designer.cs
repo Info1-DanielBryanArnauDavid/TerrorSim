@@ -30,6 +30,9 @@
         {
             checkBox1 = new CheckBox();
             listBox1 = new ListBox();
+            progressBar1 = new ProgressBar();
+            comboBox1 = new ComboBox();
+            treeView1 = new TreeView();
             SuspendLayout();
             // 
             // checkBox1
@@ -52,11 +55,36 @@
             listBox1.Size = new Size(120, 94);
             listBox1.TabIndex = 1;
             // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(409, 366);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(297, 20);
+            progressBar1.TabIndex = 2;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(361, 215);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 3;
+            // 
+            // treeView1
+            // 
+            treeView1.Location = new Point(87, 56);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(121, 97);
+            treeView1.TabIndex = 4;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(treeView1);
+            Controls.Add(comboBox1);
+            Controls.Add(progressBar1);
             Controls.Add(listBox1);
             Controls.Add(checkBox1);
             Name = "Form1";
@@ -69,5 +97,8 @@
 
         private CheckBox checkBox1;
         private ListBox listBox1;
+        private ProgressBar progressBar1;
+        private ComboBox comboBox1;
+        private TreeView treeView1;
     }
 }
