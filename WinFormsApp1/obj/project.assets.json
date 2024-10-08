@@ -8,19 +8,19 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\bolty\\.nuget\\packages\\": {}
+    "C:\\Users\\34647\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectUniqueName": "C:\\Users\\34647\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
       "projectName": "WinFormsApp1",
-      "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
-      "packagesPath": "C:\\Users\\bolty\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
+      "projectPath": "C:\\Users\\34647\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+      "packagesPath": "C:\\Users\\34647\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\34647\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bolty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\34647\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
