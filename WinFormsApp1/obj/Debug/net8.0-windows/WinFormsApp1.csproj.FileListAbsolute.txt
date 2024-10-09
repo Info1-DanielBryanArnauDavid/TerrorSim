@@ -17,3 +17,5 @@ C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\o
 C:\Users\34647\source\repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Inicio.resources
 C:\Users\34647\source\repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.IntroducirFlightPlans.resources
 C:\Users\34647\source\repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.DistanciaSeguridadTiempoCiclo.resources
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Error.resources
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.DatosGuardados.resources

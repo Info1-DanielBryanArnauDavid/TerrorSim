@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\34647\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectUniqueName": "C:\\Users\\34647\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
       "projectName": "WinFormsApp1",
-      "projectPath": "C:\\Users\\34647\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectPath": "C:\\Users\\34647\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
       "packagesPath": "C:\\Users\\34647\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\34647\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
       "projectStyle": "PackageReference",

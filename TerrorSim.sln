@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerrorSim", "TerrorSim\TerrorSim.csproj", "{22726F39-1806-44EA-909E-EE570E805499}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{09BB3DF7-B2B9-4FBF-80AC-B0B9C69E3F43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp1", "WinFormsApp1\WinFormsApp1.csproj", "{725CA623-DAD9-4A76-83CB-9DF27E27DC37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsApp1", "WinFormsApp1\WinFormsApp1.csproj", "{725CA623-DAD9-4A76-83CB-9DF27E27DC37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{22726F39-1806-44EA-909E-EE570E805499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22726F39-1806-44EA-909E-EE570E805499}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22726F39-1806-44EA-909E-EE570E805499}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22726F39-1806-44EA-909E-EE570E805499}.Release|Any CPU.Build.0 = Release|Any CPU
 		{725CA623-DAD9-4A76-83CB-9DF27E27DC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{725CA623-DAD9-4A76-83CB-9DF27E27DC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{725CA623-DAD9-4A76-83CB-9DF27E27DC37}.Release|Any CPU.ActiveCfg = Release|Any CPU

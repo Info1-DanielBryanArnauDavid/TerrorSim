@@ -76,6 +76,7 @@
             AceptarBoton2.TabIndex = 4;
             AceptarBoton2.Text = "Aceptar";
             AceptarBoton2.UseVisualStyleBackColor = true;
+            AceptarBoton2.Click += AceptarBoton2_Click;
             // 
             // DistanciaSeguridadTiempoCiclo
             // 
@@ -89,6 +90,7 @@
             Controls.Add(label1);
             Name = "DistanciaSeguridadTiempoCiclo";
             Text = "Distancia de seguridad y tiempo de ciclo";
+            Load += DistanciaSeguridadTiempoCiclo_Load;
             ResumeLayout(false);
             PerformLayout();
         }

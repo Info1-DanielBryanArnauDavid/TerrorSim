@@ -219,6 +219,7 @@
             AceptarBoton.TabIndex = 20;
             AceptarBoton.Text = "Aceptar";
             AceptarBoton.UseVisualStyleBackColor = true;
+            AceptarBoton.Click += AceptarBoton_Click;
             // 
             // IntroducirFlightPlans
             // 

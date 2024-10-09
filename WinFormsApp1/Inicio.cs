@@ -19,6 +19,7 @@ namespace WinFormsApp1
 
         private void introducirFlightPlansToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Crea y abre el forms de introducir flightplans
             IntroducirFlightPlans IFP = new IntroducirFlightPlans();
             IFP.ShowDialog();   
         }
@@ -30,6 +31,7 @@ namespace WinFormsApp1
 
         private void introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Crea y abre el forms de introducir distancia de seguridad y tiempo de ciclo
             DistanciaSeguridadTiempoCiclo DSTC = new DistanciaSeguridadTiempoCiclo();
             DSTC.ShowDialog();
         }

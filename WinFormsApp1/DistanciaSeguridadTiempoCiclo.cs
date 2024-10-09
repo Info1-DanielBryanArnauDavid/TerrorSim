@@ -21,5 +21,38 @@ namespace WinFormsApp1
         {
 
         }
+
+        private void AceptarBoton2_Click(object sender, EventArgs e)
+        {
+            //Cuando le damos al boton Aceptar:
+
+            try
+            {
+                //Guardamos la info en dos variables nuevas
+                float SecDist = Convert.ToInt16(DistanciaSeguridad.Text);
+                float TC = Convert.ToInt16(TiempoCiclo.Text);
+
+                //Abre un forms que confirma que todo se ha guardado bien
+                DatosGuardados Dg = new DatosGuardados();
+                Dg.ShowDialog();
+
+                //Cierra el forms al pulsar "aceptar"
+                Close();
+            }
+
+            //En caso de error:
+            catch (Exception)
+            {
+                //Abre un forms que avisa de un error
+                Error fallo = new Error();
+                fallo.ShowDialog();
+            }
+
+        }
+
+        private void DistanciaSeguridadTiempoCiclo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
