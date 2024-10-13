@@ -39,7 +39,14 @@
             hoverInfoLabel = new Label();
             label1 = new Label();
             label3 = new Label();
+            flightDataGridView = new DataGridView();
+            label4 = new Label();
+            button4 = new Button();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)miPanel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)flightDataGridView).BeginInit();
             SuspendLayout();
             // 
             // miPanel
@@ -59,7 +66,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(764, 276);
+            button1.Location = new Point(738, 370);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(82, 45);
@@ -70,7 +77,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(764, 376);
+            button2.Location = new Point(738, 478);
             button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
             button2.Size = new Size(82, 45);
@@ -81,10 +88,10 @@
             // 
             // button3
             // 
-            button3.Location = new Point(764, 339);
+            button3.Location = new Point(738, 433);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(82, 21);
+            button3.Size = new Size(82, 28);
             button3.TabIndex = 3;
             button3.Text = "Reset";
             button3.UseVisualStyleBackColor = true;
@@ -116,26 +123,87 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(18, 17);
+            label1.Location = new Point(799, 62);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(86, 15);
             label1.TabIndex = 6;
-            label1.Text = "label1";
+            label1.Text = "Datos de Vuelo";
+            label1.Click += label1_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(738, 676);
+            label3.Location = new Point(757, 665);
             label3.Name = "label3";
             label3.Size = new Size(124, 15);
             label3.TabIndex = 7;
             label3.Text = "hay que definir limites";
             // 
+            // flightDataGridView
+            // 
+            flightDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            flightDataGridView.Location = new Point(738, 92);
+            flightDataGridView.Name = "flightDataGridView";
+            flightDataGridView.Size = new Size(209, 149);
+            flightDataGridView.TabIndex = 8;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(789, 335);
+            label4.Name = "label4";
+            label4.Size = new Size(35, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Chuli";
+            // 
+            // button4
+            // 
+            button4.Location = new Point(858, 425);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 36);
+            button4.TabIndex = 10;
+            button4.Text = "Check";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(858, 400);
+            label5.Name = "label5";
+            label5.Size = new Size(0, 15);
+            label5.TabIndex = 11;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(738, 335);
+            label6.Name = "label6";
+            label6.Size = new Size(50, 15);
+            label6.TabIndex = 12;
+            label6.Text = "STATUS";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(757, 680);
+            label7.Name = "label7";
+            label7.Size = new Size(104, 15);
+            label7.TabIndex = 13;
+            label7.Text = "usar lat,lon pronto";
+            // 
             // SimulacionVuelo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(898, 724);
+            ClientSize = new Size(976, 724);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(button4);
+            Controls.Add(label4);
+            Controls.Add(flightDataGridView);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(hoverInfoLabel);
@@ -149,6 +217,7 @@
             Text = "SimulacionVuelo";
             Load += SimulacionVuelo_Load_1;
             ((System.ComponentModel.ISupportInitialize)miPanel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)flightDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,5 +234,11 @@
         private Label hoverInfoLabel;
         private Label label1;
         private Label label3;
+        private DataGridView flightDataGridView;
+        private Label label4;
+        private Button button4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
     }
 }

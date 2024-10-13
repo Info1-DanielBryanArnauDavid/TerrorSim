@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,14 @@ namespace Class
         public WaypointCart GetPlanePosition() { return plane; }
         public void SetPlanePosition(WaypointCart newPosition) { this.plane = newPosition; }
 
+        public double GetAngle()
+        {
+            double x = Convert.ToInt32(GetDestination().GetX()) - Convert.ToInt32(GetOrigin().GetX());
+            double y = Convert.ToInt32(GetDestination().GetY()) - Convert.ToInt32(GetOrigin().GetY());
+            double angle = Math.Atan2(y, x);
+            return angle;
+        }
+
         public void Restart()
         {
             this.plane = new WaypointCart(origin.GetX(), origin.GetY());
@@ -48,13 +57,6 @@ namespace Class
 
         public void MovePlane(double dx, double dy)
         {
-            if (this.HasArrived())
-            {
-                plane.SetX(destination.GetX());
-                plane.SetY(destination.GetY());
-            }
-            else
-            {
                 double newX = plane.GetX() + dx;
                 double newY = plane.GetY() + dy;
 
@@ -68,7 +70,7 @@ namespace Class
                 else
                 {
                     plane.Move(dx, dy);
-                }
+                
             }
         }
 

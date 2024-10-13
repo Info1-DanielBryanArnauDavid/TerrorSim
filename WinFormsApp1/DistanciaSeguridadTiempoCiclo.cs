@@ -13,6 +13,7 @@ namespace WinFormsApp1
     public partial class DistanciaSeguridadTiempoCiclo : Form
     {
         int tiempoCiclo = 0;
+        int SecDist;
         public DistanciaSeguridadTiempoCiclo()
         {
             InitializeComponent();
@@ -23,6 +24,10 @@ namespace WinFormsApp1
             return tiempoCiclo;
         }
 
+        public int dameDist()
+        {
+            return SecDist;
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -35,7 +40,7 @@ namespace WinFormsApp1
             try
             {
                 //Guardamos la info en dos variables nuevas
-                float SecDist = Convert.ToInt16(DistanciaSeguridad.Text);
+                SecDist = Convert.ToInt16(DistanciaSeguridad.Text);
                 tiempoCiclo = Convert.ToInt16(TiempoCiclo.Text);
 
                 //Abre un forms que confirma que todo se ha guardado bien
@@ -63,7 +68,7 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DistanciaSeguridad.Text = "10";
+            DistanciaSeguridad.Text = "50";
             TiempoCiclo.Text = "2";
         }
     }

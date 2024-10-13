@@ -16,6 +16,7 @@ namespace WinFormsApp1
     {
         FlightPlanList miLista = new FlightPlanList();
         int tiempoCiclo;
+        int distSeg;
         public Inicio()
         {
             InitializeComponent();
@@ -40,12 +41,14 @@ namespace WinFormsApp1
             DistanciaSeguridadTiempoCiclo DSTC = new DistanciaSeguridadTiempoCiclo();
             DSTC.ShowDialog();
             tiempoCiclo = DSTC.dameTiempo();
+            distSeg = DSTC.dameDist();
+
         }
 
         private void simularToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SimulacionVuelo simulacion = new SimulacionVuelo();
-            simulacion.setData(miLista, tiempoCiclo);
+            simulacion.setData(miLista, tiempoCiclo,distSeg);
             simulacion.ShowDialog();
         }
 
