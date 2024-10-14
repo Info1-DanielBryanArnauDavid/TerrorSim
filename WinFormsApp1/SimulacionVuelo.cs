@@ -21,12 +21,11 @@ namespace WinFormsApp1
             InitializeComponent();
             miPanel.Paint += MiPanel_Paint;
             hoverInfoLabel.AutoSize = true;
-            hoverInfoLabel.BackColor = Color.White;
             hoverInfoLabel.ForeColor = Color.Black;
             hoverInfoLabel.BorderStyle = BorderStyle.FixedSingle;
-            hoverInfoLabel.Visible = false;  
+            hoverInfoLabel.Visible = false;
             miPanel.Controls.Add(hoverInfoLabel);
-            SetupDataGridView(); 
+            SetupDataGridView();
         }
 
         private void UpdateDataGridView()
@@ -51,7 +50,6 @@ namespace WinFormsApp1
 
         private void SetupDataGridView()
         {
-            // Add columns
             flightDataGridView.Columns.Add("FlightNumber", "Flight Number");
             flightDataGridView.Columns.Add("OriginX", "Origin X");
             flightDataGridView.Columns.Add("OriginY", "Origin Y");
@@ -61,11 +59,8 @@ namespace WinFormsApp1
             flightDataGridView.Columns.Add("CurrentY", "Current Y");
             flightDataGridView.Columns.Add("Speed", "Speed");
 
-            // Add the DataGridView to your form
             this.Controls.Add(flightDataGridView);
 
-            // Initial population of the DataGridView
-            UpdateDataGridView();
         }
 
         private bool CheckSecurityDistance(FlightPlanCart flightToCheck)
@@ -85,12 +80,12 @@ namespace WinFormsApp1
                     otherFlight.GetPlanePosition().GetY()
                 );
 
-                if (distance < 2*distSeg)
+                if (distance < 2 * distSeg)
                 {
-                    return true; 
+                    return true;
                 }
             }
-            return false; 
+            return false;
         }
 
         private double CalculateDistance(double x1, double y1, double x2, double y2)
@@ -128,17 +123,17 @@ namespace WinFormsApp1
                 }
 
             }
-            using (Pen redPen = new Pen(Color.Red, 1)) 
+            using (Pen redPen = new Pen(Color.Red, 1))
             {
                 for (int i = 0; i < miLista.GetNumber(); i++)
                 {
                     Point planePosition = vuelos[i].Location;
 
                     Rectangle circleRect = new Rectangle(
-                        planePosition.X - distSeg,  
-                        planePosition.Y - distSeg,  
-                        distSeg * 2,                
-                        distSeg * 2                 
+                        planePosition.X - distSeg,
+                        planePosition.Y - distSeg,
+                        distSeg * 2,
+                        distSeg * 2
                     );
 
                     g.DrawEllipse(redPen, circleRect);
@@ -147,10 +142,7 @@ namespace WinFormsApp1
             }
         }
         //Visualizar los vuelos
-        private void Simulacion_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void Simulacion_Load(object sender, EventArgs e) { }
 
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
         {
@@ -174,12 +166,13 @@ namespace WinFormsApp1
                 v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
                 v.MouseLeave += (s, ev) => HidePlaneInfo();
                 vuelos[numPics] = v;
-                numPics++;                
+                numPics++;
                 miPanel.Controls.Add(v);
                 miPanel.Controls.Add(p);
                 miPanel.Controls.Add(a);
 
             }
+            UpdateDataGridView();
 
         }
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
@@ -298,6 +291,7 @@ namespace WinFormsApp1
 
             }
             UpdateDataGridView();
+            timer1.Stop();
             miPanel.Invalidate(); //asi forzamos el repaint
         }
 
@@ -335,16 +329,18 @@ namespace WinFormsApp1
                     //derivada precalculada
                     double t = -(rx * vx + ry * vy) / (vx * vx + vy * vy);
 
+                    if (t < 0) { return false; }
+
                     double cx = rx + vx * t;
                     double cy = ry + vy * t;
 
                     if (cx * cx + cy * cy < distSeg * distSeg)
                     {
-                        return true; // Collision predicted
+                        return true;
                     }
                 }
             }
-            return false; // No collision predicted
+            return false;
         }
 
 
@@ -355,11 +351,43 @@ namespace WinFormsApp1
             if (collisionPredicted)
             {
                 label5.Text = "Posible Accidente";
+                button5.Enabled = true;
             }
             else
             {
                 label5.Text = "Seguro";
+                button5.Enabled = false;
             }
+        }
+
+        private void flightDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //añadir el cambio integrado de velocidad en los vuelos
+
+            SetSpeedForm formspeed = new SetSpeedForm();
+            formspeed.Show();
+            double speed = formspeed.getData();
+
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {}
+
+        private void flightDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //abrirá un forms de cambios
+            if (e.ColumnIndex == 7)
+            {
+            SetSpeedForm fixSpeed = new SetSpeedForm();
+            double speed = Convert.ToDouble(flightDataGridView.CurrentCell.Value);
+            fixSpeed.setData(speed);
+            fixSpeed.ShowDialog();
+            speed = fixSpeed.getData();
+            miLista.GetFlightPlanCart(e.RowIndex).SetSpeed(speed);
+            UpdateDataGridView();
+            }
+            
         }
     }
 }

@@ -45,6 +45,7 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
+            button5 = new Button();
             ((System.ComponentModel.ISupportInitialize)miPanel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)flightDataGridView).BeginInit();
             SuspendLayout();
@@ -142,10 +143,12 @@
             // flightDataGridView
             // 
             flightDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            flightDataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
             flightDataGridView.Location = new Point(738, 92);
             flightDataGridView.Name = "flightDataGridView";
             flightDataGridView.Size = new Size(209, 149);
             flightDataGridView.TabIndex = 8;
+            flightDataGridView.CellContentDoubleClick += flightDataGridView_CellContentDoubleClick;
             // 
             // label4
             // 
@@ -193,11 +196,23 @@
             label7.TabIndex = 13;
             label7.Text = "usar lat,lon pronto";
             // 
+            // button5
+            // 
+            button5.Enabled = false;
+            button5.Location = new Point(858, 467);
+            button5.Name = "button5";
+            button5.Size = new Size(75, 23);
+            button5.TabIndex = 14;
+            button5.Text = "Fix";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // SimulacionVuelo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(976, 724);
+            Controls.Add(button5);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -240,5 +255,6 @@
         private Label label5;
         private Label label6;
         private Label label7;
+        private Button button5;
     }
 }

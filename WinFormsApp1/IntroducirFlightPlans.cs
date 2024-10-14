@@ -95,8 +95,8 @@ namespace WinFormsApp1
             FP2Xo.Text = "480";
             FP2Xf.Text = "45";
             FP1Speed.Text = "10";
-            FP1Yo.Text = "65";
-            FP1Yf.Text = "540";
+            FP1Yo.Text = "450";
+            FP1Yf.Text = "40";
             FP2Yo.Text = "510";
             FP2Yf.Text = "25";
             FP2Speed.Text = "15";

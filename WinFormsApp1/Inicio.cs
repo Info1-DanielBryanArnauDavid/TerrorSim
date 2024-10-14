@@ -48,7 +48,7 @@ namespace WinFormsApp1
         private void simularToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SimulacionVuelo simulacion = new SimulacionVuelo();
-            simulacion.setData(miLista, tiempoCiclo,distSeg);
+            simulacion.setData(miLista,tiempoCiclo,distSeg);
             simulacion.ShowDialog();
         }
 
