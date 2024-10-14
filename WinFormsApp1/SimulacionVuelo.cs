@@ -362,12 +362,6 @@ namespace WinFormsApp1
 
         private void flightDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //añadir el cambio integrado de velocidad en los vuelos
-
-            SetSpeedForm formspeed = new SetSpeedForm();
-            formspeed.Show();
-            double speed = formspeed.getData();
-
 
         }
 
