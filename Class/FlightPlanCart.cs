@@ -61,7 +61,7 @@ namespace Class
                 double newY = plane.GetY() + dy;
 
                 // Check if the new position overshoots the destination
-                if (new WaypointCart(newX, newY).DistanceTo(destination) > plane.DistanceTo(destination))
+                if (new WaypointCart(newX, newY).DistanceTo(origin) > origin.DistanceTo(destination))
                 {
                     // If it overshoots, snap to the destination
                     plane.SetX(destination.GetX());

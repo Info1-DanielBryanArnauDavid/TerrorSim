@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F55D6A75-5F77-4AA9-B6F3-27350D2D4164}|Class\\Class.csproj|c:\\users\\bolty\\desktop\\info\\terrorsim\\class\\flightplancart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F55D6A75-5F77-4AA9-B6F3-27350D2D4164}|Class\\Class.csproj|solutionrelative:class\\flightplancart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\bolty\\desktop\\info\\terrorsim\\winformsapp1\\simulacionvuelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\simulacionvuelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\bolty\\desktop\\info\\terrorsim\\winformsapp1\\simulacionvuelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\simulacionvuelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F55D6A75-5F77-4AA9-B6F3-27350D2D4164}|Class\\Class.csproj|c:\\users\\bolty\\desktop\\info\\terrorsim\\class\\flightplancart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55D6A75-5F77-4AA9-B6F3-27350D2D4164}|Class\\Class.csproj|solutionrelative:class\\flightplancart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\bolty\\desktop\\info\\terrorsim\\winformsapp1\\distanciaseguridadtiempociclo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\distanciaseguridadtiempociclo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\winformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -25,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\winformsapp1\\distanciaseguridadtiempociclo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\distanciaseguridadtiempociclo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\bolty\\desktop\\info\\terrorsim\\winformsapp1\\distanciaseguridadtiempociclo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{725CA623-DAD9-4A76-83CB-9DF27E27DC37}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\distanciaseguridadtiempociclo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,15 +42,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SimulacionVuelo.cs",
+              "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\SimulacionVuelo.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\SimulacionVuelo.cs",
+              "ToolTip": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\SimulacionVuelo.cs",
+              "RelativeToolTip": "WinFormsApp1\\SimulacionVuelo.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAA8wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-14T06:03:28.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "SimulacionVuelo.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\SimulacionVuelo.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\SimulacionVuelo.cs",
@@ -58,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Form1.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\Form1.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\Form1.cs",
@@ -69,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Inicio.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\Inicio.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\Inicio.cs",
@@ -80,18 +101,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "DistanciaSeguridadTiempoCiclo.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\DistanciaSeguridadTiempoCiclo.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\DistanciaSeguridadTiempoCiclo.cs",
               "ToolTip": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\DistanciaSeguridadTiempoCiclo.cs [Dise\u00F1o]",
               "RelativeToolTip": "WinFormsApp1\\DistanciaSeguridadTiempoCiclo.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T18:08:53.036Z"
+              "WhenOpened": "2024-10-13T18:08:53.036Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "DistanciaSeguridadTiempoCiclo.cs",
               "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\DistanciaSeguridadTiempoCiclo.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\DistanciaSeguridadTiempoCiclo.cs",
@@ -99,11 +121,12 @@
               "RelativeToolTip": "WinFormsApp1\\DistanciaSeguridadTiempoCiclo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T17:59:06.692Z"
+              "WhenOpened": "2024-10-13T17:59:06.692Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Inicio.cs",
               "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\Inicio.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\Inicio.cs",
@@ -115,13 +138,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "FlightPlanCart.cs",
               "DocumentMoniker": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\FlightPlanCart.cs",
               "RelativeDocumentMoniker": "Class\\FlightPlanCart.cs",
-              "ToolTip": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\FlightPlanCart.cs",
-              "RelativeToolTip": "Class\\FlightPlanCart.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAA4AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\FlightPlanCart.cs*",
+              "RelativeToolTip": "Class\\FlightPlanCart.cs*",
+              "ViewState": "AgIAACYAAAAAAAAAAAAswEUAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-12T20:22:16.297Z",
               "EditorCaption": ""
