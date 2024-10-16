@@ -334,7 +334,7 @@ namespace WinFormsApp1
                     double cx = rx + vx * t;
                     double cy = ry + vy * t;
 
-                    if (cx * cx + cy * cy < distSeg * distSeg)
+                    if (cx * cx + cy * cy < distSeg *4* distSeg)
                     {
                         return true;
                     }
@@ -343,6 +343,10 @@ namespace WinFormsApp1
             return false;
         }
 
+        private double GetOptimalVelocity (FlightPlanCart flight1, FlightPlanCart flight2)
+        {
+            return 0;
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -366,7 +370,10 @@ namespace WinFormsApp1
         }
 
         private void button5_Click(object sender, EventArgs e)
-        {}
+        {
+            double vopt=GetOptimalVelocity(miLista.GetFlightPlanCart(0),miLista.GetFlightPlanCart(1));
+            label8.Text=Convert.ToString(Math.Round(vopt,2));
+        }
 
         private void flightDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

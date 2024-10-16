@@ -46,6 +46,7 @@
             label6 = new Label();
             label7 = new Label();
             button5 = new Button();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)miPanel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)flightDataGridView).BeginInit();
             SuspendLayout();
@@ -207,11 +208,20 @@
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(876, 493);
+            label8.Name = "label8";
+            label8.Size = new Size(0, 15);
+            label8.TabIndex = 15;
+            // 
             // SimulacionVuelo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(976, 724);
+            Controls.Add(label8);
             Controls.Add(button5);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -256,5 +266,6 @@
         private Label label6;
         private Label label7;
         private Button button5;
+        private Label label8;
     }
 }
