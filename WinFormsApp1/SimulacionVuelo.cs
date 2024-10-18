@@ -80,7 +80,7 @@ namespace WinFormsApp1
                     otherFlight.GetPlanePosition().GetY()
                 );
 
-                if (distance < 2 * distSeg)
+                if (distance < 2 * distSeg-1)
                 {
                     return true;
                 }
@@ -290,6 +290,15 @@ namespace WinFormsApp1
                 vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
 
             }
+            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
+            if (v)
+            {
+                label4.Text = "Jodido";
+            }
+            else
+            {
+                label4.Text = "Guay";
+            }
             UpdateDataGridView();
             timer1.Stop();
             miPanel.Invalidate(); //asi forzamos el repaint
@@ -343,9 +352,65 @@ namespace WinFormsApp1
             return false;
         }
 
-        private double GetOptimalVelocity (FlightPlanCart flight1, FlightPlanCart flight2)
+        private double OptVel(FlightPlanCart flight1, FlightPlanCart flight2)
         {
-            return 0;
+            const int MAX_ITERATIONS = 5;
+            const double CONVERGENCE_THRESHOLD = 0.1; // m/s
+            double currentSpeed = flight2.GetSpeed();
+            double lastSpeed = double.MaxValue;
+
+            for (int iteration = 0; iteration < MAX_ITERATIONS; iteration++)
+            {
+                double rx = flight2.GetPlanePosition().GetX() - flight1.GetPlanePosition().GetX();
+                double ry = flight2.GetPlanePosition().GetY() - flight1.GetPlanePosition().GetY();
+
+                double v1x = flight1.GetSpeed() * Math.Cos(flight1.GetAngle());
+                double v1y = flight1.GetSpeed() * Math.Sin(flight1.GetAngle());
+                double v2x = currentSpeed * Math.Cos(flight2.GetAngle());
+                double v2y = currentSpeed * Math.Sin(flight2.GetAngle());
+
+                double vx = v2x - v1x;
+                double vy = v2y - v1y;
+
+                double topt = -(rx * vx + ry * vy) / (vx * vx + vy * vy);
+
+                if (topt < 0) return -1;
+
+                double cosangle = Math.Cos(flight2.GetAngle());
+                double sinangle = Math.Sin(flight2.GetAngle());
+
+                double alpha = topt * topt;
+                double beta = 2 * topt * (rx * cosangle + ry * sinangle -
+                                         topt * (v1x * cosangle + v1y * sinangle));
+                double gamma = topt * topt * (v1x * v1x + v1y * v1y) -
+                              2 * topt * (rx * v1x + ry * v1y) +
+                              rx * rx + ry * ry -
+                              4*distSeg * distSeg;
+
+                double discriminant = beta * beta - 4 * alpha * gamma;
+
+                if (discriminant < 0) return -1;
+
+                double newSpeed = (-beta - Math.Sqrt(discriminant)) / (2 * alpha);
+
+                if (newSpeed < 0) return -1;
+
+                if (Math.Abs(newSpeed - currentSpeed) < CONVERGENCE_THRESHOLD) //minimo definido para evitar iteraciones de mas
+
+                {
+                    return newSpeed;
+                }
+
+                lastSpeed = currentSpeed;
+                currentSpeed = newSpeed;
+
+                if (iteration > 0 && Math.Abs(currentSpeed - lastSpeed) > Math.Abs(lastSpeed))
+                {
+                    return (currentSpeed + lastSpeed) / 2;
+                }
+            }
+
+            return currentSpeed > 0 ? currentSpeed : -1;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -371,10 +436,34 @@ namespace WinFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            double vopt=GetOptimalVelocity(miLista.GetFlightPlanCart(0),miLista.GetFlightPlanCart(1));
-            label8.Text=Convert.ToString(Math.Round(vopt,2));
+
+            double optSpeed = (OptVel(miLista.GetFlightPlanCart(0), miLista.GetFlightPlanCart(1)));
+
+            if (optSpeed == -1)
+            {
+                Imposible imp = new Imposible();
+                imp.ShowDialog();
+            }
+            else
+            {
+            miLista.GetFlightPlanCart(1).SetSpeed(Math.Round(optSpeed,2));
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                miLista.GetFlightPlanCart(i).Restart();
+                vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
+
+            }
+            label5.Text = "Seguro";
+            button5.Enabled = false;
+
+            UpdateDataGridView();
+            timer1.Stop();
+            miPanel.Invalidate(); //asi forzamos el repaint
+            }
+
         }
 
+            
         private void flightDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //abrirá un forms de cambios

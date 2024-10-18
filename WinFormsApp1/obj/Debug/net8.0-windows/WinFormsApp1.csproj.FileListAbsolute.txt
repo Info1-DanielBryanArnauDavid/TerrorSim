@@ -125,3 +125,4 @@ C:\Users\bolty\Desktop\info\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinF
 C:\Users\bolty\Desktop\info\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll
 C:\Users\bolty\Desktop\info\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.FixSpeed.resources
 C:\Users\bolty\Desktop\info\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.SetSpeedForm.resources
+C:\Users\bolty\Desktop\info\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Imposible.resources
