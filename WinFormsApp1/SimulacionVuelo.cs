@@ -380,12 +380,8 @@ namespace WinFormsApp1
                 double sinangle = Math.Sin(flight2.GetAngle());
 
                 double alpha = topt * topt;
-                double beta = 2 * topt * (rx * cosangle + ry * sinangle -
-                                         topt * (v1x * cosangle + v1y * sinangle));
-                double gamma = topt * topt * (v1x * v1x + v1y * v1y) -
-                              2 * topt * (rx * v1x + ry * v1y) +
-                              rx * rx + ry * ry -
-                              4*distSeg * distSeg;
+                double beta = 2 * topt * (rx * cosangle + ry * sinangle - topt * (v1x * cosangle + v1y * sinangle));
+                double gamma = topt * topt * (v1x * v1x + v1y * v1y) - 2 * topt * (rx * v1x + ry * v1y) + rx * rx + ry * ry - 4*distSeg * distSeg;
 
                 double discriminant = beta * beta - 4 * alpha * gamma;
 
