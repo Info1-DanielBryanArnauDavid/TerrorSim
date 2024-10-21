@@ -415,6 +415,25 @@ namespace WinFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
+
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                miLista.GetFlightPlanCart(i).Restart();
+                vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
+
+            }
+            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
+            if (v)
+            {
+                label4.Text = "Jodido";
+            }
+            else
+            {
+                label4.Text = "Guay";
+            }
+            UpdateDataGridView();
+            timer1.Stop();
+            miPanel.Invalidate();
             bool collisionPredicted = PredictCollision();
 
             if (collisionPredicted)
