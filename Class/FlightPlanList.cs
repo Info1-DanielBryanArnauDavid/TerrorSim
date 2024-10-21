@@ -9,41 +9,37 @@ namespace Class
 {
     public class FlightPlanList
     {
-        FlightPlanCart[] miLista = new FlightPlanCart[10];
-        int number = 0;
+        private List<FlightPlanCart> miLista;
+
         public FlightPlanList()
         {
-            FlightPlan[] miLista = new FlightPlan[10];
+            miLista = new List<FlightPlanCart>();
         }
+
         public int AddFlightPlan(FlightPlanCart flightPlanCart)
         {
-            if (number == 10)
+            if (flightPlanCart == null)
             {
                 return -1;
             }
-            else
-            {
-                miLista[number] = flightPlanCart;
-                number++;
-                return 0;
-            }
+
+            miLista.Add(flightPlanCart);
+            return 0;
         }
 
         public FlightPlanCart GetFlightPlanCart(int i)
         {
-            if (i < 0 || i > 10)
+            if (i < 0 || i >= miLista.Count)
             {
                 return null;
             }
-            else
-            {
-                return miLista[i];
-            }
+
+            return miLista[i];
         }
 
         public int GetNumber()
         {
-            return number;
+            return miLista.Count;
         }
     }
 }

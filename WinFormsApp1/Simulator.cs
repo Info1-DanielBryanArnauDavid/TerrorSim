@@ -8,13 +8,10 @@ namespace WinFormsApp1
 {
     public partial class Simulator : Form
     {
-
         FlightPlanList miLista = new FlightPlanList();
         int tiempoCiclo;
         int distSeg;
-        PictureBox[] vuelos = new PictureBox[100];
-        int numPics = 0;
-
+        List<PictureBox> vuelos = new List<PictureBox>();
 
         public Simulator()
         {
@@ -119,13 +116,12 @@ namespace WinFormsApp1
                     g.DrawLine(dottedPen,
                         new Point((int)origin.GetX(), (int)origin.GetY()),
                         new Point((int)destination.GetX(), (int)destination.GetY()));
-
                 }
-
             }
+
             using (Pen redPen = new Pen(Color.Red, 1))
             {
-                for (int i = 0; i < miLista.GetNumber(); i++)
+                for (int i = 0; i < vuelos.Count; i++)
                 {
                     Point planePosition = vuelos[i].Location;
 
@@ -137,7 +133,6 @@ namespace WinFormsApp1
                     );
 
                     g.DrawEllipse(redPen, circleRect);
-
                 }
             }
         }
@@ -166,15 +161,12 @@ namespace WinFormsApp1
                 v.Location = new Point(Convert.ToInt16(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt16(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
                 v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
                 v.MouseLeave += (s, ev) => HidePlaneInfo();
-                vuelos[numPics] = v;
-                numPics++;
+                vuelos.Add(v);
                 miPanel.Controls.Add(v);
                 miPanel.Controls.Add(p);
                 miPanel.Controls.Add(a);
-
             }
             UpdateDataGridView();
-
         }
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
         {
@@ -208,11 +200,9 @@ namespace WinFormsApp1
         private void miPanel_MouseLeave_1(object sender, EventArgs e) { }
         private void button1_Click(object sender, EventArgs e)
         {
-
             //mover manualmente
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
-
                 double angle = miLista.GetFlightPlanCart(i).GetAngle();
                 double inc = miLista.GetFlightPlanCart(i).GetSpeed() * Convert.ToDouble(tiempoCiclo);
                 double dx = inc * Math.Cos(angle);
@@ -249,7 +239,6 @@ namespace WinFormsApp1
                 double dy = inc * Math.Sin(angle);
                 miLista.GetFlightPlanCart(i).MovePlane(dx, dy);
                 vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
-
             }
             miPanel.Invalidate();
             UpdateDataGridView();
@@ -263,6 +252,7 @@ namespace WinFormsApp1
                 label4.Text = "Guay";
             }
         }
+
 
         private void SimulacionVuelo_Load_(object sender, EventArgs e)
         { }
@@ -289,7 +279,6 @@ namespace WinFormsApp1
             {
                 miLista.GetFlightPlanCart(i).Restart();
                 vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
-
             }
             bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
             if (v)
@@ -302,7 +291,7 @@ namespace WinFormsApp1
             }
             UpdateDataGridView();
             timer1.Stop();
-            miPanel.Invalidate(); //asi forzamos el repaint
+            miPanel.Invalidate();
         }
 
         private void miPanel_MouseHover(object sender, EventArgs e) { }

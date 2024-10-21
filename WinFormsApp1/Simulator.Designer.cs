@@ -216,7 +216,7 @@
             label8.Size = new Size(0, 15);
             label8.TabIndex = 15;
             // 
-            // SimulacionVuelo
+            // Simulator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -238,7 +238,7 @@
             Controls.Add(button1);
             Controls.Add(miPanel);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "SimulacionVuelo";
+            Name = "Simulator";
             Text = "SimulacionVuelo";
             Load += SimulacionVuelo_Load_1;
             ((System.ComponentModel.ISupportInitialize)miPanel).EndInit();
