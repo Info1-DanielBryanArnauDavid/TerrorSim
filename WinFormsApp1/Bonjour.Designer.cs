@@ -49,6 +49,7 @@
             Controls.Add(button1);
             Name = "Bonjour";
             Text = "Bonjour";
+            Load += Bonjour_Load;
             ResumeLayout(false);
         }
 

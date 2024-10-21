@@ -21,5 +21,10 @@ namespace WinFormsApp1
             MainForm inicio = new MainForm();
             inicio.ShowDialog();
         }
+
+        private void Bonjour_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

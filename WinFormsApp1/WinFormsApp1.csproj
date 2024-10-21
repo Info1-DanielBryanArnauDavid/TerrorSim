@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>beluga (1).ico</ApplicationIcon>
+    <ApplicationIcon>beluga.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="beluga (1).ico" />
+    <Content Include="beluga.ico" />
   </ItemGroup>
 
   <ItemGroup>

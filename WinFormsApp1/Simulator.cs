@@ -146,6 +146,7 @@ namespace WinFormsApp1
 
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
         {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 PictureBox p = new PictureBox();
