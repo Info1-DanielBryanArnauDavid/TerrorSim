@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {}
+    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\Class.csproj": {
+    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\Class.csproj",
+        "projectUniqueName": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
         "projectName": "Class",
-        "projectPath": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\Class.csproj",
+        "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
         "packagesPath": "C:\\Users\\bolty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\obj\\",
+        "outputPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bolty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,14 +64,14 @@
         }
       }
     },
-    "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {
+    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectUniqueName": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
         "projectName": "WinFormsApp1",
-        "projectPath": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
         "packagesPath": "C:\\Users\\bolty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\WinFormsApp1\\obj\\",
+        "outputPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bolty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +88,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\Class.csproj": {
-                "projectPath": "C:\\Users\\bolty\\Desktop\\info\\TerrorSim\\Class\\Class.csproj"
+              "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
+                "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj"
               }
             }
           }

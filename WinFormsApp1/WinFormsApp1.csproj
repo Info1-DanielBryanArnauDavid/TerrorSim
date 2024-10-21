@@ -6,10 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>beluga (1).ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="programa.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="beluga (1).ico" />
   </ItemGroup>
 
   <ItemGroup>
