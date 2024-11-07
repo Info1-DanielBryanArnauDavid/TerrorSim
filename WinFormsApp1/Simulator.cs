@@ -1,7 +1,6 @@
 ﻿using Class;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace WinFormsApp1
@@ -23,6 +22,13 @@ namespace WinFormsApp1
             hoverInfoLabel.Visible = false;
             miPanel.Controls.Add(hoverInfoLabel);
             SetupDataGridView();
+        }
+
+        public void setData(FlightPlanList f, int c, int dist)
+        {
+            miLista = f;
+            tiempoCiclo = c;
+            distSeg = dist;
         }
 
         private void UpdateDataGridView()
@@ -57,44 +63,11 @@ namespace WinFormsApp1
             flightDataGridView.Columns.Add("Speed", "Speed");
 
             this.Controls.Add(flightDataGridView);
-
         }
 
         private bool CheckSecurityDistance(FlightPlanCart flightToCheck)
         {
-            for (int i = 0; i < miLista.GetNumber(); i++)
-            {
-                FlightPlanCart otherFlight = miLista.GetFlightPlanCart(i);
-
-                // Skip comparing the flight with itself
-                if (flightToCheck.GetFlightNumber() == otherFlight.GetFlightNumber())
-                    continue;
-
-                double distance = CalculateDistance(
-                    flightToCheck.GetPlanePosition().GetX(),
-                    flightToCheck.GetPlanePosition().GetY(),
-                    otherFlight.GetPlanePosition().GetX(),
-                    otherFlight.GetPlanePosition().GetY()
-                );
-
-                if (distance < 2 * distSeg-1)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private double CalculateDistance(double x1, double y1, double x2, double y2)
-        {
-            return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
-        }
-
-        public void setData(FlightPlanList f, int c, int dist)
-        {
-            miLista = f;
-            tiempoCiclo = c;
-            distSeg = dist;
+            return miLista.CheckSecurityDistance(flightToCheck, distSeg);
         }
 
         private void MiPanel_Paint(object sender, PaintEventArgs e)
@@ -112,7 +85,6 @@ namespace WinFormsApp1
                     WaypointCart origin = flight.GetOrigin();
                     WaypointCart destination = flight.GetDestination();
 
-                    // Draw dotted line from origin to destination
                     g.DrawLine(dottedPen,
                         new Point((int)origin.GetX(), (int)origin.GetY()),
                         new Point((int)destination.GetX(), (int)destination.GetY()));
@@ -136,7 +108,7 @@ namespace WinFormsApp1
                 }
             }
         }
-        //Visualizar los vuelos
+
         private void Simulacion_Load(object sender, EventArgs e) { }
 
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
@@ -149,7 +121,7 @@ namespace WinFormsApp1
                 PictureBox v = new PictureBox();
                 FlightPlanCart f = miLista.GetFlightPlanCart(i);
 
-                //Configuración PictureBox
+                // Configure PictureBox
                 p.Size = new Size(5, 5);
                 p.BackColor = Color.Red;
                 p.Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetOrigin().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetOrigin().GetY()));
@@ -168,9 +140,9 @@ namespace WinFormsApp1
             }
             UpdateDataGridView();
         }
+
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
         {
-            // Prepare the flight information
             string flightInfo = $"Name: {flight.GetFlightNumber()}\n" +
                                 $"Origin: ({flight.GetOrigin().GetX()}, {flight.GetOrigin().GetY()})\n" +
                                 $"Dest: ({flight.GetDestination().GetX()}, {flight.GetDestination().GetY()})\n" +
@@ -180,13 +152,10 @@ namespace WinFormsApp1
             hoverInfoLabel.Text = flightInfo;
 
             Point cursorPositionInPanel = miPanel.PointToClient(Cursor.Position);
-
             hoverInfoLabel.Location = new Point(cursorPositionInPanel.X, cursorPositionInPanel.Y);
-
             hoverInfoLabel.Visible = true;
         }
 
-        // Hide the label when the mouse leaves the PictureBox
         private void HidePlaneInfo()
         {
             hoverInfoLabel.Visible = false;
@@ -198,17 +167,14 @@ namespace WinFormsApp1
         private void miPanel_CursorChanged(object sender, EventArgs e) { }
         private void miPanel_MouseMove_1(object sender, MouseEventArgs e) { }
         private void miPanel_MouseLeave_1(object sender, EventArgs e) { }
-        private void button1_Click(object sender, EventArgs e)
+
+        private void button1_Click(object sender, EventArgs e) // Manual Move Button
         {
-            //mover manualmente
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
-                double angle = miLista.GetFlightPlanCart(i).GetAngle();
-                double inc = miLista.GetFlightPlanCart(i).GetSpeed() * Convert.ToDouble(tiempoCiclo);
-                double dx = inc * Math.Cos(angle);
-                double dy = inc * Math.Sin(angle);
-                miLista.GetFlightPlanCart(i).MovePlane(dx, dy);
-                vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
+                FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
+                vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
             }
             miPanel.Invalidate();
             UpdateDataGridView();
@@ -223,43 +189,9 @@ namespace WinFormsApp1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) { }
-        private void label3_Paint(object sender, PaintEventArgs e) { }
-        private void button1_Click_1(object sender, EventArgs e) { }
-        private void timer1_Tick(object sender, EventArgs e) { }
-        private void label2_Click(object sender, EventArgs e) { }
-        private void MiPanel_Click_1(object sender, EventArgs e) { }
-        private void timer1_Tick_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // Auto Move Button
         {
-            for (int i = 0; i < miLista.GetNumber(); i++)
-            {
-                double angle = miLista.GetFlightPlanCart(i).GetAngle();
-                double inc = miLista.GetFlightPlanCart(i).GetSpeed() * Convert.ToDouble(tiempoCiclo);
-                double dx = inc * Math.Cos(angle);
-                double dy = inc * Math.Sin(angle);
-                miLista.GetFlightPlanCart(i).MovePlane(dx, dy);
-                vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
-            }
-            miPanel.Invalidate();
-            UpdateDataGridView();
-            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-            if (v)
-            {
-                label4.Text = "Jodido";
-            }
-            else
-            {
-                label4.Text = "Guay";
-            }
-        }
-
-
-        private void SimulacionVuelo_Load_(object sender, EventArgs e)
-        { }
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            //mover auto
-            timer1.Interval = 1000;
+            timer1.Interval = 1000 * tiempoCiclo;
             if (timer1.Enabled)
             {
                 timer1.Stop();
@@ -267,13 +199,12 @@ namespace WinFormsApp1
             }
             else
             {
-                ;
                 timer1.Start();
                 button2.Text = "Stop";
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // Reset Button
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
@@ -294,23 +225,6 @@ namespace WinFormsApp1
             miPanel.Invalidate();
         }
 
-        private void miPanel_MouseHover(object sender, EventArgs e) { }
-        private void miPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            label2.Text = "X= " + e.X + "Y= " + e.Y;
-        }
-
-        private void miPanel_MouseLeave(object sender, EventArgs e)
-        {
-            label2.Text = "Out of bounds";
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //asi no usamos una simulacion otra vez
         private bool PredictCollision()
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
@@ -333,7 +247,7 @@ namespace WinFormsApp1
                     double cx = rx + vx * t;
                     double cy = ry + vy * t;
 
-                    if (cx * cx + cy * cy < distSeg *4* distSeg)
+                    if (cx * cx + cy * cy < distSeg * 4 * distSeg)
                     {
                         return true;
                     }
@@ -344,82 +258,16 @@ namespace WinFormsApp1
 
         private double OptVel(FlightPlanCart flight1, FlightPlanCart flight2)
         {
-            const int MAX_ITERATIONS = 5;
-            const double CONVERGENCE_THRESHOLD = 0.1; // m/s
-            double currentSpeed = flight2.GetSpeed();
-            double lastSpeed = double.MaxValue;
-
-            for (int iteration = 0; iteration < MAX_ITERATIONS; iteration++)
-            {
-                double rx = flight2.GetPlanePosition().GetX() - flight1.GetPlanePosition().GetX();
-                double ry = flight2.GetPlanePosition().GetY() - flight1.GetPlanePosition().GetY();
-
-                double v1x = flight1.GetSpeed() * Math.Cos(flight1.GetAngle());
-                double v1y = flight1.GetSpeed() * Math.Sin(flight1.GetAngle());
-                double v2x = currentSpeed * Math.Cos(flight2.GetAngle());
-                double v2y = currentSpeed * Math.Sin(flight2.GetAngle());
-
-                double vx = v2x - v1x;
-                double vy = v2y - v1y;
-
-                double topt = -(rx * vx + ry * vy) / (vx * vx + vy * vy);
-
-                if (topt < 0) return -1;
-
-                double cosangle = Math.Cos(flight2.GetAngle());
-                double sinangle = Math.Sin(flight2.GetAngle());
-
-                double alpha = topt * topt;
-                double beta = 2 * topt * (rx * cosangle + ry * sinangle - topt * (v1x * cosangle + v1y * sinangle));
-                double gamma = topt * topt * (v1x * v1x + v1y * v1y) - 2 * topt * (rx * v1x + ry * v1y) + rx * rx + ry * ry - 4*distSeg * distSeg;
-
-                double discriminant = beta * beta - 4 * alpha * gamma;
-
-                if (discriminant < 0) return -1;
-
-                double newSpeed = (-beta - Math.Sqrt(discriminant)) / (2 * alpha);
-
-                if (newSpeed < 0) return -1;
-
-                if (Math.Abs(newSpeed - currentSpeed) < CONVERGENCE_THRESHOLD) //minimo definido para evitar iteraciones de mas
-
-                {
-                    return newSpeed;
-                }
-
-                lastSpeed = currentSpeed;
-                currentSpeed = newSpeed;
-
-                if (iteration > 0 && Math.Abs(currentSpeed - lastSpeed) > Math.Abs(lastSpeed))
-                {
-                    return (currentSpeed + lastSpeed) / 2;
-                }
-            }
-
-            return currentSpeed > 0 ? currentSpeed : -1;
+            return miLista.OptimalVelocity(flight1, flight2, distSeg);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) // Predict Collision Button
         {
-
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 miLista.GetFlightPlanCart(i).Restart();
                 vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
-
             }
-            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-            if (v)
-            {
-                label4.Text = "Jodido";
-            }
-            else
-            {
-                label4.Text = "Guay";
-            }
-            UpdateDataGridView();
-            timer1.Stop();
-            miPanel.Invalidate();
             bool collisionPredicted = PredictCollision();
 
             if (collisionPredicted)
@@ -432,6 +280,9 @@ namespace WinFormsApp1
                 label5.Text = "Seguro";
                 button5.Enabled = false;
             }
+            UpdateDataGridView();
+            timer1.Stop();
+            miPanel.Invalidate();
         }
 
         private void flightDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -439,10 +290,9 @@ namespace WinFormsApp1
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e) // Optimize Speed Button
         {
-
-            double optSpeed = (OptVel(miLista.GetFlightPlanCart(0), miLista.GetFlightPlanCart(1)));
+            double optSpeed = OptVel(miLista.GetFlightPlanCart(0), miLista.GetFlightPlanCart(1));
 
             if (optSpeed == -1)
             {
@@ -451,38 +301,58 @@ namespace WinFormsApp1
             }
             else
             {
-            miLista.GetFlightPlanCart(1).SetSpeed(Math.Round(optSpeed,2));
-            for (int i = 0; i < miLista.GetNumber(); i++)
-            {
-                miLista.GetFlightPlanCart(i).Restart();
-                vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
-
+                miLista.GetFlightPlanCart(1).SetSpeed(Math.Round(optSpeed, 2));
+                for (int i = 0; i < miLista.GetNumber(); i++)
+                {
+                    miLista.GetFlightPlanCart(i).Restart();
+                    vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
+                }
+                label5.Text = "Seguro";
+                button5.Enabled = false;
+                UpdateDataGridView();
+                timer1.Stop();
+                miPanel.Invalidate();
             }
-            label5.Text = "Seguro";
-            button5.Enabled = false;
-
-            UpdateDataGridView();
-            timer1.Stop();
-            miPanel.Invalidate(); //asi forzamos el repaint
-            }
-
         }
 
-            
         private void flightDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //abrirá un forms de cambios
             if (e.ColumnIndex == 7)
             {
-            SetSpeedForm fixSpeed = new SetSpeedForm();
-            double speed = Convert.ToDouble(flightDataGridView.CurrentCell.Value);
-            fixSpeed.setData(speed);
-            fixSpeed.ShowDialog();
-            speed = fixSpeed.getData();
-            miLista.GetFlightPlanCart(e.RowIndex).SetSpeed(speed);
-            UpdateDataGridView();
+                SetSpeedForm fixSpeed = new SetSpeedForm();
+                double speed = Convert.ToDouble(flightDataGridView.CurrentCell.Value);
+                fixSpeed.setData(speed);
+                fixSpeed.ShowDialog();
+                speed = fixSpeed.getData();
+                miLista.GetFlightPlanCart(e.RowIndex).SetSpeed(speed);
+                UpdateDataGridView();
             }
-            
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
+                vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+            }
+            miPanel.Invalidate();
+            UpdateDataGridView();
+            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
+            if (v)
+            {
+                label4.Text = "Jodido";
+            }
+            else
+            {
+                label4.Text = "Guay";
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

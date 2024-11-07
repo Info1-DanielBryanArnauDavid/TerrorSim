@@ -61,9 +61,6 @@
             miPanel.Size = new Size(700, 700);
             miPanel.TabIndex = 0;
             miPanel.TabStop = false;
-            miPanel.Click += MiPanel_Click_1;
-            miPanel.MouseLeave += miPanel_MouseLeave;
-            miPanel.MouseHover += miPanel_MouseHover;
             miPanel.MouseMove += miPanel_MouseMove;
             // 
             // button1
@@ -86,7 +83,6 @@
             button2.TabIndex = 2;
             button2.Text = "Auto";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click_1;
             // 
             // button3
             // 
@@ -107,11 +103,9 @@
             label2.Size = new Size(38, 15);
             label2.TabIndex = 4;
             label2.Text = "label2";
-            label2.Click += label2_Click;
             // 
             // timer1
             // 
-            timer1.Tick += timer1_Tick_1;
             // 
             // hoverInfoLabel
             // 

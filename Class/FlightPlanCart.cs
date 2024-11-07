@@ -39,10 +39,9 @@ namespace Class
 
         public double GetAngle()
         {
-            double x = Convert.ToInt32(GetDestination().GetX()) - Convert.ToInt32(GetOrigin().GetX());
-            double y = Convert.ToInt32(GetDestination().GetY()) - Convert.ToInt32(GetOrigin().GetY());
-            double angle = Math.Atan2(y, x);
-            return angle;
+            double x = destination.GetX() - origin.GetX();
+            double y = destination.GetY() - origin.GetY();
+            return Math.Atan2(y, x);
         }
 
         public void Restart()
@@ -57,27 +56,25 @@ namespace Class
 
         public void MovePlane(double dx, double dy)
         {
-                double newX = plane.GetX() + dx;
-                double newY = plane.GetY() + dy;
+            double newX = plane.GetX() + dx;
+            double newY = plane.GetY() + dy;
 
-                // Check if the new position overshoots the destination
-                if (new WaypointCart(newX, newY).DistanceTo(origin) > origin.DistanceTo(destination))
-                {
-                    // If it overshoots, snap to the destination
-                    plane.SetX(destination.GetX());
-                    plane.SetY(destination.GetY());
-                }
-                else
-                {
-                    plane.Move(dx, dy);
-                
+            // Check if the new position overshoots the destination
+            if (new WaypointCart(newX, newY).DistanceTo(origin) > origin.DistanceTo(destination))
+            {
+                // If it overshoots, snap to the destination
+                plane.SetX(destination.GetX());
+                plane.SetY(destination.GetY());
+            }
+            else
+            {
+                plane.Move(dx, dy);
             }
         }
 
-            public static double Distance(FlightPlanCart plan)
+        public static double Distance(FlightPlanCart plan)
         {
             return plan.GetOrigin().DistanceTo(plan.GetDestination());
         }
     }
 }
-
