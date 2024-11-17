@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {}
+    "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
+    "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
+        "projectUniqueName": "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
         "projectName": "Class",
-        "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
-        "packagesPath": "C:\\Users\\bolty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\obj\\",
+        "projectPath": "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
+        "packagesPath": "C:\\Users\\BRYAN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bolty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BRYAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +44,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -64,17 +70,17 @@
         }
       }
     },
-    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {
+    "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectUniqueName": "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
         "projectName": "WinFormsApp1",
-        "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
-        "packagesPath": "C:\\Users\\bolty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
+        "projectPath": "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+        "packagesPath": "C:\\Users\\BRYAN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bolty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BRYAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -88,8 +94,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
-                "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj"
+              "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
+                "projectPath": "C:\\Users\\BRYAN\\source\\repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj"
               }
             }
           }
@@ -108,6 +114,12 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

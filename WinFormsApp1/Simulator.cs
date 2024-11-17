@@ -189,7 +189,7 @@ namespace WinFormsApp1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) // Auto Move Button
+        private void button2_Click_1(object sender, EventArgs e) // Auto Move Button
         {
             timer1.Interval = 1000 * tiempoCiclo;
             if (timer1.Enabled)
@@ -329,7 +329,7 @@ namespace WinFormsApp1
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick_1(object sender, EventArgs e)
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
@@ -354,5 +354,6 @@ namespace WinFormsApp1
         {
 
         }
+
     }
 }
