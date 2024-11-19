@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Saved
+    partial class Error2
     {
         /// <summary>
         /// Required designer variable.
@@ -28,56 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            CerrarBoton = new Button();
+            BotonReintentar = new Button();
             label1 = new Label();
-            label2 = new Label();
             SuspendLayout();
             // 
-            // CerrarBoton
+            // BotonReintentar
             // 
-            CerrarBoton.Location = new Point(73, 58);
-            CerrarBoton.Name = "CerrarBoton";
-            CerrarBoton.Size = new Size(75, 23);
-            CerrarBoton.TabIndex = 0;
-            CerrarBoton.Text = "Cerrar";
-            CerrarBoton.UseVisualStyleBackColor = true;
-            CerrarBoton.Click += CerrarBoton_Click;
+            BotonReintentar.Location = new Point(97, 95);
+            BotonReintentar.Name = "BotonReintentar";
+            BotonReintentar.Size = new Size(75, 23);
+            BotonReintentar.TabIndex = 0;
+            BotonReintentar.Text = "Reintentar";
+            BotonReintentar.UseVisualStyleBackColor = true;
+            BotonReintentar.Click += BotonReintentar_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(267, 201);
+            label1.Location = new Point(48, 44);
             label1.Name = "label1";
-            label1.Size = new Size(0, 15);
+            label1.Size = new Size(179, 15);
             label1.TabIndex = 1;
+            label1.Text = "No se pudo encontrar el archivo.";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(27, 30);
-            label2.Name = "label2";
-            label2.Size = new Size(179, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Datos guardados correctamente.";
-            // 
-            // Saved
+            // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(232, 105);
-            Controls.Add(label2);
+            ClientSize = new Size(286, 162);
             Controls.Add(label1);
-            Controls.Add(CerrarBoton);
-            Name = "Saved";
-            Load += DatosGuardados_Load;
+            Controls.Add(BotonReintentar);
+            Name = "Form1";
+            Text = "Error";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button CerrarBoton;
+        private Button BotonReintentar;
         private Label label1;
-        private Label label2;
     }
 }

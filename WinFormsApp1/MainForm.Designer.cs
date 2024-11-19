@@ -61,28 +61,28 @@
             // 
             introducirFlightPlansToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fromFileToolStripMenuItem, flightPlanPairToolStripMenuItem });
             introducirFlightPlansToolStripMenuItem.Name = "introducirFlightPlansToolStripMenuItem";
-            introducirFlightPlansToolStripMenuItem.Size = new Size(167, 22);
+            introducirFlightPlansToolStripMenuItem.Size = new Size(180, 22);
             introducirFlightPlansToolStripMenuItem.Text = "Insert Flight Plans";
             introducirFlightPlansToolStripMenuItem.Click += introducirFlightPlansToolStripMenuItem_Click;
             // 
             // fromFileToolStripMenuItem
             // 
             fromFileToolStripMenuItem.Name = "fromFileToolStripMenuItem";
-            fromFileToolStripMenuItem.Size = new Size(153, 22);
+            fromFileToolStripMenuItem.Size = new Size(180, 22);
             fromFileToolStripMenuItem.Text = "From File";
             fromFileToolStripMenuItem.Click += fromFileToolStripMenuItem_Click;
             // 
             // flightPlanPairToolStripMenuItem
             // 
             flightPlanPairToolStripMenuItem.Name = "flightPlanPairToolStripMenuItem";
-            flightPlanPairToolStripMenuItem.Size = new Size(153, 22);
+            flightPlanPairToolStripMenuItem.Size = new Size(180, 22);
             flightPlanPairToolStripMenuItem.Text = "Flight Plan Pair";
             flightPlanPairToolStripMenuItem.Click += flightPlanPairToolStripMenuItem_Click;
             // 
             // introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem
             // 
             introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Name = "introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem";
-            introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(167, 22);
+            introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(180, 22);
             introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Parameters";
             introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Click += introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem_Click;
             // 

@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Saved
+    partial class FromFile
     {
         /// <summary>
         /// Required designer variable.
@@ -28,56 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            CerrarBoton = new Button();
             label1 = new Label();
-            label2 = new Label();
+            textBoxNombreArchivotxt = new TextBox();
+            buttoncargar = new Button();
             SuspendLayout();
-            // 
-            // CerrarBoton
-            // 
-            CerrarBoton.Location = new Point(73, 58);
-            CerrarBoton.Name = "CerrarBoton";
-            CerrarBoton.Size = new Size(75, 23);
-            CerrarBoton.TabIndex = 0;
-            CerrarBoton.Text = "Cerrar";
-            CerrarBoton.UseVisualStyleBackColor = true;
-            CerrarBoton.Click += CerrarBoton_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(267, 201);
+            label1.Location = new Point(42, 45);
             label1.Name = "label1";
-            label1.Size = new Size(0, 15);
-            label1.TabIndex = 1;
+            label1.Size = new Size(112, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Nombre del archivo";
             // 
-            // label2
+            // textBoxNombreArchivotxt
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(27, 30);
-            label2.Name = "label2";
-            label2.Size = new Size(179, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Datos guardados correctamente.";
+            textBoxNombreArchivotxt.Location = new Point(160, 42);
+            textBoxNombreArchivotxt.Name = "textBoxNombreArchivotxt";
+            textBoxNombreArchivotxt.Size = new Size(95, 23);
+            textBoxNombreArchivotxt.TabIndex = 2;
             // 
-            // Saved
+            // buttoncargar
+            // 
+            buttoncargar.Location = new Point(171, 81);
+            buttoncargar.Name = "buttoncargar";
+            buttoncargar.Size = new Size(75, 23);
+            buttoncargar.TabIndex = 3;
+            buttoncargar.Text = "Cargar";
+            buttoncargar.UseVisualStyleBackColor = true;
+            buttoncargar.Click += buttoncargar_Click;
+            // 
+            // FromFile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(232, 105);
-            Controls.Add(label2);
+            ClientSize = new Size(327, 170);
+            Controls.Add(buttoncargar);
+            Controls.Add(textBoxNombreArchivotxt);
             Controls.Add(label1);
-            Controls.Add(CerrarBoton);
-            Name = "Saved";
-            Load += DatosGuardados_Load;
+            Name = "FromFile";
+            Text = "Cargar FlightPlan";
+            Load += FromFile_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button CerrarBoton;
         private Label label1;
-        private Label label2;
+        private TextBox textBoxNombreArchivotxt;
+        private Button buttoncargar;
     }
 }

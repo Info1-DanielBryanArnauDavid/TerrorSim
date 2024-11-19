@@ -37,6 +37,7 @@ namespace WinFormsApp1
             {
                 MisUsuarios.AñadirUsuario(textBox1.Text, textBox2.Text);
                 MessageBox.Show("Usuario registrado correctamente");
+                Close();
                 return;
             }
 
@@ -45,6 +46,7 @@ namespace WinFormsApp1
                 MessageBox.Show("El usuario ya existe");
                 return;
             }
+            
 
         }
 

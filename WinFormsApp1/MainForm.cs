@@ -72,7 +72,9 @@ namespace WinFormsApp1
 
         private void fromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //añadir readfile y eso
+            FromFile Fp = new FromFile();
+            miLista = Fp.getLista();
+            Fp.ShowDialog();
         }
     }
 }

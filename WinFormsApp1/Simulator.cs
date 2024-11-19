@@ -12,6 +12,9 @@ namespace WinFormsApp1
         int distSeg;
         List<PictureBox> vuelos = new List<PictureBox>();
 
+        public FlightPlanList GetmiLista()
+        { return miLista; }
+
         public Simulator()
         {
             InitializeComponent();
@@ -355,5 +358,15 @@ namespace WinFormsApp1
 
         }
 
+        private void miPanel_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonGuardarSim_Click(object sender, EventArgs e)
+        {
+            Guardar g = new Guardar(GetmiLista());
+            g.ShowDialog();
+        }
     }
 }

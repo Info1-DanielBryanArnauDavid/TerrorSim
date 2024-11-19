@@ -25,6 +25,7 @@ namespace WinFormsApp1
                 MainForm inicio = new MainForm();
                 inicio.ShowDialog();
                 return;
+
             }
             
             else
@@ -32,7 +33,6 @@ namespace WinFormsApp1
                 MessageBox.Show("Datos incorrectos");
                 return;
             }
-
         }
 
         private void Bonjour_Load(object sender, EventArgs e)

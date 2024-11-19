@@ -37,24 +37,25 @@ namespace WinFormsApp1
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(37, 33);
+            label1.Location = new Point(72, 45);
             label1.Name = "label1";
-            label1.Size = new Size(317, 15);
+            label1.Size = new Size(138, 15);
             label1.TabIndex = 0;
-            label1.Text = "Ha habido un error al guardar los valores, asegúrate de que";
+            label1.Text = "Se ha producido un error";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(17, 50);
+            label2.Location = new Point(63, 60);
             label2.Name = "label2";
-            label2.Size = new Size(355, 15);
+            label2.Size = new Size(160, 15);
             label2.TabIndex = 1;
-            label2.Text = "no falte ningun valor y de que esten todos escritos correctamente.";
+            label2.Text = "por favor inténtalo de nuevo.";
+            label2.Click += label2_Click;
             // 
             // ReintentarBoton
             // 
-            ReintentarBoton.Location = new Point(164, 93);
+            ReintentarBoton.Location = new Point(100, 89);
             ReintentarBoton.Name = "ReintentarBoton";
             ReintentarBoton.Size = new Size(75, 23);
             ReintentarBoton.TabIndex = 2;
@@ -66,12 +67,12 @@ namespace WinFormsApp1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(385, 136);
+            ClientSize = new Size(291, 146);
             Controls.Add(ReintentarBoton);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "Error";
-            Text = "Ha surgido un error";
+            Text = "Error";
             Load += Error_Load;
             ResumeLayout(false);
             PerformLayout();

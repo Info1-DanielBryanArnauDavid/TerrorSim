@@ -59,3 +59,16 @@ C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\bin\Debu
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\bin\Debug\net8.0\Class.pdb
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.csproj.AssemblyReference.cache
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\ref\Class.dll
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\bin\Debug\net8.0\Class.deps.json
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\bin\Debug\net8.0\Class.dll
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\bin\Debug\net8.0\Class.pdb
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.csproj.AssemblyReference.cache
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.AssemblyInfoInputs.cache
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.AssemblyInfo.cs
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.csproj.CoreCompileInputs.cache
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.sourcelink.json
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.dll
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\refint\Class.dll
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.pdb
+C:\Users\34647\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\ref\Class.dll

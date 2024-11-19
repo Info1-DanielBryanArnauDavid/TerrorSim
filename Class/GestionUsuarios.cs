@@ -27,7 +27,7 @@ namespace Class
         }
         public int CrearBaseDeUsuarios()
         {
-            string sql = "CREATE TABLE Usuarios ( Usuario varchar, Contraseña varchar)";
+            string sql = "CREATE TABLE IF NOT EXISTS Usuarios ( Usuario varchar, Contraseña varchar)";
             SqliteCommand command = new SqliteCommand(sql, cnx);
             try
             {
@@ -47,6 +47,7 @@ namespace Class
 
         public int ComprovarSiElUsuarioExiste(string Usuario, string Contraseña)
         {
+            CrearBaseDeUsuarios();
             DataTable dt = new DataTable();
             string sql = "SELECT * FROM Usuarios WHERE Usuario = '"+Usuario+"'";
             SqliteCommand command = new SqliteCommand(sql, cnx);
