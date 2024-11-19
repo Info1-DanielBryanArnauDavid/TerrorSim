@@ -67,7 +67,7 @@
             Controls.Add(button1Guardar);
             Controls.Add(textBox1);
             Controls.Add(Name);
-            Name = "Guardar";
+            
             Text = "Guardar simulación";
             ResumeLayout(false);
             PerformLayout();

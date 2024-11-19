@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Windows.Markup;
 
 namespace WinFormsApp1
 {
@@ -11,10 +12,10 @@ namespace WinFormsApp1
         int tiempoCiclo;
         int distSeg;
         List<PictureBox> vuelos = new List<PictureBox>();
-
-        public FlightPlanList GetmiLista()
-        { return miLista; }
-
+        Stack<FlightPlanList> EstadoVuelos = new Stack<FlightPlanList>();
+        bool StatusBtn = false;
+        double multiplicador = 1;
+        int cuentaClicks = 1;
         public Simulator()
         {
             InitializeComponent();
@@ -26,6 +27,9 @@ namespace WinFormsApp1
             miPanel.Controls.Add(hoverInfoLabel);
             SetupDataGridView();
         }
+
+        public FlightPlanList GetmiLista()
+            { return miLista; }
 
         public void setData(FlightPlanList f, int c, int dist)
         {
@@ -173,37 +177,63 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e) // Manual Move Button
         {
-            for (int i = 0; i < miLista.GetNumber(); i++)
-            {
-                FlightPlanCart flight = miLista.GetFlightPlanCart(i);
-                flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
-                vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
-            }
-            miPanel.Invalidate();
-            UpdateDataGridView();
-            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-            if (v)
-            {
-                label4.Text = "Jodido";
-            }
-            else
-            {
-                label4.Text = "Guay";
-            }
-        }
 
-        private void button2_Click_1(object sender, EventArgs e) // Auto Move Button
-        {
-            timer1.Interval = 1000 * tiempoCiclo;
-            if (timer1.Enabled)
+            if (!StatusBtn)
             {
-                timer1.Stop();
-                button2.Text = "Auto";
+                int PlanesInDestination = 0;
+                FlightPlanList EstadoAnterior = new FlightPlanList();
+                for (int i = 0; i < miLista.GetNumber(); i++)
+                {
+                    WaypointCart Posicion = new WaypointCart(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX(), miLista.GetFlightPlanCart(i).GetPlanePosition().GetY());
+                    FlightPlanCart vuelo = new FlightPlanCart(miLista.GetFlightPlanCart(i).GetFlightNumber(), miLista.GetFlightPlanCart(i).GetOrigin(), miLista.GetFlightPlanCart(i).GetDestination(), miLista.GetFlightPlanCart(i).GetSpeed());
+                    vuelo.SetPlanePosition(Posicion);
+                    EstadoAnterior.AddFlightPlan(vuelo);
+                    FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                    flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
+                    vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                    if (flight.GetPlanePosition().GetX() == miLista.GetFlightPlanCart(i).GetDestination().GetX() && flight.GetPlanePosition().GetY() == miLista.GetFlightPlanCart(i).GetDestination().GetY())
+                    {
+                        PlanesInDestination++;
+                    }
+                }
+                if (PlanesInDestination != miLista.GetNumber())
+                {
+                    EstadoVuelos.Push(EstadoAnterior);
+                }
+                else
+                {
+                    button1.Enabled = false;
+                }
+                miPanel.Invalidate();
+                UpdateDataGridView();
+                bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
+                if (v)
+                {
+                    label4.Text = "Jodido";
+                }
+                else
+                {
+                    label4.Text = "Guay";
+                }
+                button6.Enabled = true;
             }
             else
             {
-                timer1.Start();
-                button2.Text = "Stop";
+                timer1.Interval = Convert.ToInt32(1000 / multiplicador) * tiempoCiclo;
+                if (timer1.Enabled)
+                {
+                    button6.Enabled = true;
+                    checkBox1.Enabled = true;
+                    timer1.Stop();
+                    button1.Text = "Avanzar";
+                }
+                else
+                {
+                    button6.Enabled = false;
+                    checkBox1.Enabled = false;
+                    timer1.Start();
+                    button1.Text = "Stop";
+                }
             }
         }
 
@@ -214,6 +244,11 @@ namespace WinFormsApp1
                 miLista.GetFlightPlanCart(i).Restart();
                 vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
             }
+            cuentaClicks = 1;
+            button8.Text = "x1";
+            button1.Text = "Avanzar";
+            button6.Text = "Retroceder";
+            EstadoVuelos = new Stack<FlightPlanList>();
             bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
             if (v)
             {
@@ -332,14 +367,39 @@ namespace WinFormsApp1
             }
         }
 
-        private void timer1_Tick_1(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
+            int PlanesInDestination = 0;
+            FlightPlanList EstadoAnterior = new FlightPlanList();
+
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
+
+                WaypointCart Posicion = new WaypointCart(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX(), miLista.GetFlightPlanCart(i).GetPlanePosition().GetY());
+                FlightPlanCart vuelo = new FlightPlanCart(miLista.GetFlightPlanCart(i).GetFlightNumber(), miLista.GetFlightPlanCart(i).GetOrigin(), miLista.GetFlightPlanCart(i).GetDestination(), miLista.GetFlightPlanCart(i).GetSpeed());
+                vuelo.SetPlanePosition(Posicion);
+                EstadoAnterior.AddFlightPlan(vuelo);
                 FlightPlanCart flight = miLista.GetFlightPlanCart(i);
                 flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
                 vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                if (flight.GetPlanePosition().GetX() == miLista.GetFlightPlanCart(i).GetDestination().GetX() && flight.GetPlanePosition().GetY() == miLista.GetFlightPlanCart(i).GetDestination().GetY())
+                {
+                    PlanesInDestination++;
+                }
             }
+            if (PlanesInDestination != miLista.GetNumber())
+            {
+                EstadoVuelos.Push(EstadoAnterior);
+            }
+            else
+            {
+                button1.Enabled = false;
+                timer1.Stop();
+                button1.Text = "Avanzar";
+                button6.Enabled = true;
+                checkBox1.Enabled = true;
+            }
+            EstadoVuelos.Push(EstadoAnterior);
             miPanel.Invalidate();
             UpdateDataGridView();
             bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
@@ -358,12 +418,147 @@ namespace WinFormsApp1
 
         }
 
-        private void miPanel_Click_1(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (!StatusBtn)
+            {
+                button6.Enabled = true;
+                button1.Enabled = true;
+                timer1.Stop();
+                if (EstadoVuelos.Count > 0)
+                {
+                    miLista = EstadoVuelos.Pop();
+                    for (int i = 0; i < miLista.GetNumber(); i++)
+                    {
+                        FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                        vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                    }
+                    miPanel.Invalidate();
+                    UpdateDataGridView();
+                    bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
+                    if (v)
+                    {
+                        label4.Text = "Jodido";
+                    }
+                    else
+                    {
+                        label4.Text = "Guay";
+                    }
+                }
+                else
+                {
+                    button6.Enabled = false;
+                    button1.Enabled = true;
+                    checkBox1.Enabled = true;
+                }
+            }
+            else
+            {
+                timer2.Interval = Convert.ToInt32(1000 / multiplicador) * tiempoCiclo;
+                if (timer2.Enabled)
+                {
+                    button1.Enabled = true;
+                    checkBox1.Enabled = true;
+                    timer2.Stop();
+                    button6.Text = "Retroceder";
+                }
+                else
+                {
+                    button1.Enabled = false;
+                    checkBox1.Enabled = false;
+                    timer2.Start();
+                    button6.Text = "Stop";
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                checkBox1.Text = "Automático";
+                StatusBtn = true;
+                button8.Enabled = true;
+                button8.Visible = true;
+                multiplicador = 1;
+                cuentaClicks = 1;
+                button8.Text = "x1";
+            }
+            else
+            {
+                checkBox1.Text = "Manual";
+                timer1.Stop();
+                StatusBtn = false;
+                button8.Enabled = false;
+                button8.Visible = false;
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+            if (EstadoVuelos.Count > 0)
+            {
+                miLista = EstadoVuelos.Pop();
+                for (int i = 0; i < miLista.GetNumber(); i++)
+                {
+                    FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                    vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                }
+                miPanel.Invalidate();
+                UpdateDataGridView();
+                bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
+                if (v)
+                {
+                    label4.Text = "Jodido";
+                }
+                else
+                {
+                    label4.Text = "Guay";
+                }
+            }
+            else
+            {
+                timer2.Stop();
+                button6.Text = "Retroceder";
+                button6.Enabled = false;
+                button1.Enabled = true;
+                checkBox1.Enabled = true;
+            }
+        }
+
+        private void label11_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void buttonGuardarSim_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
+        {
+            double[] values = [0.5, 1, 2, 4];
+            cuentaClicks++;
+            if (cuentaClicks == 4)
+            {
+                cuentaClicks = 0;
+            }
+            button8.Text = "x" + Convert.ToString(values[cuentaClicks]);
+            setMultiplicador(values[cuentaClicks]);
+            if (timer1.Enabled)
+            {
+                timer1.Interval = Convert.ToInt32(1000 / multiplicador) * tiempoCiclo;
+            }
+            if (timer2.Enabled)
+            {
+                timer2.Interval = Convert.ToInt32(1000 / multiplicador) * tiempoCiclo;
+            }
+
+        }
+
+        public void setMultiplicador(double num)
+        {
+            multiplicador = num;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             Guardar g = new Guardar(GetmiLista());
             g.ShowDialog();

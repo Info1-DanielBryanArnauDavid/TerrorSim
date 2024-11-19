@@ -337,11 +337,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\34647\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
+      "projectUniqueName": "C:\\Users\\34647\\Desktop\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
       "projectName": "Class",
-      "projectPath": "C:\\Users\\34647\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
+      "projectPath": "C:\\Users\\34647\\Desktop\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
       "packagesPath": "C:\\Users\\34647\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\34647\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\obj\\",
+      "outputPath": "C:\\Users\\34647\\Desktop\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\34647\\AppData\\Roaming\\NuGet\\NuGet.Config",

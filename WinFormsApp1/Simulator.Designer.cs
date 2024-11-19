@@ -31,7 +31,6 @@
             components = new System.ComponentModel.Container();
             miPanel = new PictureBox();
             button1 = new Button();
-            button2 = new Button();
             button3 = new Button();
             label2 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
@@ -46,8 +45,14 @@
             label6 = new Label();
             label7 = new Label();
             button5 = new Button();
-            label8 = new Label();
-            buttonGuardarSim = new Button();
+            button6 = new Button();
+            checkBox1 = new CheckBox();
+            timer2 = new System.Windows.Forms.Timer(components);
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            button8 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)miPanel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)flightDataGridView).BeginInit();
             SuspendLayout();
@@ -62,34 +67,22 @@
             miPanel.Size = new Size(700, 700);
             miPanel.TabIndex = 0;
             miPanel.TabStop = false;
-            miPanel.Click += miPanel_Click_1;
             miPanel.MouseMove += miPanel_MouseMove;
             // 
             // button1
             // 
-            button1.Location = new Point(738, 370);
+            button1.Location = new Point(738, 383);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(82, 45);
             button1.TabIndex = 1;
-            button1.Text = "Manual";
+            button1.Text = "Avanzar";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
-            // 
-            button2.Location = new Point(738, 478);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(82, 45);
-            button2.TabIndex = 2;
-            button2.Text = "Auto";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click_1;
-            // 
             // button3
             // 
-            button3.Location = new Point(738, 433);
+            button3.Location = new Point(738, 294);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
             button3.Size = new Size(82, 28);
@@ -109,7 +102,7 @@
             // 
             // timer1
             // 
-            timer1.Tick += timer1_Tick_1;
+            timer1.Tick += timer1_Tick;
             // 
             // hoverInfoLabel
             // 
@@ -153,7 +146,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(789, 335);
+            label4.Location = new Point(789, 265);
             label4.Name = "label4";
             label4.Size = new Size(35, 15);
             label4.TabIndex = 9;
@@ -161,9 +154,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(858, 425);
+            button4.Location = new Point(738, 468);
             button4.Name = "button4";
-            button4.Size = new Size(75, 36);
+            button4.Size = new Size(82, 36);
             button4.TabIndex = 10;
             button4.Text = "Check";
             button4.UseVisualStyleBackColor = true;
@@ -172,7 +165,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(858, 400);
+            label5.Location = new Point(853, 468);
             label5.Name = "label5";
             label5.Size = new Size(0, 15);
             label5.TabIndex = 11;
@@ -181,7 +174,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(738, 335);
+            label6.Location = new Point(738, 265);
             label6.Name = "label6";
             label6.Size = new Size(50, 15);
             label6.TabIndex = 12;
@@ -199,39 +192,102 @@
             // button5
             // 
             button5.Enabled = false;
-            button5.Location = new Point(858, 467);
+            button5.Location = new Point(738, 518);
             button5.Name = "button5";
-            button5.Size = new Size(75, 23);
+            button5.Size = new Size(82, 23);
             button5.TabIndex = 14;
             button5.Text = "Fix";
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
-            // label8
+            // button6
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(876, 493);
-            label8.Name = "label8";
-            label8.Size = new Size(0, 15);
-            label8.TabIndex = 15;
+            button6.Location = new Point(853, 383);
+            button6.Margin = new Padding(3, 2, 3, 2);
+            button6.Name = "button6";
+            button6.Size = new Size(82, 45);
+            button6.TabIndex = 16;
+            button6.Text = "Retroceder";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
-            // buttonGuardarSim
+            // checkBox1
             // 
-            buttonGuardarSim.Location = new Point(858, 500);
-            buttonGuardarSim.Name = "buttonGuardarSim";
-            buttonGuardarSim.Size = new Size(75, 23);
-            buttonGuardarSim.TabIndex = 16;
-            buttonGuardarSim.Text = "Guardar";
-            buttonGuardarSim.UseVisualStyleBackColor = true;
-            buttonGuardarSim.Click += buttonGuardarSim_Click;
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(788, 356);
+            checkBox1.Margin = new Padding(3, 2, 3, 2);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(66, 19);
+            checkBox1.TabIndex = 17;
+            checkBox1.Text = "Manual";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // timer2
+            // 
+            timer2.Tick += timer2_Tick;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(738, 335);
+            label9.Name = "label9";
+            label9.Size = new Size(89, 15);
+            label9.TabIndex = 18;
+            label9.Text = "Mover Aviones:";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(738, 357);
+            label10.Name = "label10";
+            label10.Size = new Size(42, 15);
+            label10.TabIndex = 19;
+            label10.Text = "Modo:";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(738, 445);
+            label11.Name = "label11";
+            label11.Size = new Size(169, 15);
+            label11.TabIndex = 20;
+            label11.Text = "Comprobar posible accidente: ";
+            label11.Click += label11_Click;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(880, 354);
+            button8.Margin = new Padding(3, 2, 3, 2);
+            button8.Name = "button8";
+            button8.Size = new Size(55, 22);
+            button8.TabIndex = 21;
+            button8.UseVisualStyleBackColor = true;
+            button8.Visible = false;
+            button8.Click += button8_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(872, 294);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 28);
+            button2.TabIndex = 22;
+            button2.Text = "Guardar";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Simulator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(976, 724);
-            Controls.Add(buttonGuardarSim);
-            Controls.Add(label8);
+            Controls.Add(button2);
+            Controls.Add(button8);
+            Controls.Add(label11);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(checkBox1);
+            Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -244,7 +300,6 @@
             Controls.Add(hoverInfoLabel);
             Controls.Add(label2);
             Controls.Add(button3);
-            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(miPanel);
             Margin = new Padding(3, 2, 3, 2);
@@ -261,7 +316,6 @@
 
         private PictureBox miPanel;
         private Button button1;
-        private Button button2;
         private Button button3;
         private Label label2;
         private System.Windows.Forms.Timer timer1;
@@ -276,7 +330,13 @@
         private Label label6;
         private Label label7;
         private Button button5;
-        private Label label8;
-        private Button buttonGuardarSim;
+        private Button button6;
+        private CheckBox checkBox1;
+        private System.Windows.Forms.Timer timer2;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private Button button8;
+        private Button button2;
     }
 }
