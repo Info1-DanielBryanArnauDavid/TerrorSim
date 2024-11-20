@@ -20,17 +20,17 @@ namespace WinFormsApp1
         GestionUsuarios MisUsuarios = new GestionUsuarios();
         private void button1_Click(object sender, EventArgs e)
         {
-            if(MisUsuarios.ComprovarSiElUsuarioiContraseñaExiste(textBox1.Text, textBox2.Text) == 1)
+            if (MisUsuarios.ComprovarSiElUsuarioiContraseñaExiste(textBox1.Text, textBox2.Text) == 1)
             {
                 MainForm inicio = new MainForm();
                 inicio.ShowDialog();
                 return;
 
             }
-            
+
             else
             {
-                MessageBox.Show("Me la pela");
+                MessageBox.Show("Usuario i/o contraseña incorrectos");
                 return;
             }
         }
@@ -39,6 +39,7 @@ namespace WinFormsApp1
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             MisUsuarios.Iniciar();
+            MisUsuarios.CrearBaseDeUsuarios();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -46,6 +47,22 @@ namespace WinFormsApp1
             Registro registro = new Registro();
             registro.SetGestionUsuarios(MisUsuarios);
             registro.ShowDialog();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked == true)
+            {
+                if (textBox2.PasswordChar == '*')
+                {
+                    textBox2.PasswordChar = '\0';
+                }
+
+            }
+            else
+            {
+                textBox2.PasswordChar = '*';
+            }
         }
     }
 }

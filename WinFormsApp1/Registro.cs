@@ -33,21 +33,32 @@ namespace WinFormsApp1
                 return;
             }
 
-            if (MisUsuarios.ComprovarSiElUsuarioExiste( textBox1.Text, textBox2.Text) == 0)
-            {
-                MisUsuarios.AñadirUsuario(textBox1.Text, textBox2.Text);
-                MessageBox.Show("Usuario registrado correctamente");
-                Close();
-                return;
-            }
-
             if (MisUsuarios.ComprovarSiElUsuarioExiste(textBox1.Text, textBox2.Text) == 1)
             {
                 MessageBox.Show("El usuario ya existe");
                 return;
             }
             
+            if (textBox1.Text.Length > 20 ||  textBox2.Text.Length > 20)
+            {
+                MessageBox.Show("Usuario o contraseña demasiado largos");
+                return;
+            }
 
+
+            if(textBox1.Text == "" || textBox2.Text == "")
+            {
+                MessageBox.Show("No puedes crear un usuario i/o contraseña vacios");
+                return;
+            }
+
+            if (MisUsuarios.ComprovarSiElUsuarioExiste(textBox1.Text, textBox2.Text) == 0)
+            {
+                MisUsuarios.AñadirUsuario(textBox1.Text, textBox2.Text);
+                MessageBox.Show("Usuario registrado correctamente");
+                Close();
+                return;
+            }
         }
 
         public void SetGestionUsuarios(GestionUsuarios MisUsuarios)

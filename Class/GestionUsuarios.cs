@@ -16,7 +16,7 @@ namespace Class
         private SqliteConnection cnx;
         public void Iniciar()
         {
-            string dataSource = "Data Source=C:\\proyectos\\practicaDB\\practica.db";
+            string dataSource = "Data Source=practica.db";
             cnx = new SqliteConnection(dataSource);
             cnx.Open();
         }
@@ -82,6 +82,13 @@ namespace Class
             }
 
             return 0;
+        }
+
+        public void EliminarTabla()
+        {
+            string sql = "DROP TABLE Usuarios";
+            SqliteCommand command = new SqliteCommand(sql, cnx);
+            command.ExecuteNonQuery();
         }
 
     }

@@ -34,6 +34,7 @@
             label1 = new Label();
             label2 = new Label();
             button2 = new Button();
+            checkBox1 = new CheckBox();
             SuspendLayout();
             // 
             // button1
@@ -49,22 +50,23 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(150, 90);
+            textBox1.Location = new Point(150, 72);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(164, 27);
             textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(150, 174);
+            textBox2.Location = new Point(150, 151);
             textBox2.Name = "textBox2";
+            textBox2.PasswordChar = '*';
             textBox2.Size = new Size(164, 27);
             textBox2.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(62, 90);
+            label1.Location = new Point(62, 75);
             label1.Name = "label1";
             label1.Size = new Size(59, 20);
             label1.TabIndex = 3;
@@ -73,7 +75,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(62, 181);
+            label2.Location = new Point(38, 158);
             label2.Name = "label2";
             label2.Size = new Size(83, 20);
             label2.TabIndex = 4;
@@ -89,11 +91,23 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(130, 184);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(170, 24);
+            checkBox1.TabIndex = 6;
+            checkBox1.Text = "Visualizar contraseña";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Bonjour
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(480, 307);
+            Controls.Add(checkBox1);
             Controls.Add(button2);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -116,5 +130,6 @@
         private Label label1;
         private Label label2;
         private Button button2;
+        private CheckBox checkBox1;
     }
 }

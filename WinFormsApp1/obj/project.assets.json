@@ -351,19 +351,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\34647\\.nuget\\packages\\": {}
+    "C:\\Users\\BRYAN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\34647\\source\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectUniqueName": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
       "projectName": "WinFormsApp1",
-      "projectPath": "C:\\Users\\34647\\source\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
-      "packagesPath": "C:\\Users\\34647\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\34647\\source\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
+      "projectPath": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\WinFormsApp1.csproj",
+      "packagesPath": "C:\\Users\\BRYAN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\WinFormsApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\34647\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BRYAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -377,8 +377,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\34647\\source\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
-              "projectPath": "C:\\Users\\34647\\source\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj"
+            "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
+              "projectPath": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj"
             }
           }
         }
