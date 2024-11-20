@@ -30,7 +30,7 @@ namespace WinFormsApp1
             
             else
             {
-                MessageBox.Show("Datos incorrectos");
+                MessageBox.Show("Me la pela");
                 return;
             }
         }
