@@ -14,21 +14,26 @@ namespace WinFormsApp1
     public partial class Guardar : Form
     {
         FlightPlanList lista = new FlightPlanList();
+        List<PictureBox> vuelos = new List<PictureBox>();
 
-        public Guardar(FlightPlanList lista)
+        public Guardar(FlightPlanList lista, List<PictureBox> vuelos)
         {
             InitializeComponent();
             this.lista = lista;
+            this.vuelos = vuelos;
         }
         public FlightPlanList GetmiLista()
         { return lista; }
 
+        public List<PictureBox> Getvuelos() {  return vuelos; }
 
         private void button1Guardar_Click(object sender, EventArgs e)
         {
             string archivo = Name.Text;
             FlightPlanList lista = GetmiLista();
+            List<PictureBox> vuelos = Getvuelos();
 
+            Close();
         }
     }
 }

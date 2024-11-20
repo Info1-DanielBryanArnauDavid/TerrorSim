@@ -29,7 +29,12 @@ namespace WinFormsApp1
         }
 
         public FlightPlanList GetmiLista()
-            { return miLista; }
+        { return this.miLista; }
+
+        public List<PictureBox> Getvuelos()
+        {
+            return this.vuelos;
+        }
 
         public void setData(FlightPlanList f, int c, int dist)
         {
@@ -560,8 +565,10 @@ namespace WinFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Guardar g = new Guardar(GetmiLista());
+            Guardar g = new Guardar(GetmiLista(),Getvuelos());
             g.ShowDialog();
         }
+
+       
     }
 }
