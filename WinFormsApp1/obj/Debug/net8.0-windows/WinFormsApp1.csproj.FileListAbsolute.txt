@@ -363,7 +363,6 @@ C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Deb
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Error2.resources
-C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Guardar.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Registro.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\Microsoft.Data.Sqlite.dll
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\SQLitePCLRaw.batteries_v2.dll

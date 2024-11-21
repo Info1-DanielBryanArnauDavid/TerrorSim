@@ -20,6 +20,7 @@ namespace WinFormsApp1
         FlightPlanCart selec1;
         FlightPlanCart selec2;
 
+
         public Simulator()
         {
             InitializeComponent();
@@ -86,6 +87,7 @@ namespace WinFormsApp1
         {
             return miLista.CheckSecurityDistance(flightToCheck, distSeg);
         }
+
 
         private void MiPanel_Paint(object sender, PaintEventArgs e)
         {
@@ -165,7 +167,7 @@ namespace WinFormsApp1
 
                 // Calculate the plane's initial position (correctly centered)
                 v.Location = new Point(
-                    Convert.ToInt32(f.GetPlanePosition().GetX() -v.Width / 2),
+                    Convert.ToInt32(f.GetPlanePosition().GetX() - v.Width / 2),
                     Convert.ToInt32(f.GetPlanePosition().GetY() - v.Height / 2)
                 );
 
@@ -187,6 +189,7 @@ namespace WinFormsApp1
             }
 
             UpdateDataGridView();
+            InitializeCheckedListBox();
         }
 
         private float GetPlaneAngle(WaypointCart origin, WaypointCart destination)
@@ -231,24 +234,112 @@ namespace WinFormsApp1
             // Return the rotated image with transparent background
             return rotatedImage;
         }
-        private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            
-        }
-
         private void InitializeCheckedListBox()
         {
             checkedListBox1.Items.Clear();
+
+            // Add flight plans to the CheckedListBox (assuming miLista is a list of FlightPlanCart)
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 FlightPlanCart flight = miLista.GetFlightPlanCart(i);
-                checkedListBox1.Items.Add(flight.GetFlightNumber(), false);
+                checkedListBox1.Items.Add(flight.GetFlightNumber(), false);  // Add the flight ID to the CheckedListBox
             }
 
-            // Wire up the ItemCheck event to the handler
+            // Attach the ItemCheck event handler to manage check/uncheck logic
             checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
         }
 
+        // Event handler to ensure only two items can be checked at a time
+        private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            // Get the count of checked items before this click
+            int checkedCount = checkedListBox1.CheckedItems.Count;
+
+            // If the new value is 'Checked' and more than 2 items are checked, uncheck the extra item
+            if (e.NewValue == CheckState.Checked && checkedCount >= 2)
+            {
+                // Uncheck the first unchecked item to ensure only 2 items are checked
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    if (checkedListBox1.GetItemChecked(i) == true)
+                    {
+                        // Automatically uncheck an unchecked item when 3rd item is selected
+                        checkedListBox1.SetItemChecked(i, false);
+                        break;
+                    }
+                }
+            }
+        }
+        private void UpdateSelectedFlights()
+        {
+            // Ensure exactly two flights are selected
+            if (checkedListBox1.CheckedItems.Count == 2)
+            {
+                // Get the indices of the two selected items in the CheckedListBox
+                int index1 = checkedListBox1.Items.IndexOf(checkedListBox1.CheckedItems[0]);
+                int index2 = checkedListBox1.Items.IndexOf(checkedListBox1.CheckedItems[1]);
+
+                // Get the corresponding FlightPlanCart objects using the indices
+                selec1 = miLista.GetFlightPlanCart(index1); // Get the flight plan using the index
+                selec2 = miLista.GetFlightPlanCart(index2); // Get the second flight plan using the index
+            }
+            else
+            {
+                // If not exactly two items are selected, reset selec1 and selec2
+                selec1 = null;
+                selec2 = null;
+            }
+        }
+
+
+        // The updated button click method that triggers opacity change
+        private void button4_Click(object sender, EventArgs e) // Predict Collision Button
+        {
+            // First, update selec1 and selec2 based on the checked items in the CheckedListBox
+            UpdateSelectedFlights();
+
+            // Ensure both selec1 and selec2 are selected before proceeding
+            if (selec1 != null && selec2 != null)
+            {
+                // Restart the flight plans and update the locations
+                for (int i = 0; i < miLista.GetNumber(); i++)
+                {
+                    miLista.GetFlightPlanCart(i).Restart();
+                    FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                    vuelos[i].Location = new Point(
+                     Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                     Convert.ToInt32(flight.GetPlanePosition().GetY()) - vuelos[i].Height / 2
+                      );
+                }
+
+                // Update opacity for all the items (except the selected ones)
+
+                // Call the collision prediction method
+                bool collisionPredicted = PredictCollision(selec1, selec2);
+
+                // Update the UI based on the result of the collision prediction
+                if (collisionPredicted)
+                {
+                    label5.Text = "Posible Accidente";
+                    button5.Enabled = true; // Enable the button if a collision is predicted
+                }
+                else
+                {
+                    label5.Text = "Seguro";
+                    button5.Enabled = false; // Disable the button if no collision is predicted
+                }
+
+                // Update the DataGridView and stop the timer
+                UpdateDataGridView();
+                timer1.Stop();
+                miPanel.Invalidate(); // Ensure panel repaint to apply opacity changes
+            }
+            else
+            {
+                // If not exactly two flights are selected, show a message
+                MessageBox.Show("Please select exactly two flights to check for a collision.");
+            }
+        }
 
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
         {
@@ -402,30 +493,6 @@ namespace WinFormsApp1
             return miLista.OptimalVelocity(flight1, flight2, distSeg);
         }
 
-        private void button4_Click(object sender, EventArgs e) // Predict Collision Button
-        {
-            for (int i = 0; i < miLista.GetNumber(); i++)
-            {
-                miLista.GetFlightPlanCart(i).Restart();
-                vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
-            }
-            bool collisionPredicted = PredictCollision(selec1,selec2);
-
-            if (collisionPredicted)
-            {
-                label5.Text = "Posible Accidente";
-                button5.Enabled = true;
-            }
-            else
-            {
-                label5.Text = "Seguro";
-                button5.Enabled = false;
-            }
-            UpdateDataGridView();
-            timer1.Stop();
-            miPanel.Invalidate();
-        }
-
         private void flightDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -433,7 +500,7 @@ namespace WinFormsApp1
 
         private void button5_Click(object sender, EventArgs e) // Optimize Speed Button
         {
-            double optSpeed = OptVel(miLista.GetFlightPlanCart(0), miLista.GetFlightPlanCart(1));
+            double optSpeed = OptVel(selec1, selec2);
 
             if (optSpeed == -1)
             {
@@ -442,11 +509,14 @@ namespace WinFormsApp1
             }
             else
             {
-                miLista.GetFlightPlanCart(1).SetSpeed(Math.Round(optSpeed, 2));
+                selec1.SetSpeed(Math.Round(optSpeed, 2));
                 for (int i = 0; i < miLista.GetNumber(); i++)
                 {
                     miLista.GetFlightPlanCart(i).Restart();
-                    vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
+                    FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                    vuelos[i].Location = new Point(
+                     Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                     Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height / 2));
                 }
                 label5.Text = "Seguro";
                 button5.Enabled = false;
@@ -719,5 +789,62 @@ namespace WinFormsApp1
         {
 
         }
+        private PictureBox GetPlanePictureBox(FlightPlanCart flight)
+        {
+            // Assuming that you have a collection or a dictionary of PictureBox objects for each plane
+            foreach (var pictureBox in vuelos)
+            {
+                // Check if the pictureBox corresponds to this flight
+                if (pictureBox.Tag != null && pictureBox.Tag.Equals(flight.GetFlightNumber()))
+                {
+                    return pictureBox;  // Return the matching plane PictureBox
+                }
+            }
+            return null;  // Return null if not found
+        }
+
+        // Method to get the PictureBox for the origin based on the flight
+        private PictureBox GetOriginPictureBox(FlightPlanCart flight)
+        {
+            // Assuming you store or tag origin picture boxes similarly
+            foreach (var pictureBox in miPanel.Controls)
+            {
+                if (pictureBox is PictureBox)
+                {
+                    PictureBox pb = (PictureBox)pictureBox;
+                    // Check if the PictureBox corresponds to the origin of this flight
+                    if (pb.Tag != null && pb.Tag.Equals(flight.GetOrigin().ToString()))  // Adjust according to how you tag origin PictureBoxes
+                    {
+                        return pb;  // Return the matching origin PictureBox
+                    }
+                }
+            }
+            return null;  // Return null if not found
+        }
+
+        // Method to get the PictureBox for the destination based on the flight
+        private PictureBox GetDestinationPictureBox(FlightPlanCart flight)
+        {
+            // Similar to GetOriginPictureBox
+            foreach (var pictureBox in miPanel.Controls)
+            {
+                if (pictureBox is PictureBox)
+                {
+                    PictureBox pb = (PictureBox)pictureBox;
+                    // Check if the PictureBox corresponds to the destination of this flight
+                    if (pb.Tag != null && pb.Tag.Equals(flight.GetDestination().ToString()))  // Adjust according to how you tag destination PictureBoxes
+                    {
+                        return pb;  // Return the matching destination PictureBox
+                    }
+                }
+            }
+            return null;  // Return null if not found
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
 }

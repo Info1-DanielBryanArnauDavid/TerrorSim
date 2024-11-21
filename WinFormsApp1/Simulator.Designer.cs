@@ -136,6 +136,7 @@
             label4.Size = new Size(35, 15);
             label4.TabIndex = 9;
             label4.Text = "Chuli";
+            label4.Click += label4_Click;
             // 
             // button4
             // 
