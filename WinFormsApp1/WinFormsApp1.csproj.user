@@ -19,9 +19,6 @@
     <Compile Update="Registro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Saved.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Imposible.cs">
       <SubType>Form</SubType>
     </Compile>

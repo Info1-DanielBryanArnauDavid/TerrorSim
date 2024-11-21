@@ -44,8 +44,7 @@ namespace WinFormsApp1
                 tiempoCiclo = Convert.ToInt16(TiempoCiclo.Text);
 
                 //Abre un forms que confirma que todo se ha guardado bien
-                Saved Dg = new Saved();
-                Dg.ShowDialog();
+                MessageBox.Show("Datos guardados correctamente");
 
                 //Cierra el forms al pulsar "aceptar"
                 Close();
@@ -68,8 +67,8 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DistanciaSeguridad.Text = "50";
-            TiempoCiclo.Text = "2";
+            DistanciaSeguridad.Text = "10";
+            TiempoCiclo.Text = "1";
         }
     }
 }

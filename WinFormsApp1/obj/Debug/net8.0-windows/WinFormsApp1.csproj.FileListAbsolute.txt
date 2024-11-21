@@ -148,7 +148,6 @@ C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\o
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.MainForm.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.InsertFP.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Parameters.resources
-C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Saved.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Simulator.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.AssemblyReference.cache
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Bonjour.resources

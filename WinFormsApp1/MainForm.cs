@@ -95,10 +95,7 @@ namespace WinFormsApp1
                             FlightPlanCart FP = new FlightPlanCart(ID, O, D, S);
                             miLista.AddFlightPlan(FP);
                         }
-
-                        Saved Dg = new Saved();
-                        Dg.ShowDialog();
-                        Close();
+                        MessageBox.Show("Datos guardados correctamente");
                     }
                     catch (FileNotFoundException)
                     {
@@ -117,6 +114,7 @@ namespace WinFormsApp1
                     }
                 }
             }
+
         }
     }
 }

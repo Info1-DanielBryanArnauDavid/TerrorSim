@@ -72,8 +72,7 @@ namespace WinFormsApp1
 
 
                 //Abre un forms que confirma que todo se ha guardado bien
-                Saved Dg = new Saved();
-                Dg.ShowDialog();
+                MessageBox.Show("Datos guardados correctamente");
 
                 //Cierra el forms al pulsar "aceptar"
                 Close();

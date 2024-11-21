@@ -16,6 +16,8 @@ namespace WinFormsApp1
         bool StatusBtn = false;
         double multiplicador = 1;
         int cuentaClicks = 1;
+        float opacity =1;
+
         public Simulator()
         {
             InitializeComponent();
@@ -97,6 +99,8 @@ namespace WinFormsApp1
                     WaypointCart origin = flight.GetOrigin();
                     WaypointCart destination = flight.GetDestination();
 
+                    dottedPen.Color = Color.FromArgb((int)(255 * opacity), Color.Green);
+
                     g.DrawLine(dottedPen,
                         new Point((int)origin.GetX(), (int)origin.GetY()),
                         new Point((int)destination.GetX(), (int)destination.GetY()));
@@ -107,6 +111,9 @@ namespace WinFormsApp1
             {
                 for (int i = 0; i < vuelos.Count; i++)
                 {
+                    // Adjust pen color based on checkbox stat
+                    redPen.Color = Color.FromArgb((int)(255 * opacity), Color.Red);
+
                     Point planePosition = vuelos[i].Location;
 
                     Rectangle circleRect = new Rectangle(
@@ -121,11 +128,15 @@ namespace WinFormsApp1
             }
         }
 
+
         private void Simulacion_Load(object sender, EventArgs e) { }
 
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
         {
+            // Set the application icon
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+
+
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 PictureBox p = new PictureBox();
@@ -133,25 +144,36 @@ namespace WinFormsApp1
                 PictureBox v = new PictureBox();
                 FlightPlanCart f = miLista.GetFlightPlanCart(i);
 
-                // Configure PictureBox
+                // Configure PictureBox for the plane's origin
                 p.Size = new Size(5, 5);
                 p.BackColor = Color.Red;
-                p.Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetOrigin().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetOrigin().GetY()));
+                p.Location = new Point(Convert.ToInt32(f.GetOrigin().GetX()), Convert.ToInt32(f.GetOrigin().GetY()));
+
+                // Configure PictureBox for the plane's destination
                 a.Size = new Size(5, 5);
                 a.BackColor = Color.Blue;
-                a.Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetDestination().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetDestination().GetY()));
+                a.Location = new Point(Convert.ToInt32(f.GetDestination().GetX()), Convert.ToInt32(f.GetDestination().GetY()));
+
+                // Configure PictureBox for the plane itself
                 v.Size = new Size(5, 5);
                 v.BackColor = Color.Black;
-                v.Location = new Point(Convert.ToInt16(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt16(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
+                v.Location = new Point(Convert.ToInt32(f.GetPlanePosition().GetX()), Convert.ToInt32(f.GetPlanePosition().GetY()));
+
+                // Add event handlers for hover information
                 v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
                 v.MouseLeave += (s, ev) => HidePlaneInfo();
+
+                // Add PictureBoxes to the panel
                 vuelos.Add(v);
                 miPanel.Controls.Add(v);
                 miPanel.Controls.Add(p);
                 miPanel.Controls.Add(a);
             }
-            UpdateDataGridView();
+      
+             UpdateDataGridView();
+
         }
+
 
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
         {
@@ -565,10 +587,18 @@ namespace WinFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Guardar g = new Guardar(GetmiLista(),Getvuelos());
+            Guardar g = new Guardar(GetmiLista(), Getvuelos());
             g.ShowDialog();
         }
 
-       
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
