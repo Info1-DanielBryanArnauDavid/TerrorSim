@@ -10,9 +10,6 @@
     <Compile Update="Guardar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FromFile.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Parameters.cs">
       <SubType>Form</SubType>
     </Compile>

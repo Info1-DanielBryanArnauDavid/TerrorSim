@@ -98,3 +98,4 @@ C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\refint\Class.dll
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.pdb
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\ref\Class.dll
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\Class\obj\Debug\net8.0\Class.csproj.AssemblyReference.cache

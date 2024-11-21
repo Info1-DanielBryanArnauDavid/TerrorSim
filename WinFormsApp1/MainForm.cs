@@ -72,9 +72,51 @@ namespace WinFormsApp1
 
         private void fromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FromFile Fp = new FromFile();
-            miLista = Fp.getLista();
-            Fp.ShowDialog();
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string archivo = openFileDialog.FileName;
+                    try
+                    {
+                        StreamReader sr = new StreamReader(archivo);
+                        string linea;
+
+                        while ((linea = sr.ReadLine()) != null)
+                        {
+                            string[] trozos = linea.Split(" ");
+                            string ID = trozos[0];
+                            WaypointCart O = new WaypointCart(Convert.ToDouble(trozos[1]), Convert.ToDouble(trozos[2]));
+                            WaypointCart D = new WaypointCart(Convert.ToDouble(trozos[3]), Convert.ToDouble(trozos[4]));
+                            double S = Convert.ToDouble(trozos[5]);
+                            FlightPlanCart FP = new FlightPlanCart(ID, O, D, S);
+                            miLista.AddFlightPlan(FP);
+                        }
+
+                        Saved Dg = new Saved();
+                        Dg.ShowDialog();
+                        Close();
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        Error2 error = new Error2();
+                        error.ShowDialog();
+                    }
+                    catch (FormatException)
+                    {
+                        Error error = new Error();
+                        error.ShowDialog();
+                    }
+                    catch
+                    {
+                        Error error = new Error();
+                        error.ShowDialog();
+                    }
+                }
+            }
         }
     }
 }
