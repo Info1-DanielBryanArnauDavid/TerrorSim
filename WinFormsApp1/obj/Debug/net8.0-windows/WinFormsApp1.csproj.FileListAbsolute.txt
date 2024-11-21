@@ -157,7 +157,6 @@ C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\o
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.MainForm.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Parameters.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Registro.resources
-C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Saved.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.SetSpeedForm.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Simulator.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.GenerateResource.cache
@@ -304,7 +303,6 @@ C:\Users\34647\Desktop\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\De
 C:\Users\34647\Desktop\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
 C:\Users\34647\Desktop\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Error2.resources
-C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.FromFile.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Guardar.resources
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.exe
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.deps.json

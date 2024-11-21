@@ -51,6 +51,29 @@ namespace WinFormsApp1
                 MessageBox.Show("No puedes crear un usuario i/o contraseña vacios");
                 return;
             }
+            int i = 0;
+            int espaciosU = 0;
+            while (i < textBox1.Text.Length)
+            {
+                if (textBox1.Text[i] == ' ')
+                {
+                    espaciosU = 1;
+                }
+                i = i + 1;
+            }
+            if (espaciosU == 1) { MessageBox.Show("No puede haver espacios en el usuario"); return; }
+
+            int n = 0;
+            int espaciosC = 0;
+            while (n < textBox2.Text.Length)
+            {
+                if (textBox2.Text[n] == ' ')
+                {
+                    espaciosC = 1;
+                }
+                n = n + 1;
+            }
+            if (espaciosC == 1) { MessageBox.Show("No puede haver espacios en la contraseña"); return; }
 
             if (MisUsuarios.ComprovarSiElUsuarioExiste(textBox1.Text, textBox2.Text) == 0)
             {

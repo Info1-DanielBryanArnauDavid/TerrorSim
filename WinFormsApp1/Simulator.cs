@@ -246,6 +246,7 @@ namespace WinFormsApp1
             }
             else
             {
+                if (tiempoCiclo == 0) { tiempoCiclo = 1; }
                 timer1.Interval = Convert.ToInt32(1000 / multiplicador) * tiempoCiclo;
                 if (timer1.Enabled)
                 {

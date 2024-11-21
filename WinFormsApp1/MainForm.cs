@@ -91,9 +91,13 @@ namespace WinFormsApp1
                             string ID = trozos[0];
                             WaypointCart O = new WaypointCart(Convert.ToDouble(trozos[1]), Convert.ToDouble(trozos[2]));
                             WaypointCart D = new WaypointCart(Convert.ToDouble(trozos[3]), Convert.ToDouble(trozos[4]));
-                            double S = Convert.ToDouble(trozos[5]);
-                            FlightPlanCart FP = new FlightPlanCart(ID, O, D, S);
-                            miLista.AddFlightPlan(FP);
+                            if (Convert.ToDouble(trozos[5]) > 0)
+                            {
+                                double S = Convert.ToDouble(trozos[5]);
+                                FlightPlanCart FP = new FlightPlanCart(ID, O, D, S);
+                                miLista.AddFlightPlan(FP);
+                            }
+                            else { MessageBox.Show("Error: Velocidades negativas o 0 encontradas, esos planes de vuelo no se van a tener en cuenta"); }
                         }
                         MessageBox.Show("Datos guardados correctamente");
                     }

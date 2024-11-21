@@ -63,19 +63,22 @@ namespace WinFormsApp1
                 WaypointCart Destination2 = new WaypointCart(Convert.ToDouble(FP2Xf.Text), Convert.ToDouble(FP2Yf.Text));
 
                 //Creamos los 2 flightplans ya con todos los elementos
-                FlightPlanCart FP1 = new FlightPlanCart(FP1Number.Text, Origen1, Destination1, Convert.ToDouble(FP1Speed.Text));
-                FlightPlanCart FP2 = new FlightPlanCart(FP2Number.Text, Origen2, Destination2, Convert.ToDouble(FP2Speed.Text));
+                if (Convert.ToDouble(FP1Speed.Text) > 0 && Convert.ToDouble(FP2Speed.Text) > 0 && FP1Number.Text != "" && FP2Number.Text != "")
+                {
+                    FlightPlanCart FP1 = new FlightPlanCart(FP1Number.Text, Origen1, Destination1, Convert.ToDouble(FP1Speed.Text));
+                    FlightPlanCart FP2 = new FlightPlanCart(FP2Number.Text, Origen2, Destination2, Convert.ToDouble(FP2Speed.Text));
 
-                //Añadir FlightPlans a la lista
-                lista.AddFlightPlan(FP1);
-                lista.AddFlightPlan(FP2);
+                    //Añadir FlightPlans a la lista
+                    lista.AddFlightPlan(FP1);
+                    lista.AddFlightPlan(FP2);
 
+                    //Abre un forms que confirma que todo se ha guardado bien
+                    MessageBox.Show("Datos guardados correctamente");
 
-                //Abre un forms que confirma que todo se ha guardado bien
-                MessageBox.Show("Datos guardados correctamente");
-
-                //Cierra el forms al pulsar "aceptar"
-                Close();
+                    //Cierra el forms al pulsar "aceptar"
+                    Close();
+                }
+                else { MessageBox.Show("Datos incorrectos"); }
             }
 
             //En caso de error:

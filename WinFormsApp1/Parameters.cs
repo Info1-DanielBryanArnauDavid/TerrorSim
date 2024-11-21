@@ -40,14 +40,19 @@ namespace WinFormsApp1
             try
             {
                 //Guardamos la info en dos variables nuevas
-                SecDist = Convert.ToInt16(DistanciaSeguridad.Text);
-                tiempoCiclo = Convert.ToInt16(TiempoCiclo.Text);
+                if (Convert.ToInt32(DistanciaSeguridad.Text) > 0 && Convert.ToInt32(TiempoCiclo.Text)>= 0)
+                {
 
-                //Abre un forms que confirma que todo se ha guardado bien
-                MessageBox.Show("Datos guardados correctamente");
+                    SecDist = Convert.ToInt16(DistanciaSeguridad.Text);
+                    tiempoCiclo = Convert.ToInt16(TiempoCiclo.Text);
 
-                //Cierra el forms al pulsar "aceptar"
-                Close();
+                    //Abre un forms que confirma que todo se ha guardado bien
+                    MessageBox.Show("Datos guardados correctamente");
+
+                    //Cierra el forms al pulsar "aceptar"
+                    Close();
+                }
+                else { MessageBox.Show("Datos incorrectos"); }
             }
 
             //En caso de error:

@@ -32,8 +32,20 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            speed=Convert.ToDouble(textBox1.Text);
-            Close();
+            try
+            {
+
+                if (Convert.ToDouble(textBox1.Text) > 0)
+                {
+                    speed = Convert.ToDouble(textBox1.Text);
+                    Close();
+                }
+                else { MessageBox.Show("No se puede añadir esa velocidad"); }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("No se puede añadir esa velocidad");
+            }
         }
     }
 }
