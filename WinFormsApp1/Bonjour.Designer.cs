@@ -35,78 +35,105 @@
             label2 = new Label();
             button2 = new Button();
             checkBox1 = new CheckBox();
+            button3 = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(275, 229);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(86, 248);
             button1.Name = "button1";
-            button1.Size = new Size(128, 34);
+            button1.Size = new Size(112, 26);
             button1.TabIndex = 0;
-            button1.Text = "Iniciar sesion";
+            button1.Text = "Login";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(150, 72);
+            textBox1.Location = new Point(77, 168);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(164, 27);
+            textBox1.Size = new Size(144, 23);
             textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(150, 151);
+            textBox2.Location = new Point(77, 206);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(164, 27);
+            textBox2.Size = new Size(144, 23);
             textBox2.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(62, 75);
+            label1.Location = new Point(41, 171);
             label1.Name = "label1";
-            label1.Size = new Size(59, 20);
+            label1.Size = new Size(30, 15);
             label1.TabIndex = 3;
-            label1.Text = "Usuario";
+            label1.Text = "User";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(38, 158);
+            label2.Location = new Point(14, 206);
             label2.Name = "label2";
-            label2.Size = new Size(83, 20);
+            label2.Size = new Size(57, 15);
             label2.TabIndex = 4;
-            label2.Text = "Contraseña";
+            label2.Text = "Password";
             // 
             // button2
             // 
-            button2.Location = new Point(72, 229);
+            button2.Location = new Point(14, 420);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(142, 34);
+            button2.Size = new Size(124, 26);
             button2.TabIndex = 5;
-            button2.Text = "Registrarse";
+            button2.Text = "Sign Up";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(130, 184);
+            checkBox1.Location = new Point(222, 210);
+            checkBox1.Margin = new Padding(3, 2, 3, 2);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(170, 24);
+            checkBox1.Size = new Size(58, 19);
             checkBox1.TabIndex = 6;
-            checkBox1.Text = "Visualizar contraseña";
+            checkBox1.Text = "Show ";
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
+            // button3
+            // 
+            button3.Location = new Point(622, 423);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 8;
+            button3.Text = "secretitos";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.bell_v_22_rotor_animation;
+            pictureBox1.Location = new Point(296, 85);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(401, 262);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // Bonjour
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(480, 307);
+            ClientSize = new Size(709, 454);
+            Controls.Add(pictureBox1);
+            Controls.Add(button3);
             Controls.Add(checkBox1);
             Controls.Add(button2);
             Controls.Add(label2);
@@ -114,10 +141,10 @@
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(button1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Bonjour";
-            Text = "Bonjour";
+            Text = "TerrorSim";
             Load += Bonjour_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -131,5 +158,7 @@
         private Label label2;
         private Button button2;
         private CheckBox checkBox1;
+        private Button button3;
+        private PictureBox pictureBox1;
     }
 }

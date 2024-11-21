@@ -36,13 +36,11 @@
             toolTip1 = new ToolTip(components);
             hoverInfoLabel = new Label();
             label1 = new Label();
-            label3 = new Label();
             flightDataGridView = new DataGridView();
             label4 = new Label();
             button4 = new Button();
             label5 = new Label();
             label6 = new Label();
-            label7 = new Label();
             button5 = new Button();
             button6 = new Button();
             checkBox1 = new CheckBox();
@@ -65,7 +63,7 @@
             miPanel.Location = new Point(10, 9);
             miPanel.Margin = new Padding(3, 2, 3, 2);
             miPanel.Name = "miPanel";
-            miPanel.Size = new Size(919, 529);
+            miPanel.Size = new Size(1270, 529);
             miPanel.TabIndex = 0;
             miPanel.TabStop = false;
             miPanel.MouseMove += miPanel_MouseMove;
@@ -83,7 +81,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(786, 600);
+            button3.Location = new Point(847, 580);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
             button3.Size = new Size(82, 28);
@@ -104,6 +102,7 @@
             hoverInfoLabel.Size = new Size(38, 15);
             hoverInfoLabel.TabIndex = 5;
             hoverInfoLabel.Text = "label1";
+            hoverInfoLabel.Click += hoverInfoLabel_Click;
             // 
             // label1
             // 
@@ -115,23 +114,17 @@
             label1.Text = "Datos de Vuelo";
             label1.Click += label1_Click;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(786, 558);
-            label3.Name = "label3";
-            label3.Size = new Size(124, 15);
-            label3.TabIndex = 7;
-            label3.Text = "hay que definir limites";
-            // 
             // flightDataGridView
             // 
+            flightDataGridView.AllowUserToAddRows = false;
+            flightDataGridView.AllowUserToDeleteRows = false;
+            flightDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             flightDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             flightDataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
             flightDataGridView.Location = new Point(256, 573);
             flightDataGridView.Name = "flightDataGridView";
-            flightDataGridView.RowHeadersWidth = 51;
-            flightDataGridView.Size = new Size(512, 88);
+            flightDataGridView.RowHeadersWidth = 20;
+            flightDataGridView.Size = new Size(575, 88);
             flightDataGridView.TabIndex = 8;
             flightDataGridView.CellContentDoubleClick += flightDataGridView_CellContentDoubleClick;
             // 
@@ -146,7 +139,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(935, 468);
+            button4.Location = new Point(960, 611);
             button4.Name = "button4";
             button4.Size = new Size(82, 36);
             button4.TabIndex = 10;
@@ -157,7 +150,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(946, 536);
+            label5.Location = new Point(960, 555);
             label5.Name = "label5";
             label5.Size = new Size(0, 15);
             label5.TabIndex = 11;
@@ -172,19 +165,10 @@
             label6.TabIndex = 12;
             label6.Text = "STATUS";
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(786, 573);
-            label7.Name = "label7";
-            label7.Size = new Size(104, 15);
-            label7.TabIndex = 13;
-            label7.Text = "usar lat,lon pronto";
-            // 
             // button5
             // 
             button5.Enabled = false;
-            button5.Location = new Point(935, 510);
+            button5.Location = new Point(960, 653);
             button5.Name = "button5";
             button5.Size = new Size(82, 23);
             button5.TabIndex = 14;
@@ -240,7 +224,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(935, 445);
+            label11.Location = new Point(960, 588);
             label11.Name = "label11";
             label11.Size = new Size(111, 15);
             label11.TabIndex = 20;
@@ -260,9 +244,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(786, 633);
+            button2.Location = new Point(847, 613);
             button2.Name = "button2";
-            button2.Size = new Size(75, 28);
+            button2.Size = new Size(82, 28);
             button2.TabIndex = 22;
             button2.Text = "Guardar";
             button2.UseVisualStyleBackColor = true;
@@ -271,16 +255,16 @@
             // checkedListBox1
             // 
             checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(935, 42);
+            checkedListBox1.Location = new Point(1096, 555);
             checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(196, 94);
+            checkedListBox1.Size = new Size(184, 112);
             checkedListBox1.TabIndex = 23;
             checkedListBox1.SelectedIndexChanged += checkedListBox1_SelectedIndexChanged_1;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(935, 430);
+            label8.Location = new Point(960, 573);
             label8.Name = "label8";
             label8.Size = new Size(118, 15);
             label8.TabIndex = 24;
@@ -290,7 +274,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1143, 687);
+            ClientSize = new Size(1292, 687);
             Controls.Add(label8);
             Controls.Add(checkedListBox1);
             Controls.Add(button2);
@@ -301,13 +285,11 @@
             Controls.Add(checkBox1);
             Controls.Add(button6);
             Controls.Add(button5);
-            Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(button4);
             Controls.Add(label4);
             Controls.Add(flightDataGridView);
-            Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(hoverInfoLabel);
             Controls.Add(button3);
@@ -332,13 +314,11 @@
         private ToolTip toolTip1;
         private Label hoverInfoLabel;
         private Label label1;
-        private Label label3;
         private DataGridView flightDataGridView;
         private Label label4;
         private Button button4;
         private Label label5;
         private Label label6;
-        private Label label7;
         private Button button5;
         private Button button6;
         private CheckBox checkBox1;

@@ -29,26 +29,26 @@ namespace WinFormsApp1
         {
             if (textBox2.Text != textBox3.Text)
             {
-                MessageBox.Show("La contraseña es diferente");
+                label4.Text="Passwords don't match";
                 return;
             }
 
             if (MisUsuarios.ComprovarSiElUsuarioExiste(textBox1.Text, textBox2.Text) == 1)
             {
-                MessageBox.Show("El usuario ya existe");
+                label4.Text = "Username taken";
                 return;
             }
-            
-            if (textBox1.Text.Length > 20 ||  textBox2.Text.Length > 20)
+
+            if (textBox1.Text.Length > 20 || textBox2.Text.Length > 20)
             {
-                MessageBox.Show("Usuario o contraseña demasiado largos");
+                label4.Text = "Username or Password incorrect";
                 return;
             }
 
 
-            if(textBox1.Text == "" || textBox2.Text == "")
+            if (textBox1.Text == "" || textBox2.Text == "")
             {
-                MessageBox.Show("No puedes crear un usuario i/o contraseña vacios");
+                label4.Text = "Empty username/password is not a valid value";
                 return;
             }
             int i = 0;
@@ -61,7 +61,7 @@ namespace WinFormsApp1
                 }
                 i = i + 1;
             }
-            if (espaciosU == 1) { MessageBox.Show("No puede haver espacios en el usuario"); return; }
+            if (espaciosU == 1) { label4.Text = "No spaces in username"; ; return; }
 
             int n = 0;
             int espaciosC = 0;
@@ -73,12 +73,12 @@ namespace WinFormsApp1
                 }
                 n = n + 1;
             }
-            if (espaciosC == 1) { MessageBox.Show("No puede haver espacios en la contraseña"); return; }
+            if (espaciosC == 1) { label4.Text = "No spaces in password";  return; }
 
             if (MisUsuarios.ComprovarSiElUsuarioExiste(textBox1.Text, textBox2.Text) == 0)
             {
                 MisUsuarios.AñadirUsuario(textBox1.Text, textBox2.Text);
-                MessageBox.Show("Usuario registrado correctamente");
+                MessageBox.Show("User correclty registered");
                 Close();
                 return;
             }
@@ -87,6 +87,11 @@ namespace WinFormsApp1
         public void SetGestionUsuarios(GestionUsuarios MisUsuarios)
         {
             this.MisUsuarios = MisUsuarios;
+        }
+
+        private void Registro_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

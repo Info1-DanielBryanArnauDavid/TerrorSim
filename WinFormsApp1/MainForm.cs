@@ -57,9 +57,11 @@ namespace WinFormsApp1
 
         private void openSimToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Simulator simulacion = new Simulator();
             simulacion.setData(miLista, tiempoCiclo, distSeg);
             simulacion.ShowDialog();
+            this.Show();
         }
 
         private void flightPlanPairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,6 +121,24 @@ namespace WinFormsApp1
                 }
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            opcionesToolStripMenuItem.Visible = true;
+            simulatorToolStripMenuItem.Visible=true;
+            button1.Visible=false;
+            button2.Visible=false;
+            linkLabel1.Visible=false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            opcionesToolStripMenuItem.Visible = true;
+            simulatorToolStripMenuItem.Visible = true;
+            button1.Visible = false;
+            button2.Visible = false;
+            linkLabel1.Visible = false;
         }
     }
 }

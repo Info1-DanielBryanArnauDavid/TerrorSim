@@ -16,13 +16,14 @@ namespace WinFormsApp1
         bool StatusBtn = false;
         double multiplicador = 1;
         int cuentaClicks = 1;
-        float opacity =1;
+        float opacity = 1;
 
         public Simulator()
         {
             InitializeComponent();
             miPanel.Paint += MiPanel_Paint;
             hoverInfoLabel.AutoSize = true;
+            hoverInfoLabel.BackColor = Color.White;
             hoverInfoLabel.ForeColor = Color.Black;
             hoverInfoLabel.BorderStyle = BorderStyle.FixedSingle;
             hoverInfoLabel.Visible = false;
@@ -89,7 +90,7 @@ namespace WinFormsApp1
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen dottedPen = new Pen(Color.Green, 1))
+            using (Pen dottedPen = new Pen(Color.FromArgb(153, 255, 153)))
             {
                 dottedPen.DashStyle = DashStyle.Dot;
 
@@ -111,14 +112,13 @@ namespace WinFormsApp1
             {
                 for (int i = 0; i < vuelos.Count; i++)
                 {
-                    // Adjust pen color based on checkbox stat
                     redPen.Color = Color.FromArgb((int)(255 * opacity), Color.Red);
+                    FlightPlanCart flight = miLista.GetFlightPlanCart(i);
 
-                    Point planePosition = vuelos[i].Location;
-
+                    Point planePosition = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width), Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height));
                     Rectangle circleRect = new Rectangle(
-                        planePosition.X - distSeg,
-                        planePosition.Y - distSeg,
+                        planePosition.X,
+                        planePosition.Y,
                         distSeg * 2,
                         distSeg * 2
                     );
@@ -136,7 +136,6 @@ namespace WinFormsApp1
             // Set the application icon
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
 
-
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 PictureBox p = new PictureBox();
@@ -145,19 +144,34 @@ namespace WinFormsApp1
                 FlightPlanCart f = miLista.GetFlightPlanCart(i);
 
                 // Configure PictureBox for the plane's origin
-                p.Size = new Size(5, 5);
-                p.BackColor = Color.Red;
-                p.Location = new Point(Convert.ToInt32(f.GetOrigin().GetX()), Convert.ToInt32(f.GetOrigin().GetY()));
+
+                p.Size = new Size(12, 12);
+                p.Image = Properties.Resources.origin_marker; // Assuming OriginImage is your standard image for the origin
+                p.SizeMode = PictureBoxSizeMode.StretchImage;
+                p.Location = new Point(Convert.ToInt32(f.GetOrigin().GetX()) - p.Width / 2, Convert.ToInt32(f.GetOrigin().GetY()) - p.Height / 2);
 
                 // Configure PictureBox for the plane's destination
-                a.Size = new Size(5, 5);
-                a.BackColor = Color.Blue;
-                a.Location = new Point(Convert.ToInt32(f.GetDestination().GetX()), Convert.ToInt32(f.GetDestination().GetY()));
+                a.Size = new Size(12, 12);
+                a.Image = Properties.Resources.final_marker; // Assuming DestinationImage is your standard image for the destination
+                a.SizeMode = PictureBoxSizeMode.StretchImage;
+                a.Location = new Point(Convert.ToInt32(f.GetDestination().GetX()) - a.Width / 2, Convert.ToInt32(f.GetDestination().GetY()) - a.Height / 2);
 
                 // Configure PictureBox for the plane itself
-                v.Size = new Size(5, 5);
-                v.BackColor = Color.Black;
-                v.Location = new Point(Convert.ToInt32(f.GetPlanePosition().GetX()), Convert.ToInt32(f.GetPlanePosition().GetY()));
+                v.Size = new Size(10, 10);
+                v.Image = Properties.Resources.plane_icon;
+                v.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                // Calculate the plane's initial position (correctly centered)
+                v.Location = new Point(
+                    Convert.ToInt32(f.GetPlanePosition().GetX() -v.Width / 2),
+                    Convert.ToInt32(f.GetPlanePosition().GetY() - v.Height / 2)
+                );
+
+                // Calculate the rotation angle for the plane image based on the direction of travel
+                float angle = GetPlaneAngle(f.GetOrigin(), f.GetDestination());
+
+                // Rotate the plane image by the calculated angle
+                v.Image = RotateImage(Properties.Resources.plane_icon, angle); // Rotate the plane image by the calculated angle
 
                 // Add event handlers for hover information
                 v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
@@ -169,10 +183,53 @@ namespace WinFormsApp1
                 miPanel.Controls.Add(p);
                 miPanel.Controls.Add(a);
             }
-      
-             UpdateDataGridView();
 
+            UpdateDataGridView();
         }
+
+        private float GetPlaneAngle(WaypointCart origin, WaypointCart destination)
+        {
+            double deltaX = destination.GetX() - origin.GetX();
+            double deltaY = destination.GetY() - origin.GetY();
+
+            // Handle special cases to avoid division by zero
+            if (deltaX == 0)
+            {
+                return deltaY > 0 ? 180 : 0;
+            }
+
+            // Calculate the angle in radians, then convert to degrees
+            float angle = (float)(Math.Atan2(deltaY, deltaX) * (180 / Math.PI) + 90);
+
+            return angle;
+        }
+
+        // Helper method to rotate an image by a specified angle
+        private Image RotateImage(Image image, float angle)
+        {
+            // Create a new bitmap with the same size as the original image
+            Bitmap rotatedImage = new Bitmap(image.Width, image.Height);
+
+            // Create a Graphics object to perform the rotation
+            using (Graphics g = Graphics.FromImage(rotatedImage))
+            {
+                // Make the background transparent
+                g.Clear(Color.Transparent);
+
+                // Move the origin of the rotation to the center of the image
+                g.TranslateTransform(rotatedImage.Width / 2, rotatedImage.Height / 2);
+
+                // Rotate the image
+                g.RotateTransform(angle);
+
+                // Draw the original image, centered on the new rotated canvas
+                g.DrawImage(image, new Point(-image.Width / 2, -image.Height / 2));
+            }
+
+            // Return the rotated image with transparent background
+            return rotatedImage;
+        }
+
 
 
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
@@ -185,8 +242,15 @@ namespace WinFormsApp1
 
             hoverInfoLabel.Text = flightInfo;
 
+            // Customize label appearance
+            hoverInfoLabel.BackColor = Color.White;
+            hoverInfoLabel.BorderStyle = BorderStyle.FixedSingle;
+            hoverInfoLabel.ForeColor = Color.Black;
+
+            // Position label slightly offset from cursor
             Point cursorPositionInPanel = miPanel.PointToClient(Cursor.Position);
-            hoverInfoLabel.Location = new Point(cursorPositionInPanel.X, cursorPositionInPanel.Y);
+            hoverInfoLabel.Location = new Point(cursorPositionInPanel.X + 10, cursorPositionInPanel.Y + 10);
+
             hoverInfoLabel.Visible = true;
         }
 
@@ -217,7 +281,10 @@ namespace WinFormsApp1
                     EstadoAnterior.AddFlightPlan(vuelo);
                     FlightPlanCart flight = miLista.GetFlightPlanCart(i);
                     flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
-                    vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                    vuelos[i].Location = new Point(
+                     Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                     Convert.ToInt32(flight.GetPlanePosition().GetY()) - vuelos[i].Height / 2
+                      );
                     if (flight.GetPlanePosition().GetX() == miLista.GetFlightPlanCart(i).GetDestination().GetX() && flight.GetPlanePosition().GetY() == miLista.GetFlightPlanCart(i).GetDestination().GetY())
                     {
                         PlanesInDestination++;
@@ -409,7 +476,10 @@ namespace WinFormsApp1
                 EstadoAnterior.AddFlightPlan(vuelo);
                 FlightPlanCart flight = miLista.GetFlightPlanCart(i);
                 flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
-                vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                vuelos[i].Location = new Point(
+                 Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                 Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height / 2)
+                  );
                 if (flight.GetPlanePosition().GetX() == miLista.GetFlightPlanCart(i).GetDestination().GetX() && flight.GetPlanePosition().GetY() == miLista.GetFlightPlanCart(i).GetDestination().GetY())
                 {
                     PlanesInDestination++;
@@ -459,7 +529,9 @@ namespace WinFormsApp1
                     for (int i = 0; i < miLista.GetNumber(); i++)
                     {
                         FlightPlanCart flight = miLista.GetFlightPlanCart(i);
-                        vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                        vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                     Convert.ToInt32(flight.GetPlanePosition().GetY()) - vuelos[i].Height / 2
+                      );
                     }
                     miPanel.Invalidate();
                     UpdateDataGridView();
@@ -598,6 +670,11 @@ namespace WinFormsApp1
         }
 
         private void checkedListBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hoverInfoLabel_Click(object sender, EventArgs e)
         {
 
         }

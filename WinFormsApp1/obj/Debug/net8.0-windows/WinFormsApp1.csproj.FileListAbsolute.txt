@@ -390,3 +390,4 @@ C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\b
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Properties.Resources.resources
