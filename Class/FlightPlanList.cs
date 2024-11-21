@@ -33,6 +33,17 @@ namespace Class
             return flights[index];
         }
 
+        public List<FlightPlanCart> GetFlightPlans()
+        {
+            List<FlightPlanCart> planes = new List<FlightPlanCart>();
+
+            for (int i = 0; i < this.GetNumber(); i++)
+            {
+                planes.Add(GetFlightPlanCart(i));
+            }
+            return planes;
+        }
+
         public int GetNumber()
         {
             return flights.Count;

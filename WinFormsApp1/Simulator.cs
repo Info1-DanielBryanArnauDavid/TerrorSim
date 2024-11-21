@@ -17,6 +17,8 @@ namespace WinFormsApp1
         double multiplicador = 1;
         int cuentaClicks = 1;
         float opacity = 1;
+        FlightPlanCart selec1;
+        FlightPlanCart selec2;
 
         public Simulator()
         {
@@ -229,7 +231,23 @@ namespace WinFormsApp1
             // Return the rotated image with transparent background
             return rotatedImage;
         }
+        private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            
+        }
 
+        private void InitializeCheckedListBox()
+        {
+            checkedListBox1.Items.Clear();
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                checkedListBox1.Items.Add(flight.GetFlightNumber(), false);
+            }
+
+            // Wire up the ItemCheck event to the handler
+            checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
+        }
 
 
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
@@ -337,7 +355,11 @@ namespace WinFormsApp1
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 miLista.GetFlightPlanCart(i).Restart();
-                vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
+                FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                vuelos[i].Location = new Point(
+                 Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                 Convert.ToInt32(flight.GetPlanePosition().GetY()) - vuelos[i].Height / 2
+                  );
             }
             cuentaClicks = 1;
             button8.Text = "x1";
@@ -358,35 +380,21 @@ namespace WinFormsApp1
             miPanel.Invalidate();
         }
 
-        private bool PredictCollision()
+        private bool PredictCollision(FlightPlanCart flight1, FlightPlanCart flight2)
         {
-            for (int i = 0; i < miLista.GetNumber(); i++)
-            {
-                for (int j = i + 1; j < miLista.GetNumber(); j++)
-                {
-                    FlightPlanCart flight1 = miLista.GetFlightPlanCart(i);
-                    FlightPlanCart flight2 = miLista.GetFlightPlanCart(j);
+            double rx = flight2.GetPlanePosition().GetX() - flight1.GetPlanePosition().GetX();
+            double ry = flight2.GetPlanePosition().GetY() - flight1.GetPlanePosition().GetY();
+            double vx = flight2.GetSpeed() * Math.Cos(flight2.GetAngle()) - flight1.GetSpeed() * Math.Cos(flight1.GetAngle());
+            double vy = flight2.GetSpeed() * Math.Sin(flight2.GetAngle()) - flight1.GetSpeed() * Math.Sin(flight1.GetAngle());
 
-                    double rx = flight2.GetPlanePosition().GetX() - flight1.GetPlanePosition().GetX();
-                    double ry = flight2.GetPlanePosition().GetY() - flight1.GetPlanePosition().GetY();
-                    double vx = flight2.GetSpeed() * Math.Cos(flight2.GetAngle()) - flight1.GetSpeed() * Math.Cos(flight1.GetAngle());
-                    double vy = flight2.GetSpeed() * Math.Sin(flight2.GetAngle()) - flight1.GetSpeed() * Math.Sin(flight1.GetAngle());
+            double t = -(rx * vx + ry * vy) / (vx * vx + vy * vy);
 
-                    //derivada precalculada
-                    double t = -(rx * vx + ry * vy) / (vx * vx + vy * vy);
+            if (t < 0) return false;
 
-                    if (t < 0) { return false; }
+            double cx = rx + vx * t;
+            double cy = ry + vy * t;
 
-                    double cx = rx + vx * t;
-                    double cy = ry + vy * t;
-
-                    if (cx * cx + cy * cy < distSeg * 4 * distSeg)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return (cx * cx + cy * cy < distSeg * 4 * distSeg);
         }
 
         private double OptVel(FlightPlanCart flight1, FlightPlanCart flight2)
@@ -401,7 +409,7 @@ namespace WinFormsApp1
                 miLista.GetFlightPlanCart(i).Restart();
                 vuelos[i].Location = new Point(Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX()), Convert.ToInt32(miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()));
             }
-            bool collisionPredicted = PredictCollision();
+            bool collisionPredicted = PredictCollision(selec1,selec2);
 
             if (collisionPredicted)
             {
@@ -660,8 +668,41 @@ namespace WinFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Guardar g = new Guardar(GetmiLista(), Getvuelos());
-            g.ShowDialog();
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                saveFileDialog.RestoreDirectory = true;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string archivo = saveFileDialog.FileName;
+                    try
+                    {
+                        using (StreamWriter sw = new StreamWriter(archivo))
+                        {
+                            foreach (var flightPlan in miLista.GetFlightPlans()) // Assuming you have a method GetFlightPlans that returns all the flight plans
+                            {
+                                string ID = flightPlan.GetFlightNumber();
+                                WaypointCart origin = flightPlan.GetOrigin();
+                                WaypointCart destination = flightPlan.GetDestination();
+                                double speed = flightPlan.GetSpeed();
+
+                                // Write the data for each flight plan in a formatted way
+                                sw.WriteLine($"{ID} {origin.GetX()} {origin.GetY()} {destination.GetX()} {destination.GetY()} {speed}");
+                            }
+
+                            MessageBox.Show("Datos guardados correctamente");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle any errors that occur during the file writing process
+                        MessageBox.Show($"Error al guardar el archivo: {ex.Message}");
+                    }
+                }
+            }
+
+
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)

@@ -44,7 +44,8 @@
             // 
             // button1
             // 
-            button1.Location = new Point(57, 96);
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(31, 36);
             button1.Name = "button1";
             button1.Size = new Size(134, 66);
             button1.TabIndex = 2;
@@ -58,7 +59,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { opcionesToolStripMenuItem, simulatorToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(434, 24);
+            menuStrip1.Size = new Size(361, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -74,28 +75,28 @@
             // 
             introducirFlightPlansToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fromFileToolStripMenuItem, flightPlanPairToolStripMenuItem });
             introducirFlightPlansToolStripMenuItem.Name = "introducirFlightPlansToolStripMenuItem";
-            introducirFlightPlansToolStripMenuItem.Size = new Size(167, 22);
+            introducirFlightPlansToolStripMenuItem.Size = new Size(180, 22);
             introducirFlightPlansToolStripMenuItem.Text = "Insert Flight Plans";
             introducirFlightPlansToolStripMenuItem.Click += introducirFlightPlansToolStripMenuItem_Click;
             // 
             // fromFileToolStripMenuItem
             // 
             fromFileToolStripMenuItem.Name = "fromFileToolStripMenuItem";
-            fromFileToolStripMenuItem.Size = new Size(153, 22);
+            fromFileToolStripMenuItem.Size = new Size(180, 22);
             fromFileToolStripMenuItem.Text = "From File";
             fromFileToolStripMenuItem.Click += fromFileToolStripMenuItem_Click;
             // 
             // flightPlanPairToolStripMenuItem
             // 
             flightPlanPairToolStripMenuItem.Name = "flightPlanPairToolStripMenuItem";
-            flightPlanPairToolStripMenuItem.Size = new Size(153, 22);
+            flightPlanPairToolStripMenuItem.Size = new Size(180, 22);
             flightPlanPairToolStripMenuItem.Text = "Flight Plan Pair";
             flightPlanPairToolStripMenuItem.Click += flightPlanPairToolStripMenuItem_Click;
             // 
             // introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem
             // 
             introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Name = "introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem";
-            introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(167, 22);
+            introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(180, 22);
             introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Parameters";
             introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Click += introducirDistanciaDeSeguridadYTiempoDeCicloToolStripMenuItem_Click;
             // 
@@ -117,7 +118,7 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(325, 234);
+            linkLabel1.Location = new Point(123, 116);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(104, 15);
             linkLabel1.TabIndex = 1;
@@ -127,8 +128,8 @@
             // 
             // button2
             // 
-            button2.Font = new Font("Nachlieli CLM", 9F, FontStyle.Regular, GraphicsUnit.Point, 177);
-            button2.Location = new Point(233, 96);
+            button2.Font = new Font("Nachlieli CLM", 12F, FontStyle.Regular, GraphicsUnit.Point, 177);
+            button2.Location = new Point(180, 36);
             button2.Name = "button2";
             button2.Size = new Size(142, 66);
             button2.TabIndex = 3;
@@ -140,7 +141,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(434, 255);
+            ClientSize = new Size(361, 154);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(linkLabel1);
