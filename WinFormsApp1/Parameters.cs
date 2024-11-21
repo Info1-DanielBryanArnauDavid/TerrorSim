@@ -59,8 +59,7 @@ namespace WinFormsApp1
             catch (Exception)
             {
                 //Abre un forms que avisa de un error
-                Error fallo = new Error();
-                fallo.ShowDialog();
+                MessageBox.Show("Error");
             }
 
         }

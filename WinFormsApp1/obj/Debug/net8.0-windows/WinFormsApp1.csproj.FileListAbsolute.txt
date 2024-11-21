@@ -130,7 +130,6 @@ C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\b
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\Class.pdb
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.AssemblyReference.cache
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Bonjour.resources
-C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Error.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Imposible.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.SetSpeedForm.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.GenerateResource.cache
@@ -361,7 +360,6 @@ C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Deb
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.pdb
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
 C:\Users\34647\source\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll
-C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Error2.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Registro.resources
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\Microsoft.Data.Sqlite.dll
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\SQLitePCLRaw.batteries_v2.dll
@@ -390,3 +388,4 @@ C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\b
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Properties.Resources.resources
 C:\Users\BRYAN\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Properties.Resources.resources
+C:\Users\bolty\Source\Repos\Info1-DanielBryanArnauDavid\TerrorSim\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.ComplexSimulation.resources

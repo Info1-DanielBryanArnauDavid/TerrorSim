@@ -47,5 +47,10 @@ namespace WinFormsApp1
                 MessageBox.Show("No se puede añadir esa velocidad");
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

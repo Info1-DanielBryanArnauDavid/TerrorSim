@@ -52,25 +52,32 @@
             button2 = new Button();
             checkedListBox1 = new CheckedListBox();
             label8 = new Label();
+            menuStrip1 = new MenuStrip();
+            optionsToolStripMenuItem = new ToolStripMenuItem();
+            viewToolStripMenuItem = new ToolStripMenuItem();
+            addFlightPlanToolStripMenuItem = new ToolStripMenuItem();
+            addPointToolStripMenuItem = new ToolStripMenuItem();
+            zoomInToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)miPanel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)flightDataGridView).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // miPanel
             // 
             miPanel.BorderStyle = BorderStyle.FixedSingle;
             miPanel.Cursor = Cursors.Cross;
-            miPanel.Location = new Point(10, 9);
+            miPanel.Location = new Point(10, 26);
             miPanel.Margin = new Padding(3, 2, 3, 2);
             miPanel.Name = "miPanel";
-            miPanel.Size = new Size(1270, 529);
+            miPanel.Size = new Size(1270, 512);
             miPanel.TabIndex = 0;
             miPanel.TabStop = false;
             miPanel.MouseMove += miPanel_MouseMove;
             // 
             // button1
             // 
-            button1.Location = new Point(18, 606);
+            button1.Location = new Point(18, 607);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(82, 45);
@@ -84,7 +91,7 @@
             button3.Location = new Point(847, 580);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(82, 28);
+            button3.Size = new Size(98, 28);
             button3.TabIndex = 3;
             button3.Text = "Reset";
             button3.UseVisualStyleBackColor = true;
@@ -109,9 +116,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(256, 555);
             label1.Name = "label1";
-            label1.Size = new Size(86, 15);
+            label1.Size = new Size(64, 15);
             label1.TabIndex = 6;
-            label1.Text = "Datos de Vuelo";
+            label1.Text = "Flight Data";
             label1.Click += label1_Click;
             // 
             // flightDataGridView
@@ -140,7 +147,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(960, 611);
+            button4.Location = new Point(976, 609);
             button4.Name = "button4";
             button4.Size = new Size(82, 36);
             button4.TabIndex = 10;
@@ -169,7 +176,7 @@
             // button5
             // 
             button5.Enabled = false;
-            button5.Location = new Point(960, 653);
+            button5.Location = new Point(976, 652);
             button5.Name = "button5";
             button5.Size = new Size(82, 23);
             button5.TabIndex = 14;
@@ -179,7 +186,7 @@
             // 
             // button6
             // 
-            button6.Location = new Point(133, 606);
+            button6.Location = new Point(120, 607);
             button6.Margin = new Padding(3, 2, 3, 2);
             button6.Name = "button6";
             button6.Size = new Size(82, 45);
@@ -209,32 +216,32 @@
             label9.AutoSize = true;
             label9.Location = new Point(18, 558);
             label9.Name = "label9";
-            label9.Size = new Size(89, 15);
+            label9.Size = new Size(40, 15);
             label9.TabIndex = 18;
-            label9.Text = "Mover Aviones:";
+            label9.Text = "Move:";
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Location = new Point(18, 580);
             label10.Name = "label10";
-            label10.Size = new Size(42, 15);
+            label10.Size = new Size(41, 15);
             label10.TabIndex = 19;
-            label10.Text = "Modo:";
+            label10.Text = "Mode:";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(960, 588);
+            label11.Location = new Point(969, 588);
             label11.Name = "label11";
-            label11.Size = new Size(111, 15);
+            label11.Size = new Size(89, 15);
             label11.TabIndex = 20;
-            label11.Text = "Comprobar a pares:";
+            label11.Text = "Check for pairs:";
             label11.Click += label11_Click;
             // 
             // button8
             // 
-            button8.Location = new Point(160, 577);
+            button8.Location = new Point(147, 576);
             button8.Margin = new Padding(3, 2, 3, 2);
             button8.Name = "button8";
             button8.Size = new Size(55, 22);
@@ -247,9 +254,9 @@
             // 
             button2.Location = new Point(847, 613);
             button2.Name = "button2";
-            button2.Size = new Size(82, 28);
+            button2.Size = new Size(98, 28);
             button2.TabIndex = 22;
-            button2.Text = "Guardar";
+            button2.Text = "Save FlightPlan";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -265,11 +272,53 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(960, 573);
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label8.Location = new Point(976, 573);
             label8.Name = "label8";
-            label8.Size = new Size(118, 15);
+            label8.Size = new Size(66, 15);
             label8.TabIndex = 24;
-            label8.Text = "(Selecciona 2 Vuelos)";
+            label8.Text = "Select 2 IDs";
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, viewToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1292, 24);
+            menuStrip1.TabIndex = 25;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            optionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addFlightPlanToolStripMenuItem, addPointToolStripMenuItem });
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            optionsToolStripMenuItem.Size = new Size(61, 20);
+            optionsToolStripMenuItem.Text = "Options";
+            // 
+            // viewToolStripMenuItem
+            // 
+            viewToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { zoomInToolStripMenuItem });
+            viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            viewToolStripMenuItem.Size = new Size(44, 20);
+            viewToolStripMenuItem.Text = "View";
+            // 
+            // addFlightPlanToolStripMenuItem
+            // 
+            addFlightPlanToolStripMenuItem.Name = "addFlightPlanToolStripMenuItem";
+            addFlightPlanToolStripMenuItem.Size = new Size(180, 22);
+            addFlightPlanToolStripMenuItem.Text = "Add Flight Plan";
+            // 
+            // addPointToolStripMenuItem
+            // 
+            addPointToolStripMenuItem.Name = "addPointToolStripMenuItem";
+            addPointToolStripMenuItem.Size = new Size(180, 22);
+            addPointToolStripMenuItem.Text = "Add Point";
+            // 
+            // zoomInToolStripMenuItem
+            // 
+            zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
+            zoomInToolStripMenuItem.Size = new Size(180, 22);
+            zoomInToolStripMenuItem.Text = "Zoom";
             // 
             // Simulator
             // 
@@ -296,12 +345,16 @@
             Controls.Add(button3);
             Controls.Add(button1);
             Controls.Add(miPanel);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
             Name = "Simulator";
             Text = "SimulacionVuelo";
             Load += SimulacionVuelo_Load_1;
             ((System.ComponentModel.ISupportInitialize)miPanel).EndInit();
             ((System.ComponentModel.ISupportInitialize)flightDataGridView).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -331,5 +384,11 @@
         private Button button2;
         private CheckedListBox checkedListBox1;
         private Label label8;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem addFlightPlanToolStripMenuItem;
+        private ToolStripMenuItem addPointToolStripMenuItem;
+        private ToolStripMenuItem viewToolStripMenuItem;
+        private ToolStripMenuItem zoomInToolStripMenuItem;
     }
 }

@@ -17,6 +17,7 @@ namespace WinFormsApp1
         FlightPlanList miLista = new FlightPlanList();
         int tiempoCiclo;
         int distSeg;
+        string mode = string.Empty;
         public MainForm()
         {
             InitializeComponent();
@@ -57,10 +58,20 @@ namespace WinFormsApp1
 
         private void openSimToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             this.Hide();
-            Simulator simulacion = new Simulator();
-            simulacion.setData(miLista, tiempoCiclo, distSeg);
-            simulacion.ShowDialog();
+            if (mode == "simple")
+            {
+                Simulator simulacion = new Simulator();
+                simulacion.setData(miLista, tiempoCiclo, distSeg);
+                simulacion.ShowDialog();
+            }
+            else
+            {
+                ComplexSimulation simulacion1 = new ComplexSimulation();
+                simulacion1.setData(miLista, tiempoCiclo, distSeg);
+                simulacion1.ShowDialog();
+            }
             this.Show();
         }
 
@@ -105,18 +116,15 @@ namespace WinFormsApp1
                     }
                     catch (FileNotFoundException)
                     {
-                        Error2 error = new Error2();
-                        error.ShowDialog();
+                        ;
                     }
                     catch (FormatException)
                     {
-                        Error error = new Error();
-                        error.ShowDialog();
+                        MessageBox.Show("Wrong format");
                     }
                     catch
                     {
-                        Error error = new Error();
-                        error.ShowDialog();
+                        MessageBox.Show("rip");
                     }
                 }
             }
@@ -130,6 +138,7 @@ namespace WinFormsApp1
             button1.Visible=false;
             button2.Visible=false;
             linkLabel1.Visible=false;
+            mode = "simple";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -139,6 +148,7 @@ namespace WinFormsApp1
             button1.Visible = false;
             button2.Visible = false;
             linkLabel1.Visible = false;
+            mode = "complex";
         }
     }
 }

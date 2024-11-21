@@ -13,6 +13,7 @@ namespace WinFormsApp1
 {
     public partial class Bonjour : Form
     {
+        int count = 0;
         public Bonjour()
         {
             InitializeComponent();
@@ -38,8 +39,10 @@ namespace WinFormsApp1
 
         private void Bonjour_Load(object sender, EventArgs e)
         {
+            timer1.Interval = 40;
+            timer1.Enabled = true;  
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.Image= Properties.Resources.bell_v_22_rotor_animation;
+            pictureBox1.Image = Properties.Resources.bell_v_22_rotor_animation;
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             MisUsuarios.Iniciar();
             MisUsuarios.CrearBaseDeUsuarios();
@@ -81,6 +84,15 @@ namespace WinFormsApp1
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            count++;
+            double x=296+Math.Sin(count+2);
+            double y=85+Math.Cos(count);
+            pictureBox1.Location = new Point((int)x,(int)y);
         }
     }
 }

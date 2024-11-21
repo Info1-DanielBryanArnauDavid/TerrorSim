@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             button1 = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
@@ -37,6 +38,7 @@
             checkBox1 = new CheckBox();
             button3 = new Button();
             pictureBox1 = new PictureBox();
+            timer1 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -110,6 +112,7 @@
             // 
             // button3
             // 
+            button3.ForeColor = SystemColors.AppWorkspace;
             button3.Location = new Point(622, 423);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
@@ -126,6 +129,10 @@
             pictureBox1.Size = new Size(401, 262);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
             // 
             // Bonjour
             // 
@@ -160,5 +167,6 @@
         private CheckBox checkBox1;
         private Button button3;
         private PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
