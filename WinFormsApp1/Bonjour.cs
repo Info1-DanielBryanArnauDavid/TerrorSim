@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Class;
+using System.Globalization;
 namespace WinFormsApp1
 {
     public partial class Bonjour : Form
@@ -42,6 +43,8 @@ namespace WinFormsApp1
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             MisUsuarios.Iniciar();
             MisUsuarios.CrearBaseDeUsuarios();
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
         }
 
         private void button2_Click(object sender, EventArgs e)

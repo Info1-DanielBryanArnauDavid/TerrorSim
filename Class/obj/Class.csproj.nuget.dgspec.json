@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {}
+    "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
+    "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
+        "projectUniqueName": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
         "projectName": "Class",
-        "projectPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
-        "packagesPath": "C:\\Users\\bolty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bolty\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\obj\\",
+        "projectPath": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\Class.csproj",
+        "packagesPath": "C:\\Users\\BRYAN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BRYAN\\Source\\Repos\\Info1-DanielBryanArnauDavid\\TerrorSim\\Class\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bolty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BRYAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
