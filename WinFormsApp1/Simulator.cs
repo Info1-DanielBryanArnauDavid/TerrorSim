@@ -20,7 +20,6 @@ namespace WinFormsApp1
         FlightPlanCart selec1;
         FlightPlanCart selec2;
 
-
         public Simulator()
         {
             InitializeComponent();
@@ -33,6 +32,7 @@ namespace WinFormsApp1
             miPanel.Controls.Add(hoverInfoLabel);
             SetupDataGridView();
         }
+
 
         public FlightPlanList GetmiLista()
         { return this.miLista; }
@@ -135,6 +135,14 @@ namespace WinFormsApp1
 
         private void Simulacion_Load(object sender, EventArgs e) { }
 
+        private Image RemoveWhiteBackground(Image image)
+        {
+            Bitmap bitmap = new Bitmap(image);
+            bitmap.MakeTransparent(Color.White);
+
+            return bitmap;
+        }
+
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
         {
             // Set the application icon
@@ -162,8 +170,12 @@ namespace WinFormsApp1
 
                 // Configure PictureBox for the plane itself
                 v.Size = new Size(10, 10);
+                v.BackColor = Color.Transparent; // Make PictureBox background transparent
                 v.Image = Properties.Resources.plane_icon;
                 v.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                // Remove white background if necessary (if any remains after rotation)
+                v.Image = RemoveWhiteBackground(v.Image);
 
                 // Calculate the plane's initial position (correctly centered)
                 v.Location = new Point(
@@ -171,11 +183,9 @@ namespace WinFormsApp1
                     Convert.ToInt32(f.GetPlanePosition().GetY() - v.Height / 2)
                 );
 
-                // Calculate the rotation angle for the plane image based on the direction of travel
-                float angle = GetPlaneAngle(f.GetOrigin(), f.GetDestination());
-
                 // Rotate the plane image by the calculated angle
-                v.Image = RotateImage(Properties.Resources.plane_icon, angle); // Rotate the plane image by the calculated angle
+                float angle = GetPlaneAngle(f.GetOrigin(), f.GetDestination());
+                v.Image = RotateImage(v.Image, angle);
 
                 // Add event handlers for hover information
                 v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
@@ -214,12 +224,13 @@ namespace WinFormsApp1
         {
             // Create a new bitmap with the same size as the original image
             Bitmap rotatedImage = new Bitmap(image.Width, image.Height);
+            rotatedImage.MakeTransparent(); // Ensure transparency is maintained
 
             // Create a Graphics object to perform the rotation
             using (Graphics g = Graphics.FromImage(rotatedImage))
             {
-                // Make the background transparent
-                g.Clear(Color.Transparent);
+                g.Clear(Color.Transparent); // Make the entire background transparent
+                g.SmoothingMode = SmoothingMode.AntiAlias; // Smooth edges
 
                 // Move the origin of the rotation to the center of the image
                 g.TranslateTransform(rotatedImage.Width / 2, rotatedImage.Height / 2);
@@ -231,9 +242,9 @@ namespace WinFormsApp1
                 g.DrawImage(image, new Point(-image.Width / 2, -image.Height / 2));
             }
 
-            // Return the rotated image with transparent background
             return rotatedImage;
         }
+
         private void InitializeCheckedListBox()
         {
             checkedListBox1.Items.Clear();
@@ -788,57 +799,6 @@ namespace WinFormsApp1
         private void hoverInfoLabel_Click(object sender, EventArgs e)
         {
 
-        }
-        private PictureBox GetPlanePictureBox(FlightPlanCart flight)
-        {
-            // Assuming that you have a collection or a dictionary of PictureBox objects for each plane
-            foreach (var pictureBox in vuelos)
-            {
-                // Check if the pictureBox corresponds to this flight
-                if (pictureBox.Tag != null && pictureBox.Tag.Equals(flight.GetFlightNumber()))
-                {
-                    return pictureBox;  // Return the matching plane PictureBox
-                }
-            }
-            return null;  // Return null if not found
-        }
-
-        // Method to get the PictureBox for the origin based on the flight
-        private PictureBox GetOriginPictureBox(FlightPlanCart flight)
-        {
-            // Assuming you store or tag origin picture boxes similarly
-            foreach (var pictureBox in miPanel.Controls)
-            {
-                if (pictureBox is PictureBox)
-                {
-                    PictureBox pb = (PictureBox)pictureBox;
-                    // Check if the PictureBox corresponds to the origin of this flight
-                    if (pb.Tag != null && pb.Tag.Equals(flight.GetOrigin().ToString()))  // Adjust according to how you tag origin PictureBoxes
-                    {
-                        return pb;  // Return the matching origin PictureBox
-                    }
-                }
-            }
-            return null;  // Return null if not found
-        }
-
-        // Method to get the PictureBox for the destination based on the flight
-        private PictureBox GetDestinationPictureBox(FlightPlanCart flight)
-        {
-            // Similar to GetOriginPictureBox
-            foreach (var pictureBox in miPanel.Controls)
-            {
-                if (pictureBox is PictureBox)
-                {
-                    PictureBox pb = (PictureBox)pictureBox;
-                    // Check if the PictureBox corresponds to the destination of this flight
-                    if (pb.Tag != null && pb.Tag.Equals(flight.GetDestination().ToString()))  // Adjust according to how you tag destination PictureBoxes
-                    {
-                        return pb;  // Return the matching destination PictureBox
-                    }
-                }
-            }
-            return null;  // Return null if not found
         }
 
         private void label4_Click(object sender, EventArgs e)
