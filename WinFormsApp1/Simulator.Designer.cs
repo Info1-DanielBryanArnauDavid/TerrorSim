@@ -119,7 +119,6 @@
             label1.Size = new Size(64, 15);
             label1.TabIndex = 6;
             label1.Text = "Flight Data";
-            label1.Click += label1_Click;
             // 
             // flightDataGridView
             // 
@@ -143,7 +142,6 @@
             label4.Size = new Size(35, 15);
             label4.TabIndex = 9;
             label4.Text = "Chuli";
-            label4.Click += label4_Click;
             // 
             // button4
             // 

@@ -33,7 +33,6 @@ namespace WinFormsApp1
             SetupDataGridView();
         }
 
-
         public FlightPlanList GetmiLista()
         { return this.miLista; }
 
@@ -88,60 +87,73 @@ namespace WinFormsApp1
             return miLista.CheckSecurityDistance(flightToCheck, distSeg);
         }
 
-
         private void MiPanel_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            // Draw flight paths
             using (Pen dottedPen = new Pen(Color.FromArgb(153, 255, 153)))
             {
                 dottedPen.DashStyle = DashStyle.Dot;
-
                 for (int i = 0; i < miLista.GetNumber(); i++)
                 {
                     FlightPlanCart flight = miLista.GetFlightPlanCart(i);
                     WaypointCart origin = flight.GetOrigin();
                     WaypointCart destination = flight.GetDestination();
-
                     dottedPen.Color = Color.FromArgb((int)(255 * opacity), Color.Green);
-
                     g.DrawLine(dottedPen,
                         new Point((int)origin.GetX(), (int)origin.GetY()),
                         new Point((int)destination.GetX(), (int)destination.GetY()));
                 }
             }
 
-            using (Pen redPen = new Pen(Color.Red, 1))
-            {
-                for (int i = 0; i < vuelos.Count; i++)
-                {
-                    redPen.Color = Color.FromArgb((int)(255 * opacity), Color.Red);
-                    FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+            bool anyViolation = false;
 
-                    Point planePosition = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width), Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height));
+            // Draw security distance circles and check for violations
+            using (Brush fillBrush = new SolidBrush(Color.FromArgb((int)(128 * opacity), Color.Red)))
+            using (Pen outlinePen = new Pen(Color.FromArgb((int)(255 * opacity), Color.Red), 1))
+            {
+                for (int i = 0; i < miLista.GetNumber(); i++)
+                {
+                    FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                    Point planeCenter = new Point(
+                        Convert.ToInt32(flight.GetPlanePosition().GetX()),
+                        Convert.ToInt32(flight.GetPlanePosition().GetY())
+                    );
                     Rectangle circleRect = new Rectangle(
-                        planePosition.X,
-                        planePosition.Y,
+                        planeCenter.X - distSeg,
+                        planeCenter.Y - distSeg,
                         distSeg * 2,
                         distSeg * 2
                     );
 
-                    g.DrawEllipse(redPen, circleRect);
+                    // Check if this flight violates security distance with any other flight
+                    bool violatesSecurityDistance = CheckSecurityDistance(flight);
+
+                    if (violatesSecurityDistance)
+                    {
+                        g.FillEllipse(fillBrush, circleRect);
+                        anyViolation = true;
+                    }
+                    g.DrawEllipse(outlinePen, circleRect);
                 }
+            }
+
+            // Update label4 text based on violations
+            label4.Text = anyViolation ? "Jodido" : "Guay";
+
+            // Draw plane images
+            for (int i = 0; i < vuelos.Count; i++)
+            {
+                PictureBox planeIcon = vuelos[i];
+                g.DrawImage(planeIcon.Image, planeIcon.Bounds);
             }
         }
 
 
         private void Simulacion_Load(object sender, EventArgs e) { }
 
-        private Image RemoveWhiteBackground(Image image)
-        {
-            Bitmap bitmap = new Bitmap(image);
-            bitmap.MakeTransparent(Color.White);
-
-            return bitmap;
-        }
 
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
         {
@@ -169,21 +181,18 @@ namespace WinFormsApp1
                 a.Location = new Point(Convert.ToInt32(f.GetDestination().GetX()) - a.Width / 2, Convert.ToInt32(f.GetDestination().GetY()) - a.Height / 2);
 
                 // Configure PictureBox for the plane itself
-                v.Size = new Size(10, 10);
-                v.BackColor = Color.Transparent; // Make PictureBox background transparent
+                v.Size = new Size(20, 20); // Increase plane size for better visibility
+                v.BackColor = Color.Transparent;
                 v.Image = Properties.Resources.plane_icon;
                 v.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                // Remove white background if necessary (if any remains after rotation)
-                v.Image = RemoveWhiteBackground(v.Image);
-
-                // Calculate the plane's initial position (correctly centered)
+                // Calculate the plane's initial position
                 v.Location = new Point(
                     Convert.ToInt32(f.GetPlanePosition().GetX() - v.Width / 2),
                     Convert.ToInt32(f.GetPlanePosition().GetY() - v.Height / 2)
                 );
 
-                // Rotate the plane image by the calculated angle
+                // Rotate the plane image based on its trajectory
                 float angle = GetPlaneAngle(f.GetOrigin(), f.GetDestination());
                 v.Image = RotateImage(v.Image, angle);
 
@@ -200,6 +209,7 @@ namespace WinFormsApp1
 
             UpdateDataGridView();
             InitializeCheckedListBox();
+            UpdateFlightHighlight();
         }
 
         private float GetPlaneAngle(WaypointCart origin, WaypointCart destination)
@@ -248,6 +258,7 @@ namespace WinFormsApp1
         private void InitializeCheckedListBox()
         {
             checkedListBox1.Items.Clear();
+            checkedListBox1.CheckOnClick = true;
 
             // Add flight plans to the CheckedListBox (assuming miLista is a list of FlightPlanCart)
             for (int i = 0; i < miLista.GetNumber(); i++)
@@ -259,51 +270,82 @@ namespace WinFormsApp1
             // Attach the ItemCheck event handler to manage check/uncheck logic
             checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
         }
-
-        // Event handler to ensure only two items can be checked at a time
         private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             // Get the count of checked items before this click
             int checkedCount = checkedListBox1.CheckedItems.Count;
 
-            // If the new value is 'Checked' and more than 2 items are checked, uncheck the extra item
+            // If the new value is 'Checked' and more than 2 items are checked, prevent the check
             if (e.NewValue == CheckState.Checked && checkedCount >= 2)
             {
-                // Uncheck the first unchecked item to ensure only 2 items are checked
-                for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                {
-                    if (checkedListBox1.GetItemChecked(i) == true)
-                    {
-                        // Automatically uncheck an unchecked item when 3rd item is selected
-                        checkedListBox1.SetItemChecked(i, false);
-                        break;
-                    }
-                }
+                e.NewValue = CheckState.Unchecked;
             }
+
+            // Use BeginInvoke to ensure the checked state is updated before calling UpdateFlightHighlight
+            BeginInvoke(new Action(() =>
+            {
+                UpdateFlightHighlight();
+                UpdateSelectedFlights();
+            }));
+        }
+
+        private void UpdateFlightHighlight()
+        {
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                PictureBox planeIcon = vuelos[i];
+                bool isChecked = checkedListBox1.GetItemChecked(i);
+
+                if (isChecked)
+                {
+                    int highlightSize = 40;
+                    Bitmap highlightedPlane = new Bitmap(highlightSize, highlightSize);
+                    using (Graphics g = Graphics.FromImage(highlightedPlane))
+                    {
+                        g.SmoothingMode = SmoothingMode.AntiAlias;
+                        using (SolidBrush brush = new SolidBrush(Color.FromArgb(70, 255, 255, 0)))
+                        {
+                            g.FillEllipse(brush, 0, 0, highlightSize, highlightSize);
+                        }
+                        float angle = GetPlaneAngle(flight.GetOrigin(), flight.GetDestination());
+                        Image rotatedPlane = RotateImage(Properties.Resources.plane_icon, angle);
+                        g.DrawImage(rotatedPlane, (highlightSize - 15) / 2, (highlightSize - 15) / 2, 15, 15);
+                    }
+                    planeIcon.Image = highlightedPlane;
+                    planeIcon.Size = new Size(highlightSize, highlightSize);
+                }
+                else
+                {
+                    float angle = GetPlaneAngle(flight.GetOrigin(), flight.GetDestination());
+                    planeIcon.Image = RotateImage(Properties.Resources.plane_icon, angle);
+                    planeIcon.Size = new Size(10, 10); // Original size when unchecked
+                }
+
+                // Update position based on current size
+                planeIcon.Location = new Point(
+                    Convert.ToInt32(flight.GetPlanePosition().GetX() - planeIcon.Width / 2),
+                    Convert.ToInt32(flight.GetPlanePosition().GetY() - planeIcon.Height / 2)
+                );
+            }
+
+            miPanel.Invalidate(); // Ensure the panel repaints to show changes
         }
         private void UpdateSelectedFlights()
         {
-            // Ensure exactly two flights are selected
+            selec1 = null;
+            selec2 = null;
+
             if (checkedListBox1.CheckedItems.Count == 2)
             {
-                // Get the indices of the two selected items in the CheckedListBox
                 int index1 = checkedListBox1.Items.IndexOf(checkedListBox1.CheckedItems[0]);
                 int index2 = checkedListBox1.Items.IndexOf(checkedListBox1.CheckedItems[1]);
-
-                // Get the corresponding FlightPlanCart objects using the indices
-                selec1 = miLista.GetFlightPlanCart(index1); // Get the flight plan using the index
-                selec2 = miLista.GetFlightPlanCart(index2); // Get the second flight plan using the index
-            }
-            else
-            {
-                // If not exactly two items are selected, reset selec1 and selec2
-                selec1 = null;
-                selec2 = null;
+                selec1 = miLista.GetFlightPlanCart(index1);
+                selec2 = miLista.GetFlightPlanCart(index2);
             }
         }
 
 
-        // The updated button click method that triggers opacity change
         private void button4_Click(object sender, EventArgs e) // Predict Collision Button
         {
             // First, update selec1 and selec2 based on the checked items in the CheckedListBox
@@ -421,14 +463,6 @@ namespace WinFormsApp1
                 miPanel.Invalidate();
                 UpdateDataGridView();
                 bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-                if (v)
-                {
-                    label4.Text = "Jodido";
-                }
-                else
-                {
-                    label4.Text = "Guay";
-                }
                 button6.Enabled = true;
             }
             else
@@ -469,14 +503,6 @@ namespace WinFormsApp1
             button6.Text = "Retroceder";
             EstadoVuelos = new Stack<FlightPlanList>();
             bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-            if (v)
-            {
-                label4.Text = "Jodido";
-            }
-            else
-            {
-                label4.Text = "Guay";
-            }
             UpdateDataGridView();
             timer1.Stop();
             miPanel.Invalidate();
@@ -512,6 +538,14 @@ namespace WinFormsApp1
         private void button5_Click(object sender, EventArgs e) // Optimize Speed Button
         {
             double optSpeed = OptVel(selec1, selec2);
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                if (checkedListBox1.GetItemChecked(i) && i != vuelos.Count())
+                {
+                    checkedListBox1.SetItemChecked(i, false);
+                }
+            }
+            UpdateFlightHighlight();
 
             if (optSpeed == -1)
             {
@@ -589,15 +623,6 @@ namespace WinFormsApp1
             EstadoVuelos.Push(EstadoAnterior);
             miPanel.Invalidate();
             UpdateDataGridView();
-            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-            if (v)
-            {
-                label4.Text = "Jodido";
-            }
-            else
-            {
-                label4.Text = "Guay";
-            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -624,15 +649,6 @@ namespace WinFormsApp1
                     }
                     miPanel.Invalidate();
                     UpdateDataGridView();
-                    bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-                    if (v)
-                    {
-                        label4.Text = "Jodido";
-                    }
-                    else
-                    {
-                        label4.Text = "Guay";
-                    }
                 }
                 else
                 {
@@ -696,15 +712,6 @@ namespace WinFormsApp1
                 }
                 miPanel.Invalidate();
                 UpdateDataGridView();
-                bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
-                if (v)
-                {
-                    label4.Text = "Jodido";
-                }
-                else
-                {
-                    label4.Text = "Guay";
-                }
             }
             else
             {
@@ -786,10 +793,6 @@ namespace WinFormsApp1
 
         }
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void checkedListBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
@@ -801,20 +804,6 @@ namespace WinFormsApp1
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-        private void addToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }
