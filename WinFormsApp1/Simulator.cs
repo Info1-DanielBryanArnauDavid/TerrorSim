@@ -19,6 +19,10 @@ namespace WinFormsApp1
         float opacity = 1;
         FlightPlanCart selec1;
         FlightPlanCart selec2;
+        private TrackBar timelineTrackBar;
+        private int totalSimulationSteps = 0;
+        private bool isDragging = false;
+        private List<FlightPlanList> simulationStates;
 
         public Simulator()
         {
@@ -33,7 +37,155 @@ namespace WinFormsApp1
 
             SetupDataGridView();
         }
+        private void SetupTimelineControls()
+        {
+            timelineTrackBar = new TrackBar();
+            timelineTrackBar.Dock = DockStyle.Bottom;
+            timelineTrackBar.Minimum = 0;
+            timelineTrackBar.Maximum = 0;
+            timelineTrackBar.Value = 0;
+            timelineTrackBar.TickStyle = TickStyle.BottomRight;
+            timelineTrackBar.Height = 45;  
 
+            timelineTrackBar.Scroll += TimelineTrackBar_Scroll;
+            timelineTrackBar.MouseDown += (s, e) => isDragging = true;
+            timelineTrackBar.MouseUp += (s, e) =>
+            {
+                isDragging = false;
+                if (checkBox1.Checked)
+                {
+                    timer1.Start();
+                }
+            };
+            this.Controls.Add(timelineTrackBar);
+            simulationStates = new List<FlightPlanList>();
+        }
+        private void CalculateTotalSimulationSteps()
+        {
+            if (miLista == null || miLista.GetNumber() == 0)
+                return;
+
+            totalSimulationSteps = 0;
+            simulationStates.Clear();
+            FlightPlanList tempList = new FlightPlanList();
+            foreach (var flight in miLista.GetFlightPlans())
+            {
+                if (flight != null)
+                {
+                    FlightPlanCart tempFlight = new FlightPlanCart(
+                        flight.GetFlightNumber(),
+                        new WaypointCart(flight.GetOrigin().GetX(), flight.GetOrigin().GetY()),
+                        new WaypointCart(flight.GetDestination().GetX(), flight.GetDestination().GetY()),
+                        flight.GetSpeed()
+                    );
+                    tempFlight.SetPlanePosition(new WaypointCart(
+                        flight.GetPlanePosition().GetX(),
+                        flight.GetPlanePosition().GetY()
+                    ));
+                    tempList.AddFlightPlan(tempFlight);
+                }
+            }
+            simulationStates.Add(CloneFlightPlanList(tempList));
+            bool allArrived;
+            do
+            {
+                allArrived = true;
+
+                foreach (var flight in tempList.GetFlightPlans())
+                {
+                    if (flight != null && !HasReachedDestination(flight))
+                    {
+                        flight.MovePlane(
+                            flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()),
+                            flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle())
+                        );
+                        allArrived = false;
+                    }
+                }
+                simulationStates.Add(CloneFlightPlanList(tempList));
+                totalSimulationSteps++;
+
+            } while (!allArrived && totalSimulationSteps < 10000); 
+
+            timelineTrackBar.Maximum = totalSimulationSteps;
+            timelineTrackBar.Value = 0;
+        }
+
+        private FlightPlanList CloneFlightPlanList(FlightPlanList original)
+        {
+            FlightPlanList clone = new FlightPlanList();
+            foreach (var flight in original.GetFlightPlans())
+            {
+                if (flight != null)
+                {
+                    FlightPlanCart clonedFlight = new FlightPlanCart(
+                        flight.GetFlightNumber(),
+                        new WaypointCart(flight.GetOrigin().GetX(), flight.GetOrigin().GetY()),
+                        new WaypointCart(flight.GetDestination().GetX(), flight.GetDestination().GetY()),
+                        flight.GetSpeed()
+                    );
+                    clonedFlight.SetPlanePosition(new WaypointCart(
+                        flight.GetPlanePosition().GetX(),
+                        flight.GetPlanePosition().GetY()
+                    ));
+                    clone.AddFlightPlan(clonedFlight);
+                }
+            }
+            return clone;
+        }
+
+
+        private bool HasReachedDestination(FlightPlanCart flight)
+        {
+            if (flight == null) return true;
+
+            var pos = flight.GetPlanePosition();
+            var dest = flight.GetDestination();
+
+            if (pos == null || dest == null) return true;
+
+            const double tolerance = 0.1;
+            return Math.Abs(pos.GetX() - dest.GetX()) < tolerance &&
+                   Math.Abs(pos.GetY() - dest.GetY()) < tolerance;
+        }
+
+        private void TimelineTrackBar_Scroll(object sender, EventArgs e)
+        {
+            if (isDragging && simulationStates != null && timelineTrackBar.Value < simulationStates.Count)
+            {
+                timer1.Stop();
+                timer2.Stop();
+
+                try
+                {
+                    FlightPlanList selectedState = simulationStates[timelineTrackBar.Value];
+                    if (selectedState != null)
+                    {
+                        miLista = CloneFlightPlanList(selectedState);
+
+                        // Update plane positions
+                        for (int i = 0; i < miLista.GetNumber() && i < vuelos.Count; i++)
+                        {
+                            FlightPlanCart flight = miLista.GetFlightPlanCart(i);
+                            if (flight != null && vuelos[i] != null)
+                            {
+                                vuelos[i].Location = new Point(
+                                    Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                                    Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height / 2)
+                                );
+                            }
+                        }
+
+                        UpdateDataGridView();
+                        miPanel.Invalidate();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error updating timeline state: {ex.Message}");
+                }
+            }
+        }
         private bool CheckForCollisions()
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
@@ -262,6 +414,8 @@ namespace WinFormsApp1
             UpdateDataGridView();
             InitializeCheckedListBox();
             UpdateFlightHighlight();
+            SetupTimelineControls();
+            CalculateTotalSimulationSteps();
         }
 
         private float GetPlaneAngle(WaypointCart origin, WaypointCart destination)
@@ -354,8 +508,6 @@ namespace WinFormsApp1
                     planeIcon.Image = RotateImage(Properties.Resources.plane_icon, angle);
                     planeIcon.Size = new Size(10, 10);
                 }
-
-                // Update position based on current size
                 planeIcon.Location = new Point(
                     Convert.ToInt32(flight.GetPlanePosition().GetX() - planeIcon.Width / 2),
                     Convert.ToInt32(flight.GetPlanePosition().GetY() - planeIcon.Height / 2)
@@ -464,6 +616,10 @@ namespace WinFormsApp1
                         PlanesInDestination++;
                     }
                 }
+                if (!isDragging)
+                {
+                    timelineTrackBar.Value = Math.Min(timelineTrackBar.Value + 1, timelineTrackBar.Maximum);
+                }
                 if (PlanesInDestination != miLista.GetNumber())
                 {
                     EstadoVuelos.Push(EstadoAnterior);
@@ -514,10 +670,11 @@ namespace WinFormsApp1
             button1.Text = "Avanzar";
             button6.Text = "Retroceder";
             EstadoVuelos = new Stack<FlightPlanList>();
-            bool v = CheckSecurityDistance(miLista.GetFlightPlanCart(0));
             UpdateDataGridView();
             timer1.Stop();
             miPanel.Invalidate();
+            timelineTrackBar.Value = 0;
+            CalculateTotalSimulationSteps();
         }
 
         private bool PredictCollision(FlightPlanCart flight1, FlightPlanCart flight2)
@@ -599,22 +756,42 @@ namespace WinFormsApp1
 
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
-
-                WaypointCart Posicion = new WaypointCart(miLista.GetFlightPlanCart(i).GetPlanePosition().GetX(), miLista.GetFlightPlanCart(i).GetPlanePosition().GetY());
-                FlightPlanCart vuelo = new FlightPlanCart(miLista.GetFlightPlanCart(i).GetFlightNumber(), miLista.GetFlightPlanCart(i).GetOrigin(), miLista.GetFlightPlanCart(i).GetDestination(), miLista.GetFlightPlanCart(i).GetSpeed());
+                WaypointCart Posicion = new WaypointCart(
+                    miLista.GetFlightPlanCart(i).GetPlanePosition().GetX(),
+                    miLista.GetFlightPlanCart(i).GetPlanePosition().GetY()
+                );
+                FlightPlanCart vuelo = new FlightPlanCart(
+                    miLista.GetFlightPlanCart(i).GetFlightNumber(),
+                    miLista.GetFlightPlanCart(i).GetOrigin(),
+                    miLista.GetFlightPlanCart(i).GetDestination(),
+                    miLista.GetFlightPlanCart(i).GetSpeed()
+                );
                 vuelo.SetPlanePosition(Posicion);
                 EstadoAnterior.AddFlightPlan(vuelo);
+
                 FlightPlanCart flight = miLista.GetFlightPlanCart(i);
-                flight.MovePlane(flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()), flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle()));
+                flight.MovePlane(
+                    flight.GetSpeed() * tiempoCiclo * Math.Cos(flight.GetAngle()),
+                    flight.GetSpeed() * tiempoCiclo * Math.Sin(flight.GetAngle())
+                );
+
                 vuelos[i].Location = new Point(
-                 Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
-                 Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height / 2)
-                  );
-                if (flight.GetPlanePosition().GetX() == miLista.GetFlightPlanCart(i).GetDestination().GetX() && flight.GetPlanePosition().GetY() == miLista.GetFlightPlanCart(i).GetDestination().GetY())
+                    Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
+                    Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height / 2)
+                );
+
+                if (flight.GetPlanePosition().GetX() == miLista.GetFlightPlanCart(i).GetDestination().GetX() &&
+                    flight.GetPlanePosition().GetY() == miLista.GetFlightPlanCart(i).GetDestination().GetY())
                 {
                     PlanesInDestination++;
                 }
             }
+
+            if (!isDragging)
+            {
+                timelineTrackBar.Value = Math.Min(timelineTrackBar.Value + 1, timelineTrackBar.Maximum);
+            }
+
             if (PlanesInDestination != miLista.GetNumber())
             {
                 EstadoVuelos.Push(EstadoAnterior);
@@ -627,10 +804,11 @@ namespace WinFormsApp1
                 button6.Enabled = true;
                 checkBox1.Enabled = true;
             }
-            EstadoVuelos.Push(EstadoAnterior);
+
             miPanel.Invalidate();
             UpdateDataGridView();
         }
+
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -676,6 +854,10 @@ namespace WinFormsApp1
                     timer2.Start();
                     button6.Text = "Stop";
                 }
+            }
+            if (!isDragging)
+            {
+                timelineTrackBar.Value = Math.Min(timelineTrackBar.Value - 1, timelineTrackBar.Maximum);
             }
         }
 

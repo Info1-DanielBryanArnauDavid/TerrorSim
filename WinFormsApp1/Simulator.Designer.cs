@@ -70,13 +70,13 @@
             miPanel.Location = new Point(10, 26);
             miPanel.Margin = new Padding(3, 2, 3, 2);
             miPanel.Name = "miPanel";
-            miPanel.Size = new Size(1270, 512);
+            miPanel.Size = new Size(1270, 486);
             miPanel.TabIndex = 0;
             miPanel.TabStop = false;
             // 
             // button1
             // 
-            button1.Location = new Point(18, 607);
+            button1.Location = new Point(10, 573);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(82, 45);
@@ -87,7 +87,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(847, 580);
+            button3.Location = new Point(839, 546);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
             button3.Size = new Size(98, 28);
@@ -112,7 +112,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(256, 555);
+            label1.Location = new Point(248, 521);
             label1.Name = "label1";
             label1.Size = new Size(64, 15);
             label1.TabIndex = 6;
@@ -125,7 +125,7 @@
             flightDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             flightDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             flightDataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
-            flightDataGridView.Location = new Point(256, 573);
+            flightDataGridView.Location = new Point(248, 539);
             flightDataGridView.Name = "flightDataGridView";
             flightDataGridView.RowHeadersWidth = 20;
             flightDataGridView.Size = new Size(575, 88);
@@ -135,7 +135,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(426, 555);
+            label4.Location = new Point(418, 521);
             label4.Name = "label4";
             label4.Size = new Size(35, 15);
             label4.TabIndex = 9;
@@ -143,7 +143,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(976, 609);
+            button4.Location = new Point(968, 575);
             button4.Name = "button4";
             button4.Size = new Size(82, 36);
             button4.TabIndex = 10;
@@ -154,7 +154,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(960, 555);
+            label5.Location = new Point(952, 521);
             label5.Name = "label5";
             label5.Size = new Size(0, 15);
             label5.TabIndex = 11;
@@ -163,7 +163,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(370, 555);
+            label6.Location = new Point(362, 521);
             label6.Name = "label6";
             label6.Size = new Size(50, 15);
             label6.TabIndex = 12;
@@ -172,7 +172,7 @@
             // button5
             // 
             button5.Enabled = false;
-            button5.Location = new Point(976, 652);
+            button5.Location = new Point(968, 610);
             button5.Name = "button5";
             button5.Size = new Size(82, 23);
             button5.TabIndex = 14;
@@ -182,7 +182,7 @@
             // 
             // button6
             // 
-            button6.Location = new Point(120, 607);
+            button6.Location = new Point(112, 573);
             button6.Margin = new Padding(3, 2, 3, 2);
             button6.Name = "button6";
             button6.Size = new Size(82, 45);
@@ -194,7 +194,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(68, 579);
+            checkBox1.Location = new Point(60, 545);
             checkBox1.Margin = new Padding(3, 2, 3, 2);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(66, 19);
@@ -210,7 +210,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(18, 558);
+            label9.Location = new Point(10, 524);
             label9.Name = "label9";
             label9.Size = new Size(40, 15);
             label9.TabIndex = 18;
@@ -219,7 +219,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(18, 580);
+            label10.Location = new Point(10, 546);
             label10.Name = "label10";
             label10.Size = new Size(41, 15);
             label10.TabIndex = 19;
@@ -228,7 +228,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(969, 588);
+            label11.Location = new Point(961, 554);
             label11.Name = "label11";
             label11.Size = new Size(89, 15);
             label11.TabIndex = 20;
@@ -236,7 +236,7 @@
             // 
             // button8
             // 
-            button8.Location = new Point(147, 576);
+            button8.Location = new Point(139, 542);
             button8.Margin = new Padding(3, 2, 3, 2);
             button8.Name = "button8";
             button8.Size = new Size(55, 22);
@@ -247,7 +247,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(847, 613);
+            button2.Location = new Point(839, 579);
             button2.Name = "button2";
             button2.Size = new Size(98, 28);
             button2.TabIndex = 22;
@@ -258,7 +258,7 @@
             // checkedListBox1
             // 
             checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(1096, 555);
+            checkedListBox1.Location = new Point(1088, 521);
             checkedListBox1.Name = "checkedListBox1";
             checkedListBox1.Size = new Size(184, 112);
             checkedListBox1.TabIndex = 23;
@@ -267,7 +267,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label8.Location = new Point(976, 573);
+            label8.Location = new Point(968, 539);
             label8.Name = "label8";
             label8.Size = new Size(66, 15);
             label8.TabIndex = 24;
