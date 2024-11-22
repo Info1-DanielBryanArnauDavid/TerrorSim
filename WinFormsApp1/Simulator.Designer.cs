@@ -54,9 +54,9 @@
             label8 = new Label();
             menuStrip1 = new MenuStrip();
             optionsToolStripMenuItem = new ToolStripMenuItem();
-            viewToolStripMenuItem = new ToolStripMenuItem();
             addFlightPlanToolStripMenuItem = new ToolStripMenuItem();
             addPointToolStripMenuItem = new ToolStripMenuItem();
+            viewToolStripMenuItem = new ToolStripMenuItem();
             zoomInToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)miPanel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)flightDataGridView).BeginInit();
@@ -73,7 +73,6 @@
             miPanel.Size = new Size(1270, 512);
             miPanel.TabIndex = 0;
             miPanel.TabStop = false;
-            miPanel.MouseMove += miPanel_MouseMove;
             // 
             // button1
             // 
@@ -109,7 +108,6 @@
             hoverInfoLabel.Size = new Size(38, 15);
             hoverInfoLabel.TabIndex = 5;
             hoverInfoLabel.Text = "label1";
-            hoverInfoLabel.Click += hoverInfoLabel_Click;
             // 
             // label1
             // 
@@ -235,7 +233,6 @@
             label11.Size = new Size(89, 15);
             label11.TabIndex = 20;
             label11.Text = "Check for pairs:";
-            label11.Click += label11_Click;
             // 
             // button8
             // 
@@ -265,7 +262,6 @@
             checkedListBox1.Name = "checkedListBox1";
             checkedListBox1.Size = new Size(184, 112);
             checkedListBox1.TabIndex = 23;
-            checkedListBox1.SelectedIndexChanged += checkedListBox1_SelectedIndexChanged_1;
             // 
             // label8
             // 
@@ -293,6 +289,18 @@
             optionsToolStripMenuItem.Size = new Size(61, 20);
             optionsToolStripMenuItem.Text = "Options";
             // 
+            // addFlightPlanToolStripMenuItem
+            // 
+            addFlightPlanToolStripMenuItem.Name = "addFlightPlanToolStripMenuItem";
+            addFlightPlanToolStripMenuItem.Size = new Size(155, 22);
+            addFlightPlanToolStripMenuItem.Text = "Add Flight Plan";
+            // 
+            // addPointToolStripMenuItem
+            // 
+            addPointToolStripMenuItem.Name = "addPointToolStripMenuItem";
+            addPointToolStripMenuItem.Size = new Size(155, 22);
+            addPointToolStripMenuItem.Text = "Add Point";
+            // 
             // viewToolStripMenuItem
             // 
             viewToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { zoomInToolStripMenuItem });
@@ -300,22 +308,10 @@
             viewToolStripMenuItem.Size = new Size(44, 20);
             viewToolStripMenuItem.Text = "View";
             // 
-            // addFlightPlanToolStripMenuItem
-            // 
-            addFlightPlanToolStripMenuItem.Name = "addFlightPlanToolStripMenuItem";
-            addFlightPlanToolStripMenuItem.Size = new Size(180, 22);
-            addFlightPlanToolStripMenuItem.Text = "Add Flight Plan";
-            // 
-            // addPointToolStripMenuItem
-            // 
-            addPointToolStripMenuItem.Name = "addPointToolStripMenuItem";
-            addPointToolStripMenuItem.Size = new Size(180, 22);
-            addPointToolStripMenuItem.Text = "Add Point";
-            // 
             // zoomInToolStripMenuItem
             // 
             zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
-            zoomInToolStripMenuItem.Size = new Size(180, 22);
+            zoomInToolStripMenuItem.Size = new Size(106, 22);
             zoomInToolStripMenuItem.Text = "Zoom";
             // 
             // Simulator

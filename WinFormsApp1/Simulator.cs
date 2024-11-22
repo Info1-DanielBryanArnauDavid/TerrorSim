@@ -30,7 +30,75 @@ namespace WinFormsApp1
             hoverInfoLabel.BorderStyle = BorderStyle.FixedSingle;
             hoverInfoLabel.Visible = false;
             miPanel.Controls.Add(hoverInfoLabel);
+
             SetupDataGridView();
+        }
+
+        private bool CheckForCollisions()
+        {
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                FlightPlanCart flight1 = miLista.GetFlightPlanCart(i);
+                for (int j = i + 1; j < miLista.GetNumber(); j++)
+                {
+                    FlightPlanCart flight2 = miLista.GetFlightPlanCart(j);
+                    if (PredictCollision(flight1, flight2))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        private void FixFlightPlansAutomatically()
+        {
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                FlightPlanCart flight1 = miLista.GetFlightPlanCart(i);
+
+                for (int j = i + 1; j < miLista.GetNumber(); j++)
+                {
+                    FlightPlanCart flight2 = miLista.GetFlightPlanCart(j);
+
+                    if (PredictCollision(flight1, flight2))
+                    {
+                        AdjustFlightPlan(flight1, flight2);
+                    }
+                }
+            }
+
+            UpdateDataGridView(); 
+        }
+        private void AdjustFlightPlan(FlightPlanCart flight1, FlightPlanCart flight2)
+        {
+            double optimalVelocity = CalculateOptimalVelocity(flight1, flight2);
+            flight1.SetSpeed(optimalVelocity);
+        }
+
+        private double CalculateOptimalVelocity(FlightPlanCart flight1, FlightPlanCart flight2)
+        {
+            double avgSpeed = (flight1.GetSpeed() + flight2.GetSpeed()) / 2;
+            return avgSpeed;
+        }
+
+        private void StartSimulation()
+        {
+            if (CheckForCollisions())
+            {
+                DialogResult result = MessageBox.Show("Potential collision detected! Would you like to fix the flight plans automatically?",
+                    "Collision Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    FixFlightPlansAutomatically();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            MessageBox.Show("No predicted accidents. The simulation will start.", "Simulation Ready", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public FlightPlanList GetmiLista()
@@ -92,7 +160,6 @@ namespace WinFormsApp1
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            // Draw flight paths
             using (Pen dottedPen = new Pen(Color.FromArgb(153, 255, 153)))
             {
                 dottedPen.DashStyle = DashStyle.Dot;
@@ -110,7 +177,6 @@ namespace WinFormsApp1
 
             bool anyViolation = false;
 
-            // Draw security distance circles and check for violations
             using (Brush fillBrush = new SolidBrush(Color.FromArgb((int)(128 * opacity), Color.Red)))
             using (Pen outlinePen = new Pen(Color.FromArgb((int)(255 * opacity), Color.Red), 1))
             {
@@ -128,7 +194,6 @@ namespace WinFormsApp1
                         distSeg * 2
                     );
 
-                    // Check if this flight violates security distance with any other flight
                     bool violatesSecurityDistance = CheckSecurityDistance(flight);
 
                     if (violatesSecurityDistance)
@@ -140,10 +205,9 @@ namespace WinFormsApp1
                 }
             }
 
-            // Update label4 text based on violations
             label4.Text = anyViolation ? "Jodido" : "Guay";
 
-            // Draw plane images
+
             for (int i = 0; i < vuelos.Count; i++)
             {
                 PictureBox planeIcon = vuelos[i];
@@ -151,13 +215,9 @@ namespace WinFormsApp1
             }
         }
 
-
-        private void Simulacion_Load(object sender, EventArgs e) { }
-
-
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
         {
-            // Set the application icon
+            StartSimulation();
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
 
             for (int i = 0; i < miLista.GetNumber(); i++)
@@ -167,40 +227,32 @@ namespace WinFormsApp1
                 PictureBox v = new PictureBox();
                 FlightPlanCart f = miLista.GetFlightPlanCart(i);
 
-                // Configure PictureBox for the plane's origin
-
                 p.Size = new Size(12, 12);
-                p.Image = Properties.Resources.origin_marker; // Assuming OriginImage is your standard image for the origin
+                p.Image = Properties.Resources.origin_marker; 
                 p.SizeMode = PictureBoxSizeMode.StretchImage;
                 p.Location = new Point(Convert.ToInt32(f.GetOrigin().GetX()) - p.Width / 2, Convert.ToInt32(f.GetOrigin().GetY()) - p.Height / 2);
 
-                // Configure PictureBox for the plane's destination
                 a.Size = new Size(12, 12);
-                a.Image = Properties.Resources.final_marker; // Assuming DestinationImage is your standard image for the destination
+                a.Image = Properties.Resources.final_marker; 
                 a.SizeMode = PictureBoxSizeMode.StretchImage;
                 a.Location = new Point(Convert.ToInt32(f.GetDestination().GetX()) - a.Width / 2, Convert.ToInt32(f.GetDestination().GetY()) - a.Height / 2);
 
-                // Configure PictureBox for the plane itself
-                v.Size = new Size(20, 20); // Increase plane size for better visibility
+                v.Size = new Size(20, 20);
                 v.BackColor = Color.Transparent;
                 v.Image = Properties.Resources.plane_icon;
                 v.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                // Calculate the plane's initial position
                 v.Location = new Point(
                     Convert.ToInt32(f.GetPlanePosition().GetX() - v.Width / 2),
                     Convert.ToInt32(f.GetPlanePosition().GetY() - v.Height / 2)
                 );
 
-                // Rotate the plane image based on its trajectory
                 float angle = GetPlaneAngle(f.GetOrigin(), f.GetDestination());
                 v.Image = RotateImage(v.Image, angle);
 
-                // Add event handlers for hover information
                 v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
                 v.MouseLeave += (s, ev) => HidePlaneInfo();
 
-                // Add PictureBoxes to the panel
                 vuelos.Add(v);
                 miPanel.Controls.Add(v);
                 miPanel.Controls.Add(p);
@@ -217,38 +269,27 @@ namespace WinFormsApp1
             double deltaX = destination.GetX() - origin.GetX();
             double deltaY = destination.GetY() - origin.GetY();
 
-            // Handle special cases to avoid division by zero
             if (deltaX == 0)
             {
                 return deltaY > 0 ? 180 : 0;
             }
 
-            // Calculate the angle in radians, then convert to degrees
             float angle = (float)(Math.Atan2(deltaY, deltaX) * (180 / Math.PI) + 90);
 
             return angle;
         }
 
-        // Helper method to rotate an image by a specified angle
         private Image RotateImage(Image image, float angle)
         {
-            // Create a new bitmap with the same size as the original image
             Bitmap rotatedImage = new Bitmap(image.Width, image.Height);
-            rotatedImage.MakeTransparent(); // Ensure transparency is maintained
+            rotatedImage.MakeTransparent();
 
-            // Create a Graphics object to perform the rotation
             using (Graphics g = Graphics.FromImage(rotatedImage))
             {
-                g.Clear(Color.Transparent); // Make the entire background transparent
-                g.SmoothingMode = SmoothingMode.AntiAlias; // Smooth edges
-
-                // Move the origin of the rotation to the center of the image
+                g.Clear(Color.Transparent);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.TranslateTransform(rotatedImage.Width / 2, rotatedImage.Height / 2);
-
-                // Rotate the image
                 g.RotateTransform(angle);
-
-                // Draw the original image, centered on the new rotated canvas
                 g.DrawImage(image, new Point(-image.Width / 2, -image.Height / 2));
             }
 
@@ -259,29 +300,21 @@ namespace WinFormsApp1
         {
             checkedListBox1.Items.Clear();
             checkedListBox1.CheckOnClick = true;
-
-            // Add flight plans to the CheckedListBox (assuming miLista is a list of FlightPlanCart)
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 FlightPlanCart flight = miLista.GetFlightPlanCart(i);
-                checkedListBox1.Items.Add(flight.GetFlightNumber(), false);  // Add the flight ID to the CheckedListBox
+                checkedListBox1.Items.Add(flight.GetFlightNumber(), false); 
             }
-
-            // Attach the ItemCheck event handler to manage check/uncheck logic
             checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
         }
         private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            // Get the count of checked items before this click
             int checkedCount = checkedListBox1.CheckedItems.Count;
 
-            // If the new value is 'Checked' and more than 2 items are checked, prevent the check
             if (e.NewValue == CheckState.Checked && checkedCount >= 2)
             {
                 e.NewValue = CheckState.Unchecked;
             }
-
-            // Use BeginInvoke to ensure the checked state is updated before calling UpdateFlightHighlight
             BeginInvoke(new Action(() =>
             {
                 UpdateFlightHighlight();
@@ -319,7 +352,7 @@ namespace WinFormsApp1
                 {
                     float angle = GetPlaneAngle(flight.GetOrigin(), flight.GetDestination());
                     planeIcon.Image = RotateImage(Properties.Resources.plane_icon, angle);
-                    planeIcon.Size = new Size(10, 10); // Original size when unchecked
+                    planeIcon.Size = new Size(10, 10);
                 }
 
                 // Update position based on current size
@@ -329,7 +362,7 @@ namespace WinFormsApp1
                 );
             }
 
-            miPanel.Invalidate(); // Ensure the panel repaints to show changes
+            miPanel.Invalidate();
         }
         private void UpdateSelectedFlights()
         {
@@ -346,15 +379,11 @@ namespace WinFormsApp1
         }
 
 
-        private void button4_Click(object sender, EventArgs e) // Predict Collision Button
+        private void button4_Click(object sender, EventArgs e)
         {
-            // First, update selec1 and selec2 based on the checked items in the CheckedListBox
             UpdateSelectedFlights();
-
-            // Ensure both selec1 and selec2 are selected before proceeding
             if (selec1 != null && selec2 != null)
             {
-                // Restart the flight plans and update the locations
                 for (int i = 0; i < miLista.GetNumber(); i++)
                 {
                     miLista.GetFlightPlanCart(i).Restart();
@@ -364,32 +393,24 @@ namespace WinFormsApp1
                      Convert.ToInt32(flight.GetPlanePosition().GetY()) - vuelos[i].Height / 2
                       );
                 }
-
-                // Update opacity for all the items (except the selected ones)
-
-                // Call the collision prediction method
                 bool collisionPredicted = PredictCollision(selec1, selec2);
-
-                // Update the UI based on the result of the collision prediction
                 if (collisionPredicted)
                 {
                     label5.Text = "Posible Accidente";
-                    button5.Enabled = true; // Enable the button if a collision is predicted
+                    button5.Enabled = true; 
                 }
                 else
                 {
                     label5.Text = "Seguro";
-                    button5.Enabled = false; // Disable the button if no collision is predicted
+                    button5.Enabled = false; 
                 }
 
-                // Update the DataGridView and stop the timer
                 UpdateDataGridView();
                 timer1.Stop();
-                miPanel.Invalidate(); // Ensure panel repaint to apply opacity changes
+                miPanel.Invalidate(); 
             }
             else
             {
-                // If not exactly two flights are selected, show a message
                 MessageBox.Show("Please select exactly two flights to check for a collision.");
             }
         }
@@ -404,12 +425,10 @@ namespace WinFormsApp1
 
             hoverInfoLabel.Text = flightInfo;
 
-            // Customize label appearance
+
             hoverInfoLabel.BackColor = Color.White;
             hoverInfoLabel.BorderStyle = BorderStyle.FixedSingle;
             hoverInfoLabel.ForeColor = Color.Black;
-
-            // Position label slightly offset from cursor
             Point cursorPositionInPanel = miPanel.PointToClient(Cursor.Position);
             hoverInfoLabel.Location = new Point(cursorPositionInPanel.X + 10, cursorPositionInPanel.Y + 10);
 
@@ -421,14 +440,7 @@ namespace WinFormsApp1
             hoverInfoLabel.Visible = false;
         }
 
-        private void miPanel_Click(object sender, EventArgs e) { }
-        private void miPanel_MouseMove(object sender, EventArgs e) { }
-        private void miPanel_MouseLeave(object sender, MouseEventArgs e) { }
-        private void miPanel_CursorChanged(object sender, EventArgs e) { }
-        private void miPanel_MouseMove_1(object sender, MouseEventArgs e) { }
-        private void miPanel_MouseLeave_1(object sender, EventArgs e) { }
-
-        private void button1_Click(object sender, EventArgs e) // Manual Move Button
+        private void button1_Click(object sender, EventArgs e)
         {
 
             if (!StatusBtn)
@@ -530,11 +542,6 @@ namespace WinFormsApp1
             return miLista.OptimalVelocity(flight1, flight2, distSeg);
         }
 
-        private void flightDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void button5_Click(object sender, EventArgs e) // Optimize Speed Button
         {
             double optSpeed = OptVel(selec1, selec2);
@@ -623,11 +630,6 @@ namespace WinFormsApp1
             EstadoVuelos.Push(EstadoAnterior);
             miPanel.Invalidate();
             UpdateDataGridView();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -723,11 +725,6 @@ namespace WinFormsApp1
             }
         }
 
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             double[] values = [0.5, 1, 2, 4];
@@ -768,14 +765,12 @@ namespace WinFormsApp1
                     {
                         using (StreamWriter sw = new StreamWriter(archivo))
                         {
-                            foreach (var flightPlan in miLista.GetFlightPlans()) // Assuming you have a method GetFlightPlans that returns all the flight plans
+                            foreach (var flightPlan in miLista.GetFlightPlans())
                             {
                                 string ID = flightPlan.GetFlightNumber();
                                 WaypointCart origin = flightPlan.GetOrigin();
                                 WaypointCart destination = flightPlan.GetDestination();
                                 double speed = flightPlan.GetSpeed();
-
-                                // Write the data for each flight plan in a formatted way
                                 sw.WriteLine($"{ID} {origin.GetX()} {origin.GetY()} {destination.GetX()} {destination.GetY()} {speed}");
                             }
 
@@ -784,23 +779,11 @@ namespace WinFormsApp1
                     }
                     catch (Exception ex)
                     {
-                        // Handle any errors that occur during the file writing process
                         MessageBox.Show($"Error al guardar el archivo: {ex.Message}");
                     }
                 }
             }
 
-
-        }
-
-
-        private void checkedListBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void hoverInfoLabel_Click(object sender, EventArgs e)
-        {
 
         }
 
