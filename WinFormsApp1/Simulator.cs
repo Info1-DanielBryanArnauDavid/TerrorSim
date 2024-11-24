@@ -213,19 +213,32 @@ namespace WinFormsApp1
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 FlightPlanCart flight1 = miLista.GetFlightPlanCart(i);
-
                 for (int j = i + 1; j < miLista.GetNumber(); j++)
                 {
                     FlightPlanCart flight2 = miLista.GetFlightPlanCart(j);
-
                     if (PredictCollision(flight1, flight2))
                     {
                         AdjustFlightPlan(flight1, flight2);
                     }
                 }
             }
-
-            UpdateDataGridView(); 
+            if (CheckForCollisions())
+            {
+                DialogResult result = MessageBox.Show("Unable to fix the potential collision detected. Would you like to proceed with the simulation?", "Collision Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    return;
+                }
+                else
+                {
+                    Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No predicted accidents. The simulation will start.", "Simulation Ready", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            UpdateDataGridView();
         }
         private void AdjustFlightPlan(FlightPlanCart flight1, FlightPlanCart flight2)
         {
@@ -255,8 +268,6 @@ namespace WinFormsApp1
                     return;
                 }
             }
-
-            MessageBox.Show("No predicted accidents. The simulation will start.", "Simulation Ready", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public FlightPlanList GetmiLista()
@@ -363,16 +374,14 @@ namespace WinFormsApp1
                 }
             }
 
+            label4.Text = anyViolation ? "Jodido" : "Guay";
+
+
             for (int i = 0; i < vuelos.Count; i++)
             {
                 PictureBox planeIcon = vuelos[i];
-                if (planeIcon.Image != null)
-                {
-                    g.DrawImage(planeIcon.Image, planeIcon.Bounds, new Rectangle(0, 0, planeIcon.Image.Width, planeIcon.Image.Height), GraphicsUnit.Pixel);
-                }
+                g.DrawImage(planeIcon.Image, planeIcon.Bounds);
             }
-
-            label4.Text = anyViolation ? "Jodido" : "Guay";
         }
 
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
@@ -443,8 +452,9 @@ namespace WinFormsApp1
 
         private Image RotateImage(Image image, float angle)
         {
-            Bitmap rotatedImage = new Bitmap(image.Width, image.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Bitmap rotatedImage = new Bitmap(image.Width, image.Height);
             rotatedImage.MakeTransparent();
+
             using (Graphics g = Graphics.FromImage(rotatedImage))
             {
                 g.Clear(Color.Transparent);
@@ -453,6 +463,7 @@ namespace WinFormsApp1
                 g.RotateTransform(angle);
                 g.DrawImage(image, new Point(-image.Width / 2, -image.Height / 2));
             }
+
             return rotatedImage;
         }
 
@@ -493,21 +504,20 @@ namespace WinFormsApp1
                 if (isChecked)
                 {
                     int highlightSize = 40;
-                    Bitmap highlightedPlane = new Bitmap(highlightSize, highlightSize, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-                    highlightedPlane.MakeTransparent();
+                    Bitmap highlightedPlane = new Bitmap(highlightSize, highlightSize);
                     using (Graphics g = Graphics.FromImage(highlightedPlane))
                     {
-                        g.Clear(Color.Transparent);
                         g.SmoothingMode = SmoothingMode.AntiAlias;
                         using (SolidBrush brush = new SolidBrush(Color.FromArgb(70, 255, 255, 0)))
                         {
                             g.FillEllipse(brush, 0, 0, highlightSize, highlightSize);
                         }
-
                         float angle = GetPlaneAngle(flight.GetOrigin(), flight.GetDestination());
                         Image rotatedPlane = RotateImage(Properties.Resources.plane_icon, angle);
                         g.DrawImage(rotatedPlane, (highlightSize - 15) / 2, (highlightSize - 15) / 2, 15, 15);
                     }
+                    planeIcon.Image = highlightedPlane;
+                    planeIcon.Size = new Size(highlightSize, highlightSize);
                 }
                 else
                 {
