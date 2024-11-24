@@ -47,12 +47,12 @@ namespace WinFormsApp1
                     tiempoCiclo = Convert.ToInt16(TiempoCiclo.Text);
 
                     //Abre un forms que confirma que todo se ha guardado bien
-                    MessageBox.Show("Datos guardados correctamente");
+                    MessageBox.Show("Data succesfully loaded");
 
                     //Cierra el forms al pulsar "aceptar"
                     Close();
                 }
-                else { MessageBox.Show("Datos incorrectos"); }
+                else { MessageBox.Show("Incorrect Data"); }
             }
 
             //En caso de error:

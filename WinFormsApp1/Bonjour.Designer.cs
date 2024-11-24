@@ -36,7 +36,6 @@
             label2 = new Label();
             button2 = new Button();
             checkBox1 = new CheckBox();
-            button3 = new Button();
             pictureBox1 = new PictureBox();
             timer1 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -110,25 +109,15 @@
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // button3
-            // 
-            button3.ForeColor = SystemColors.AppWorkspace;
-            button3.Location = new Point(622, 423);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 8;
-            button3.Text = "secretitos";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.bell_v_22_rotor_animation;
-            pictureBox1.Location = new Point(296, 85);
+            pictureBox1.Location = new Point(77, 85);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(401, 262);
+            pictureBox1.Size = new Size(620, 426);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click_1;
             // 
             // timer1
             // 
@@ -140,7 +129,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(709, 454);
             Controls.Add(pictureBox1);
-            Controls.Add(button3);
             Controls.Add(checkBox1);
             Controls.Add(button2);
             Controls.Add(label2);
@@ -165,7 +153,6 @@
         private Label label2;
         private Button button2;
         private CheckBox checkBox1;
-        private Button button3;
         private PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer1;
     }

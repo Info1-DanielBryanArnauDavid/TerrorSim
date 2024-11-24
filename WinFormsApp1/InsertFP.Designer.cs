@@ -218,7 +218,7 @@
             AceptarBoton.Name = "AceptarBoton";
             AceptarBoton.Size = new Size(75, 23);
             AceptarBoton.TabIndex = 20;
-            AceptarBoton.Text = "Aceptar";
+            AceptarBoton.Text = "Accept";
             AceptarBoton.UseVisualStyleBackColor = true;
             AceptarBoton.Click += AceptarBoton_Click;
             // 
@@ -232,7 +232,7 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // IntroducirFlightPlans
+            // InsertFP
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -259,7 +259,7 @@
             Controls.Add(FP2Number);
             Controls.Add(FP1Number);
             Controls.Add(label1);
-            Name = "IntroducirFlightPlans";
+            Name = "InsertFP";
             Text = "Introducir Flight Plans";
             Load += Form1_Load;
             ResumeLayout(false);

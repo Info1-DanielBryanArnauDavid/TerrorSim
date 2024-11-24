@@ -110,9 +110,9 @@ namespace WinFormsApp1
                                 FlightPlanCart FP = new FlightPlanCart(ID, O, D, S);
                                 miLista.AddFlightPlan(FP);
                             }
-                            else { MessageBox.Show("Error: Velocidades negativas o 0 encontradas, esos planes de vuelo no se van a tener en cuenta"); }
+                            else { MessageBox.Show("Error: 0 or Negative velocities, won't be taken into account"); }
                         }
-                        MessageBox.Show("Datos guardados correctamente");
+                        MessageBox.Show("Data saved correctly");
                     }
                     catch (FileNotFoundException)
                     {

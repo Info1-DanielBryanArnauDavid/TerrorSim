@@ -37,6 +37,7 @@ namespace WinFormsApp1
 
             SetupDataGridView();
         }
+
         private void SetupTimelineControls()
         {
             timelineTrackBar = new TrackBar();
@@ -162,15 +163,12 @@ namespace WinFormsApp1
                     if (selectedState != null)
                     {
                         miLista = CloneFlightPlanList(selectedState);
-
-                        // Clear and update EstadoVuelos stack
                         EstadoVuelos.Clear();
                         for (int i = 0; i <= timelineTrackBar.Value; i++)
                         {
                             EstadoVuelos.Push(CloneFlightPlanList(simulationStates[i]));
                         }
 
-                        // Update plane positions
                         for (int i = 0; i < miLista.GetNumber() && i < vuelos.Count; i++)
                         {
                             FlightPlanCart flight = miLista.GetFlightPlanCart(i);
@@ -270,14 +268,6 @@ namespace WinFormsApp1
             }
         }
 
-        public FlightPlanList GetmiLista()
-        { return this.miLista; }
-
-        public List<PictureBox> Getvuelos()
-        {
-            return this.vuelos;
-        }
-
         public void setData(FlightPlanList f, int c, int dist)
         {
             miLista = f;
@@ -374,7 +364,7 @@ namespace WinFormsApp1
                 }
             }
 
-            label4.Text = anyViolation ? "Jodido" : "Guay";
+            label4.Text = anyViolation ? "Oops.." : "Safe";
 
 
             for (int i = 0; i < vuelos.Count; i++)
@@ -469,23 +459,50 @@ namespace WinFormsApp1
 
         private void InitializeCheckedListBox()
         {
+            TextBox searchBox = new TextBox();
+            searchBox.Dock = DockStyle.Top; 
+            searchBox.PlaceholderText = "Search flights...";
+            searchBox.KeyPress += SearchBox_KeyPress;
+            checkedListBox1.Parent.Controls.Add(searchBox);
+            searchBox.BringToFront();
             checkedListBox1.Items.Clear();
             checkedListBox1.CheckOnClick = true;
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
                 FlightPlanCart flight = miLista.GetFlightPlanCart(i);
-                checkedListBox1.Items.Add(flight.GetFlightNumber(), false); 
+                checkedListBox1.Items.Add(flight.GetFlightNumber(), false);
             }
+
             checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
         }
+        private void SearchBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                TextBox searchBox = (TextBox)sender;
+                if (!string.IsNullOrWhiteSpace(searchBox.Text))
+                {
+                    SearchFlights();
+                }
+            }
+        }
+        private void SearchFlights()
+        {
+            TextBox searchBox = (TextBox)checkedListBox1.Parent.Controls.OfType<TextBox>().FirstOrDefault();
+            if (searchBox == null) return;
+
+            string searchTerm = searchBox.Text.ToLower();
+
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                string itemText = checkedListBox1.Items[i].ToString().ToLower();
+                checkedListBox1.SetItemChecked(i, itemText.Contains(searchTerm));
+            }
+        }
+
         private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            int checkedCount = checkedListBox1.CheckedItems.Count;
-
-            if (e.NewValue == CheckState.Checked && checkedCount >= 2)
-            {
-                e.NewValue = CheckState.Unchecked;
-            }
             BeginInvoke(new Action(() =>
             {
                 UpdateFlightHighlight();
@@ -565,12 +582,12 @@ namespace WinFormsApp1
                 bool collisionPredicted = PredictCollision(selec1, selec2);
                 if (collisionPredicted)
                 {
-                    label5.Text = "Posible Accidente";
+                    label5.Text = "Collision Possible";
                     button5.Enabled = true; 
                 }
                 else
                 {
-                    label5.Text = "Seguro";
+                    label5.Text = "Safe";
                     button5.Enabled = false; 
                 }
 
@@ -721,6 +738,7 @@ namespace WinFormsApp1
 
         private void button5_Click(object sender, EventArgs e) // Optimize Speed Button
         {
+            timelineTrackBar.Value = 0;
             double optSpeed = OptVel(selec1, selec2);
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
@@ -747,7 +765,7 @@ namespace WinFormsApp1
                      Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
                      Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height / 2));
                 }
-                label5.Text = "Seguro";
+                label5.Text = "Safe";
                 button5.Enabled = false;
                 UpdateDataGridView();
                 timer1.Stop();
