@@ -23,7 +23,8 @@ namespace WinFormsApp1
         private int totalSimulationSteps = 0;
         private bool isDragging = false;
         private List<FlightPlanList> simulationStates;
-
+        
+        //constructor
         public Simulator()
         {
             InitializeComponent();
@@ -38,6 +39,67 @@ namespace WinFormsApp1
             SetupDataGridView();
         }
 
+        //introduce los datos al forms
+        public void setData(FlightPlanList f, int c, int dist)
+        {
+            miLista = f;
+            tiempoCiclo = c;
+            distSeg = dist;
+        }
+
+        //método de carga del formulario
+        private void SimulacionVuelo_Load_1(object sender, EventArgs e)
+        {
+            StartSimulation();
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+
+            for (int i = 0; i < miLista.GetNumber(); i++)
+            {
+                PictureBox p = new PictureBox();
+                PictureBox a = new PictureBox();
+                PictureBox v = new PictureBox();
+                FlightPlanCart f = miLista.GetFlightPlanCart(i);
+
+                p.Size = new Size(12, 12);
+                p.Image = Properties.Resources.origin_marker;
+                p.SizeMode = PictureBoxSizeMode.StretchImage;
+                p.Location = new Point(Convert.ToInt32(f.GetOrigin().GetX()) - p.Width / 2, Convert.ToInt32(f.GetOrigin().GetY()) - p.Height / 2);
+
+                a.Size = new Size(12, 12);
+                a.Image = Properties.Resources.final_marker;
+                a.SizeMode = PictureBoxSizeMode.StretchImage;
+                a.Location = new Point(Convert.ToInt32(f.GetDestination().GetX()) - a.Width / 2, Convert.ToInt32(f.GetDestination().GetY()) - a.Height / 2);
+
+                v.Size = new Size(20, 20);
+                v.BackColor = Color.Transparent;
+                v.Image = Properties.Resources.plane_icon;
+                v.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                v.Location = new Point(
+                    Convert.ToInt32(f.GetPlanePosition().GetX() - v.Width / 2),
+                    Convert.ToInt32(f.GetPlanePosition().GetY() - v.Height / 2)
+                );
+
+                float angle = GetPlaneAngle(f.GetOrigin(), f.GetDestination());
+                v.Image = RotateImage(v.Image, angle);
+
+                v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
+                v.MouseLeave += (s, ev) => HidePlaneInfo();
+
+                vuelos.Add(v);
+                miPanel.Controls.Add(v);
+                miPanel.Controls.Add(p);
+                miPanel.Controls.Add(a);
+            }
+
+            UpdateDataGridView();
+            InitializeCheckedListBox();
+            UpdateFlightHighlight();
+            SetupTimelineControls();
+            CalculateTotalSimulationSteps();
+        }
+
+        //setup de la linea temporal
         private void SetupTimelineControls()
         {
             timelineTrackBar = new TrackBar();
@@ -62,6 +124,7 @@ namespace WinFormsApp1
             simulationStates = new List<FlightPlanList>();
         }
 
+        //calcula los "frames" de la simulación
         private void CalculateTotalSimulationSteps()
         {
             if (miLista == null || miLista.GetNumber() == 0)
@@ -113,6 +176,7 @@ namespace WinFormsApp1
             timelineTrackBar.Value = 0;
         }
 
+        //clonación para estados
         private FlightPlanList CloneFlightPlanList(FlightPlanList original)
         {
             FlightPlanList clone = new FlightPlanList();
@@ -136,7 +200,7 @@ namespace WinFormsApp1
             return clone;
         }
 
-
+        //helper para determinar si estamos o no con un poco de margen
         private bool HasReachedDestination(FlightPlanCart flight)
         {
             if (flight == null) return true;
@@ -151,6 +215,7 @@ namespace WinFormsApp1
                    Math.Abs(pos.GetY() - dest.GetY()) < tolerance;
         }
 
+        //evento que dispara con cualquier cambio a la linea de tiempo
         private void TimelineTrackBar_Scroll(object sender, EventArgs e)
         {
             if (simulationStates != null && timelineTrackBar.Value < simulationStates.Count)
@@ -190,6 +255,8 @@ namespace WinFormsApp1
                 }
             }
         }
+
+        //determina si chocará o no
         private bool CheckForCollisions()
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
@@ -206,6 +273,8 @@ namespace WinFormsApp1
             }
             return false;
         }
+
+        //método de autosolución
         private void FixFlightPlansAutomatically()
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
@@ -238,18 +307,22 @@ namespace WinFormsApp1
             }
             UpdateDataGridView();
         }
+
+        //ajusta el vuelo para que cumpla la distancia minima
         private void AdjustFlightPlan(FlightPlanCart flight1, FlightPlanCart flight2)
         {
             double optimalVelocity = CalculateOptimalVelocity(flight1, flight2);
             flight1.SetSpeed(optimalVelocity);
         }
 
+        //calcula velocidad óptima
         private double CalculateOptimalVelocity(FlightPlanCart flight1, FlightPlanCart flight2)
         {
             double avgSpeed = (flight1.GetSpeed() + flight2.GetSpeed()) / 2;
             return avgSpeed;
         }
 
+        //inicia la simulación una vez se haya escogido
         private void StartSimulation()
         {
             if (CheckForCollisions())
@@ -268,13 +341,7 @@ namespace WinFormsApp1
             }
         }
 
-        public void setData(FlightPlanList f, int c, int dist)
-        {
-            miLista = f;
-            tiempoCiclo = c;
-            distSeg = dist;
-        }
-
+        //actualiza el datagridview
         private void UpdateDataGridView()
         {
             flightDataGridView.Rows.Clear();
@@ -295,6 +362,7 @@ namespace WinFormsApp1
             }
         }
 
+        //inicializa el datagridview
         private void SetupDataGridView()
         {
             flightDataGridView.Columns.Add("FlightNumber", "Flight Number");
@@ -309,11 +377,13 @@ namespace WinFormsApp1
             this.Controls.Add(flightDataGridView);
         }
 
+        //determina si estmaos en la distancia de seguridad
         private bool CheckSecurityDistance(FlightPlanCart flightToCheck)
         {
             return miLista.CheckSecurityDistance(flightToCheck, distSeg);
         }
 
+        //método para el renderizado de gráficos
         private void MiPanel_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -374,57 +444,7 @@ namespace WinFormsApp1
             }
         }
 
-        private void SimulacionVuelo_Load_1(object sender, EventArgs e)
-        {
-            StartSimulation();
-            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-
-            for (int i = 0; i < miLista.GetNumber(); i++)
-            {
-                PictureBox p = new PictureBox();
-                PictureBox a = new PictureBox();
-                PictureBox v = new PictureBox();
-                FlightPlanCart f = miLista.GetFlightPlanCart(i);
-
-                p.Size = new Size(12, 12);
-                p.Image = Properties.Resources.origin_marker; 
-                p.SizeMode = PictureBoxSizeMode.StretchImage;
-                p.Location = new Point(Convert.ToInt32(f.GetOrigin().GetX()) - p.Width / 2, Convert.ToInt32(f.GetOrigin().GetY()) - p.Height / 2);
-
-                a.Size = new Size(12, 12);
-                a.Image = Properties.Resources.final_marker; 
-                a.SizeMode = PictureBoxSizeMode.StretchImage;
-                a.Location = new Point(Convert.ToInt32(f.GetDestination().GetX()) - a.Width / 2, Convert.ToInt32(f.GetDestination().GetY()) - a.Height / 2);
-
-                v.Size = new Size(20, 20);
-                v.BackColor = Color.Transparent;
-                v.Image = Properties.Resources.plane_icon;
-                v.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                v.Location = new Point(
-                    Convert.ToInt32(f.GetPlanePosition().GetX() - v.Width / 2),
-                    Convert.ToInt32(f.GetPlanePosition().GetY() - v.Height / 2)
-                );
-
-                float angle = GetPlaneAngle(f.GetOrigin(), f.GetDestination());
-                v.Image = RotateImage(v.Image, angle);
-
-                v.MouseMove += (s, ev) => ShowPlaneInfoAtMouse(f, ev);
-                v.MouseLeave += (s, ev) => HidePlaneInfo();
-
-                vuelos.Add(v);
-                miPanel.Controls.Add(v);
-                miPanel.Controls.Add(p);
-                miPanel.Controls.Add(a);
-            }
-
-            UpdateDataGridView();
-            InitializeCheckedListBox();
-            UpdateFlightHighlight();
-            SetupTimelineControls();
-            CalculateTotalSimulationSteps();
-        }
-
+        //devuelve ela ngulo de un avion en función de sus qaypoints
         private float GetPlaneAngle(WaypointCart origin, WaypointCart destination)
         {
             double deltaX = destination.GetX() - origin.GetX();
@@ -440,6 +460,7 @@ namespace WinFormsApp1
             return angle;
         }
 
+        //rota el bitmap
         private Image RotateImage(Image image, float angle)
         {
             Bitmap rotatedImage = new Bitmap(image.Width, image.Height);
@@ -457,6 +478,7 @@ namespace WinFormsApp1
             return rotatedImage;
         }
 
+        //inicializa le cheboxlist de los vuelos
         private void InitializeCheckedListBox()
         {
             TextBox searchBox = new TextBox();
@@ -475,6 +497,8 @@ namespace WinFormsApp1
 
             checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
         }
+
+        //Método para hacer la búsqueda de vuelos
         private void SearchBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -487,6 +511,8 @@ namespace WinFormsApp1
                 }
             }
         }
+
+        //lógica de la búsqueda de vuelos
         private void SearchFlights()
         {
             TextBox searchBox = (TextBox)checkedListBox1.Parent.Controls.OfType<TextBox>().FirstOrDefault();
@@ -501,6 +527,7 @@ namespace WinFormsApp1
             }
         }
 
+        //´registra el chequeo
         private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             BeginInvoke(new Action(() =>
@@ -510,6 +537,7 @@ namespace WinFormsApp1
             }));
         }
 
+        //actualiza los círculos amarillos de selección
         private void UpdateFlightHighlight()
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
@@ -550,6 +578,8 @@ namespace WinFormsApp1
 
             miPanel.Invalidate();
         }
+
+        //asigna los valores a los dos vuelos seleccionados
         private void UpdateSelectedFlights()
         {
             selec1 = null;
@@ -564,7 +594,7 @@ namespace WinFormsApp1
             }
         }
 
-
+        //botón de Check
         private void button4_Click(object sender, EventArgs e)
         {
             UpdateSelectedFlights();
@@ -601,6 +631,7 @@ namespace WinFormsApp1
             }
         }
 
+        //método de info cuando hovereamos
         private void ShowPlaneInfoAtMouse(FlightPlanCart flight, MouseEventArgs e)
         {
             string flightInfo = $"Name: {flight.GetFlightNumber()}\n" +
@@ -621,11 +652,13 @@ namespace WinFormsApp1
             hoverInfoLabel.Visible = true;
         }
 
+        //método para esconderla
         private void HidePlaneInfo()
         {
             hoverInfoLabel.Visible = false;
         }
 
+        //botón de avanzado/stop en automatico
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -691,7 +724,8 @@ namespace WinFormsApp1
             }
         }
 
-        private void button3_Click(object sender, EventArgs e) // Reset Button
+        //Boton de reseteo
+        private void button3_Click(object sender, EventArgs e) 
         {
             for (int i = 0; i < miLista.GetNumber(); i++)
             {
@@ -714,6 +748,7 @@ namespace WinFormsApp1
             CalculateTotalSimulationSteps();
         }
 
+        //método de predicción de colisión
         private bool PredictCollision(FlightPlanCart flight1, FlightPlanCart flight2)
         {
             double rx = flight2.GetPlanePosition().GetX() - flight1.GetPlanePosition().GetX();
@@ -731,12 +766,14 @@ namespace WinFormsApp1
             return (cx * cx + cy * cy < distSeg * 4 * distSeg);
         }
 
+        //velocidad óptima
         private double OptVel(FlightPlanCart flight1, FlightPlanCart flight2)
         {
             return miLista.OptimalVelocity(flight1, flight2, distSeg);
         }
 
-        private void button5_Click(object sender, EventArgs e) // Optimize Speed Button
+        //boton de optimización de la velocidad fix
+        private void button5_Click(object sender, EventArgs e) 
         {
             timelineTrackBar.Value = 0;
             double optSpeed = OptVel(selec1, selec2);
@@ -773,6 +810,7 @@ namespace WinFormsApp1
             }
         }
 
+        //método para cambiar manualmente la velocidad
         private void flightDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 7)
@@ -787,6 +825,7 @@ namespace WinFormsApp1
             }
         }
 
+        //el tick de la simulación, se actualiza todo
         private void timer1_Tick(object sender, EventArgs e)
         {
             int PlanesInDestination = 0;
@@ -847,7 +886,7 @@ namespace WinFormsApp1
             UpdateDataGridView();
         }
 
-
+        //botón de retroceder/reverse automatico
         private void button6_Click(object sender, EventArgs e)
         {
             if (!StatusBtn)
@@ -899,6 +938,7 @@ namespace WinFormsApp1
             }
         }
 
+        //método para seleccionar automatico o manual
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
@@ -921,6 +961,7 @@ namespace WinFormsApp1
             }
         }
 
+        //tick de reverso
         private void timer2_Tick(object sender, EventArgs e)
         {
 
@@ -949,6 +990,7 @@ namespace WinFormsApp1
             }
         }
 
+        //velocidad de simulación
         private void button8_Click(object sender, EventArgs e)
         {
             double[] values = [0.5, 1, 2, 4];
@@ -970,11 +1012,13 @@ namespace WinFormsApp1
 
         }
 
+        //guarda el multiplicador de velocidad
         public void setMultiplicador(double num)
         {
             multiplicador = num;
         }
 
+        //guardar archivo en cualquier directorio
         private void button2_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())

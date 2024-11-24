@@ -1,77 +1,78 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System; // Importa el espacio de nombres para funciones básicas
+using System.Collections.Generic; // Importa clases para colecciones genéricas
+using System.Linq; // Importa clases para LINQ
+using System.Numerics; // Importa clases para operaciones matemáticas avanzadas
+using System.Text; // Importa clases para manipulación de texto
+using System.Threading.Tasks; // Importa clases para tareas asíncronas
 
-namespace Class
+namespace Class // Define el espacio de nombres de la clase
 {
-    public class FlightPlanList
+    public class FlightPlanList // Clase que representa una lista de planes de vuelo
     {
-        private List<FlightPlanCart> flights;
+        private List<FlightPlanCart> flights; // Lista que almacena los planes de vuelo
 
-        public FlightPlanList()
+        public FlightPlanList() // Constructor que inicializa la lista de vuelos
         {
-            flights = new List<FlightPlanCart>();
+            flights = new List<FlightPlanCart>(); // Crea una nueva lista vacía
         }
 
-        public int AddFlightPlan(FlightPlanCart flightPlan)
+        public int AddFlightPlan(FlightPlanCart flightPlan) // Añade un nuevo plan de vuelo a la lista
         {
-            if (flightPlan == null)
-                return -1;
+            if (flightPlan == null) // Verifica si el plan de vuelo es nulo
+                return -1; // Retorna -1 si es nulo
 
-            flights.Add(flightPlan);
-            return 0;
+            flights.Add(flightPlan); // Agrega el plan de vuelo a la lista
+            return 0; // Retorna 0 si se agregó correctamente
         }
 
-        public FlightPlanCart GetFlightPlanCart(int index)
+        public FlightPlanCart GetFlightPlanCart(int index) // Obtiene un plan de vuelo por su índice
         {
-            if (index < 0 || index >= flights.Count)
-                return null;
+            if (index < 0 || index >= flights.Count) // Verifica si el índice es válido
+                return null; // Retorna nulo si el índice es inválido
 
-            return flights[index];
+            return flights[index]; // Retorna el plan de vuelo correspondiente al índice
         }
 
-        public List<FlightPlanCart> GetFlightPlans()
+        public List<FlightPlanCart> GetFlightPlans() // Devuelve todos los planes de vuelo en una lista
         {
-            List<FlightPlanCart> planes = new List<FlightPlanCart>();
+            List<FlightPlanCart> planes = new List<FlightPlanCart>(); // Crea una nueva lista para almacenar los planes
 
-            for (int i = 0; i < this.GetNumber(); i++)
+            for (int i = 0; i < this.GetNumber(); i++) // Itera sobre los índices válidos
             {
-                planes.Add(GetFlightPlanCart(i));
+                planes.Add(GetFlightPlanCart(i)); // Agrega cada plan a la nueva lista
             }
-            return planes;
+            return planes; // Retorna la lista completa de planes de vuelo
         }
 
-        public int GetNumber()
+        public int GetNumber() // Devuelve el número total de planes de vuelo en la lista
         {
-            return flights.Count;
+            return flights.Count; // Retorna la cantidad de elementos en la lista
         }
 
-        public bool CheckSecurityDistance(FlightPlanCart flightToCheck, int securityDistance)
+        public bool CheckSecurityDistance(FlightPlanCart flightToCheck, int securityDistance) // Verifica si un vuelo cumple con la distancia de seguridad respecto a otros vuelos
         {
-            foreach (FlightPlanCart otherFlight in flights)
+            foreach (FlightPlanCart otherFlight in flights) // Itera sobre todos los vuelos en la lista
             {
-                // Skip comparing the flight with itself
-                if (flightToCheck.GetFlightNumber() == otherFlight.GetFlightNumber())
+                if (flightToCheck.GetFlightNumber() == otherFlight.GetFlightNumber()) // Omite el mismo vuelo
                     continue;
 
-                double distance = flightToCheck.GetPlanePosition().DistanceTo(otherFlight.GetPlanePosition());
-                if (distance < 2 * securityDistance - 1)
-                    return true;
+                double distance = flightToCheck.GetPlanePosition().DistanceTo(otherFlight.GetPlanePosition()); // Calcula la distancia entre los aviones
+                if (distance < 2 * securityDistance - 1) // Verifica si está dentro del rango de seguridad
+                    return true; // Retorna true si hay violación de distancia
+
             }
-            return false;
+            return false; // Retorna false si no hay violaciones encontradas
         }
 
-        public double OptimalVelocity(FlightPlanCart flight1, FlightPlanCart flight2, int securityDistance)
+        public double OptimalVelocity(FlightPlanCart flight1, FlightPlanCart flight2, int securityDistance) // Calcula la velocidad óptima para evitar colisiones entre dos vuelos
         {
-            const int MAX_ITERATIONS = 5;
-            const double CONVERGENCE_THRESHOLD = 0.1; // m/s
-            double currentSpeed = flight2.GetSpeed();
-            double lastSpeed = double.MaxValue;
+            const int MAX_ITERATIONS = 5; // Número máximo de iteraciones para encontrar una solución
+            const double CONVERGENCE_THRESHOLD = 0.1; // Umbral para determinar convergencia en m/s
 
-            for (int iteration = 0; iteration < MAX_ITERATIONS; iteration++)
+            double currentSpeed = flight2.GetSpeed(); // Velocidad actual del segundo vuelo
+            double lastSpeed = double.MaxValue; // Inicializa la última velocidad como máxima posible
+
+            for (int iteration = 0; iteration < MAX_ITERATIONS; iteration++) // Realiza iteraciones hasta alcanzar el máximo permitido
             {
                 double rx = flight2.GetPlanePosition().GetX() - flight1.GetPlanePosition().GetX();
                 double ry = flight2.GetPlanePosition().GetY() - flight1.GetPlanePosition().GetY();

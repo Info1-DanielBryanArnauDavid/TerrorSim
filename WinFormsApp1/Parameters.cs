@@ -12,65 +12,60 @@ namespace WinFormsApp1
 {
     public partial class Parameters : Form
     {
+        // Variables para almacenar los valores de tiempo de ciclo y distancia de seguridad.
         int tiempoCiclo = 0;
         int SecDist;
+
         public Parameters()
         {
             InitializeComponent();
         }
 
+        // Devuelve el tiempo de ciclo introducido.
         public int dameTiempo()
         {
             return tiempoCiclo;
         }
 
+        // Devuelve la distancia de seguridad introducida.
         public int dameDist()
         {
             return SecDist;
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void AceptarBoton2_Click(object sender, EventArgs e)
         {
-            //Cuando le damos al boton Aceptar:
-
+            // Evento al pulsar el botón "Aceptar".
             try
             {
-                //Guardamos la info en dos variables nuevas
-                if (Convert.ToInt32(DistanciaSeguridad.Text) > 0 && Convert.ToInt32(TiempoCiclo.Text)>= 0)
+                // Verifica y guarda los valores si son válidos.
+                if (Convert.ToInt32(DistanciaSeguridad.Text) > 0 && Convert.ToInt32(TiempoCiclo.Text) >= 0)
                 {
-
                     SecDist = Convert.ToInt16(DistanciaSeguridad.Text);
                     tiempoCiclo = Convert.ToInt16(TiempoCiclo.Text);
 
-                    //Abre un forms que confirma que todo se ha guardado bien
-                    MessageBox.Show("Data succesfully loaded");
+                    // Muestra un mensaje de confirmación.
+                    MessageBox.Show("Data successfully loaded");
 
-                    //Cierra el forms al pulsar "aceptar"
+                    // Cierra el formulario.
                     Close();
                 }
-                else { MessageBox.Show("Incorrect Data"); }
+                else
+                {
+                    // Muestra un mensaje si los datos son incorrectos.
+                    MessageBox.Show("Incorrect Data");
+                }
             }
-
-            //En caso de error:
             catch (Exception)
             {
-                //Abre un forms que avisa de un error
+                // Manejo de errores: muestra un mensaje si ocurre un problema.
                 MessageBox.Show("Error");
             }
-
-        }
-
-        private void DistanciaSeguridadTiempoCiclo_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // Restaura valores predeterminados.
             DistanciaSeguridad.Text = "10";
             TiempoCiclo.Text = "1";
         }

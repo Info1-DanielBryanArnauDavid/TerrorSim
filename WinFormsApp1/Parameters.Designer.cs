@@ -44,7 +44,6 @@
             label1.Size = new Size(119, 15);
             label1.TabIndex = 0;
             label1.Text = "Security Distance (m)";
-            label1.Click += label1_Click;
             // 
             // DistanciaSeguridad
             // 
@@ -103,7 +102,6 @@
             Controls.Add(label1);
             Name = "Parameters";
             Text = "Global Parameters";
-            Load += DistanciaSeguridadTiempoCiclo_Load;
             ResumeLayout(false);
             PerformLayout();
         }

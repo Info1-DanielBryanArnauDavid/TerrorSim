@@ -77,7 +77,6 @@
             introducirFlightPlansToolStripMenuItem.Name = "introducirFlightPlansToolStripMenuItem";
             introducirFlightPlansToolStripMenuItem.Size = new Size(180, 22);
             introducirFlightPlansToolStripMenuItem.Text = "Insert Flight Plans";
-            introducirFlightPlansToolStripMenuItem.Click += introducirFlightPlansToolStripMenuItem_Click;
             // 
             // fromFileToolStripMenuItem
             // 
