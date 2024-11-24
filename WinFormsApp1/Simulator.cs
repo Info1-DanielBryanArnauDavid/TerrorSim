@@ -45,7 +45,7 @@ namespace WinFormsApp1
             timelineTrackBar.Maximum = 0;
             timelineTrackBar.Value = 0;
             timelineTrackBar.TickStyle = TickStyle.BottomRight;
-            timelineTrackBar.Height = 45;  
+            timelineTrackBar.Height = 30;  
 
             timelineTrackBar.Scroll += TimelineTrackBar_Scroll;
             timelineTrackBar.MouseDown += (s, e) => isDragging = true;
@@ -60,6 +60,7 @@ namespace WinFormsApp1
             this.Controls.Add(timelineTrackBar);
             simulationStates = new List<FlightPlanList>();
         }
+
         private void CalculateTotalSimulationSteps()
         {
             if (miLista == null || miLista.GetNumber() == 0)
@@ -151,17 +152,23 @@ namespace WinFormsApp1
 
         private void TimelineTrackBar_Scroll(object sender, EventArgs e)
         {
-            if (isDragging && simulationStates != null && timelineTrackBar.Value < simulationStates.Count)
+            if (simulationStates != null && timelineTrackBar.Value < simulationStates.Count)
             {
                 timer1.Stop();
                 timer2.Stop();
-
                 try
                 {
                     FlightPlanList selectedState = simulationStates[timelineTrackBar.Value];
                     if (selectedState != null)
                     {
                         miLista = CloneFlightPlanList(selectedState);
+
+                        // Clear and update EstadoVuelos stack
+                        EstadoVuelos.Clear();
+                        for (int i = 0; i <= timelineTrackBar.Value; i++)
+                        {
+                            EstadoVuelos.Push(CloneFlightPlanList(simulationStates[i]));
+                        }
 
                         // Update plane positions
                         for (int i = 0; i < miLista.GetNumber() && i < vuelos.Count; i++)
@@ -175,7 +182,6 @@ namespace WinFormsApp1
                                 );
                             }
                         }
-
                         UpdateDataGridView();
                         miPanel.Invalidate();
                     }
@@ -357,14 +363,16 @@ namespace WinFormsApp1
                 }
             }
 
-            label4.Text = anyViolation ? "Jodido" : "Guay";
-
-
             for (int i = 0; i < vuelos.Count; i++)
             {
                 PictureBox planeIcon = vuelos[i];
-                g.DrawImage(planeIcon.Image, planeIcon.Bounds);
+                if (planeIcon.Image != null)
+                {
+                    g.DrawImage(planeIcon.Image, planeIcon.Bounds, new Rectangle(0, 0, planeIcon.Image.Width, planeIcon.Image.Height), GraphicsUnit.Pixel);
+                }
             }
+
+            label4.Text = anyViolation ? "Jodido" : "Guay";
         }
 
         private void SimulacionVuelo_Load_1(object sender, EventArgs e)
@@ -435,9 +443,8 @@ namespace WinFormsApp1
 
         private Image RotateImage(Image image, float angle)
         {
-            Bitmap rotatedImage = new Bitmap(image.Width, image.Height);
+            Bitmap rotatedImage = new Bitmap(image.Width, image.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             rotatedImage.MakeTransparent();
-
             using (Graphics g = Graphics.FromImage(rotatedImage))
             {
                 g.Clear(Color.Transparent);
@@ -446,7 +453,6 @@ namespace WinFormsApp1
                 g.RotateTransform(angle);
                 g.DrawImage(image, new Point(-image.Width / 2, -image.Height / 2));
             }
-
             return rotatedImage;
         }
 
@@ -487,20 +493,21 @@ namespace WinFormsApp1
                 if (isChecked)
                 {
                     int highlightSize = 40;
-                    Bitmap highlightedPlane = new Bitmap(highlightSize, highlightSize);
+                    Bitmap highlightedPlane = new Bitmap(highlightSize, highlightSize, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                    highlightedPlane.MakeTransparent();
                     using (Graphics g = Graphics.FromImage(highlightedPlane))
                     {
+                        g.Clear(Color.Transparent);
                         g.SmoothingMode = SmoothingMode.AntiAlias;
                         using (SolidBrush brush = new SolidBrush(Color.FromArgb(70, 255, 255, 0)))
                         {
                             g.FillEllipse(brush, 0, 0, highlightSize, highlightSize);
                         }
+
                         float angle = GetPlaneAngle(flight.GetOrigin(), flight.GetDestination());
                         Image rotatedPlane = RotateImage(Properties.Resources.plane_icon, angle);
                         g.DrawImage(rotatedPlane, (highlightSize - 15) / 2, (highlightSize - 15) / 2, 15, 15);
                     }
-                    planeIcon.Image = highlightedPlane;
-                    planeIcon.Size = new Size(highlightSize, highlightSize);
                 }
                 else
                 {
@@ -651,6 +658,9 @@ namespace WinFormsApp1
                     timer1.Start();
                     button1.Text = "Stop";
                 }
+            }
+            if (timelineTrackBar.Value > 0) {
+                button6.Enabled = true;
             }
         }
 
@@ -824,7 +834,7 @@ namespace WinFormsApp1
                     {
                         FlightPlanCart flight = miLista.GetFlightPlanCart(i);
                         vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width / 2),
-                     Convert.ToInt32(flight.GetPlanePosition().GetY()) - vuelos[i].Height / 2
+                     Convert.ToInt32(flight.GetPlanePosition().GetY() - vuelos[i].Height/2)
                       );
                     }
                     miPanel.Invalidate();
@@ -855,7 +865,7 @@ namespace WinFormsApp1
                     button6.Text = "Stop";
                 }
             }
-            if (!isDragging)
+            if (!isDragging&&timelineTrackBar.Value!=0)
             {
                 timelineTrackBar.Value = Math.Min(timelineTrackBar.Value - 1, timelineTrackBar.Maximum);
             }
@@ -892,7 +902,7 @@ namespace WinFormsApp1
                 for (int i = 0; i < miLista.GetNumber(); i++)
                 {
                     FlightPlanCart flight = miLista.GetFlightPlanCart(i);
-                    vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX()), Convert.ToInt32(flight.GetPlanePosition().GetY()));
+                    vuelos[i].Location = new Point(Convert.ToInt32(flight.GetPlanePosition().GetX() - vuelos[i].Width/2), Convert.ToInt32(flight.GetPlanePosition().GetY()) - vuelos[i].Width / 2);
                 }
                 miPanel.Invalidate();
                 UpdateDataGridView();
@@ -904,6 +914,10 @@ namespace WinFormsApp1
                 button6.Enabled = false;
                 button1.Enabled = true;
                 checkBox1.Enabled = true;
+            }
+            if (!isDragging&&timelineTrackBar.Value!=0)
+            {
+                timelineTrackBar.Value = Math.Min(timelineTrackBar.Value - 1, timelineTrackBar.Maximum);
             }
         }
 
