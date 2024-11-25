@@ -3,7 +3,7 @@
 A basic flight simulator with real-time collision detection.
 
 ## Features
-- **Flight Simulation**: Input the basic parameters
+- **ArcGIS IMplementation**: chuli
 - **Collision Detection**: Detects collisions with terrain and other objects in the environment.
 
 ## Usage
